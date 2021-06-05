@@ -103,5 +103,4 @@ GitHub.sublime-settings
 .history
 
 #secret Keys
-
-gecom/secret_keys.py
+secret_keys.py
