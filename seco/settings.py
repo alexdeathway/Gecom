@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from pathlib import Path
+from .secgen import generate_secret_key
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +22,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ""
+try:
+    from .secret_keys import SECRET_KEY
+except ModuleNotFoundError:
+    SETTINGS_DIR=os.path.abspath(os.path.dirname(__file__))
+    generate_secret_key(os.path.join(SETTINGS_DIR,"secret_keys.py"))
+    from .secret_keys import SECRET_KEY 
+#
+# SECRET_KEY = ""
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
