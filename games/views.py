@@ -1,3 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render,reverse
+from django.views.generic import (
+                            CreateView,                    
+                                )
 
-# Create your views here.
+from games.forms import GameCreationForm
+
+class GamesCreateView(CreateView):
+    template_name="games/games_create.html"
+    form_class=GameCreationForm
+
+    def get_success_url(self):
+        return reverse("home")
+
+
