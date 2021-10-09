@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+
+{% block body %}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+	<form method="post">
+
+{% csrf_token %}
+{{ form|crispy }}
+<button>Signup </button>
+
+</form>
+</div>
+{% endblock body %}

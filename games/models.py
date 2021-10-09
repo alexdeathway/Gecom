@@ -5,8 +5,8 @@ from django.db.models.base import Model
 
 class GamesModel(models.Model):
     name=models.CharField(max_length=30)
-    cover=models.ImageField()
-    price=models.IntegerField()
+    cover=models.ImageField(default="default_cover.jpg", upload_to="games_cover")
+    price=models.PositiveIntegerField ()
     discription=models.CharField(max_length=500)
     publisher=models.CharField(max_length=50)
     release_date=models.DateField() 
