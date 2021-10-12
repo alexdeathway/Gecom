@@ -12,11 +12,15 @@ class GameCreationForm(forms.ModelForm):
                
       class Meta:
          model=GamesModel
+         labels={
+            "sale": "Allot for new release sale?",
+        }
          fields=[
             "name",
             "category",
             "cover",
             "price",
+            "sale",
             "discription",
             "publisher"      
          ]

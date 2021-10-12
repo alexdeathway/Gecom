@@ -11,6 +11,7 @@ class GamesModel(models.Model):
     category=models.ForeignKey('CategoryModel',null=True,blank=True,on_delete=models.SET_NULL,related_name="GameModel_CategoryModel")
     price=models.PositiveIntegerField ()
     discription=models.CharField(max_length=500)
+    sale=models.BooleanField(default=False)
     publisher=models.ForeignKey('PublisherModel',on_delete=models.CASCADE,related_name="GameModel_PublisherModel")
     release_date=models.DateField(auto_now=True) 
 
@@ -28,6 +29,6 @@ class PublisherModel(models.Model):
 
 class CategoryModel(models.Model):
     name=models.CharField(max_length=20,unique=True)
-
+    cover=models.ImageField(default="default_category_cover.jpg",upload_to="category_cover")
     def __str__(self):
         return self.name
