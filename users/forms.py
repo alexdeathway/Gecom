@@ -9,12 +9,11 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model=User
         labels={
-            "is_publisher":"Are you publisher ?"
+            "password2":"confirm password"
         }
         fields=[
             "username",
             "email",
             "password1",
             "password2",
-            "is_publisher" 
         ]
