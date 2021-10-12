@@ -3,10 +3,10 @@
 
 {% block body %}
 <div class="min-h-screen flex  justify-center bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
-    <form method="post">
 
+<form action={% url 'games:publishercreate'  %} method="POST">
 {% csrf_token %}
-{{ form|crispy }}
+{{form|crispy}}
  <input type="submit" value="Submit">
 </form>
 </div>
