@@ -1,10 +1,27 @@
 from django.shortcuts import render,reverse
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
-                            CreateView,                    
+                            CreateView,
+                            ListView,
+                            DetailView,                    
                                 )
+from .models import GamesModel
 
 from games.forms import GameCreationForm,PublisherCreationForm
+
+class GamesListView(ListView):
+    template_name="games/games_list.html"
+    context_object_name="games"
+    paginate_by=16
+    queryset=GamesModel.objects.all()
+
+
+class GamesDetailView(DetailView):
+      template_name="games/games_detail.html"
+      context_object_name="game"
+      model=GamesModel
+
 
 class GamesCreateView(LoginRequiredMixin ,CreateView):
     template_name="games/games_create.html"
