@@ -6,7 +6,7 @@ from django.views.generic import (
                             ListView,
                             DetailView,                    
                                 )
-from .models import GamesModel
+from .models import CategoryModel, GamesModel, PublisherModel
 
 from games.forms import GameCreationForm,PublisherCreationForm
 
@@ -51,4 +51,29 @@ class PublisherCreateView(LoginRequiredMixin ,CreateView):
     def get_success_url(self):
         return reverse("home")
 
+class PublisherDetailView(DetailView):
+    template_name="games/publisher_detail.html"
+    model=PublisherModel
+    context_object_name="publisher"
+    slug_url_kwarg = "name"
+    slug_field = "name"
+
+    def get_context_data(self,**kwargs):
+        context=super(PublisherDetailView,self).get_context_data(**kwargs)
+        games=self.get_object().GameModel_PublisherModel.all()              
+        context["games"]=games
+        return context
+
+class CategoryDetailView(DetailView):
+    template_name="games/category_detail.html"
+    model=CategoryModel
+    context_object_name="category"
+    slug_url_kwarg = "name"
+    slug_field = "name"
+
+    def get_context_data(self,**kwargs):
+        context=super(CategoryDetailView,self).get_context_data(**kwargs)
+        games=self.get_object().GameModel_CategoryModel.all()              
+        context["games"]=games
+        return context
 

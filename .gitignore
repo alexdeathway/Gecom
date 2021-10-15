@@ -3,7 +3,7 @@
 *.pot
 *.pyc
 __pycache__
-#db.sqlite3 <excluded for dev-unstable>
+db.sqlite3 <excluded for dev-unstable>
 media
 
 # Backup files # 

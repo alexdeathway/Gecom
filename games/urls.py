@@ -4,6 +4,8 @@ from .views import (
                    GamesCreateView,
                    PublisherCreateView,
                    GamesDetailView,
+                   PublisherDetailView,
+                   CategoryDetailView,
                     )
 
 app_name="games"
@@ -14,4 +16,6 @@ urlpatterns = [
     path('create/', GamesCreateView.as_view(),name="gamecreate"),
     path('publisher/create/', PublisherCreateView.as_view(),name="publishercreate"),
     path('<int:pk>/',GamesDetailView.as_view(),name="gamedetail"),
+    path("publisher/<str:name>/",PublisherDetailView.as_view(),name="publisherdetail"),
+    path("category/<str:name>/",CategoryDetailView.as_view(),name="categorydetail"),
 ]

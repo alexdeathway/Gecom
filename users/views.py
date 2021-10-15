@@ -14,14 +14,12 @@ class UserSignupView(CreateView):
         return reverse("home")
 
 class UserProfileView(LoginRequiredMixin ,DetailView):
+    model=User
     template_name="users/profile.html"
-    context_object_name="userprofile"
+    context_object_name="profile"
+    slug_url_kwarg="username"
+    slug_field="username"
     
-    def get_queryset(self):
-        user=self.request.user.pk
-        queryset=User.objects.get(id=user)
-
-        return queryset
 
 
 
