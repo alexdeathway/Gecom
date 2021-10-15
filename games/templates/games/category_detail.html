@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<section class="text-gray-400 bg-gray-900 body-font">
+
+   <div class="flex flex-wrap w-full mb-20">
+      <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">{{category.name}}</h1>
+        <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+      </div>
+    </div>
+
+
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-wrap -mx-4 -mb-10 text-center">
+    
+    {% for game in games %}
+
+      <div class="sm:w-1/2 mb-10 px-4">
+        <div class="rounded-lg h-64 overflow-hidden">
+          <img alt="content" class="object-cover object-center h-full w-full" src="{{game.cover.url}}">
+        </div>
+        <h2 class="title-font text-2xl font-medium text-white mt-6 mb-3">{{game.name}}</h2>
+        <p class="leading-relaxed text-base">{{game.discription}}</p>
+        <button class="flex mx-auto mt-6 text-white bg-blue-500 border-0 py-2 px-5 focus:outline-none hover:bg-blue-600 rounded">Button</button>
+      </div>
+    
+    {% endfor %}
+    
+    </div>
+  </div>
+</section>
+
+{% endblock body %}
