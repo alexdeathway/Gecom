@@ -16,9 +16,15 @@ class UserSignupView(CreateView):
 class UserProfileView(LoginRequiredMixin ,DetailView):
     model=User
     template_name="users/profile.html"
-    context_object_name="profile"
+    context_object_name="userprofile"
     slug_url_kwarg="username"
     slug_field="username"
+
+    def get_context_data(self,**kwargs):
+        context=super(UserProfileView,self).get_context_data(**kwargs)
+        publishers=self.get_object().PublisherModel_User.all()              
+        context["publishers"]=publishers
+        return context
     
 
 

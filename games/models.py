@@ -19,7 +19,7 @@ class GamesModel(models.Model):
         return self.name
 
 class PublisherModel(models.Model):
-    owner=models.ForeignKey(User,on_delete=models.CASCADE)
+    owner=models.ForeignKey(User,on_delete=models.CASCADE,related_name="PublisherModel_User")
     name=models.CharField(max_length=50,unique=True)
     email=models.EmailField(blank=True, max_length=50)
 
@@ -32,3 +32,10 @@ class CategoryModel(models.Model):
     cover=models.ImageField(default="default_category_cover.jpg",upload_to="category_cover")
     def __str__(self):
         return self.name
+
+class BoughtModel(models.Model):
+      buyer=models.ForeignKey(User, on_delete=models.CASCADE,related_name="BoughtModel_User")
+      game=models.ForeignKey("GamesModel", on_delete=models.CASCADE,related_name="BoughtModel_GamesModel")
+      
+      def __str__(self):
+          return f"{self.buyer} bought {self.game}"
