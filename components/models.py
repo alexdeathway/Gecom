@@ -1,11 +1,25 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from django.db.models.base import Model
+from games.models import PublisherModel as OrganisationModel
 # Create your models here.
 
-# User=get_user_model()
+User=get_user_model()
 
-class VendorModel(models.Model):
-    
-    name=models.CharField(unique=True,max_length=50)
-    email=models.EmailField(max_length=254)
+class ComponentsModel(models.Model):
+    name=models.CharField(max_length=50)
+    cover=models.ImageField(default="default_cover.jpg", upload_to="components_cover")
+    price=models.PositiveIntegerField(default=0)
+    description=models.CharField(max_length=50)
+    vendor=models.ForeignKey(OrganisationModel, on_delete=models.CASCADE,related_name="ComponentsModel_OrganisationModel")
+    category=models.ForeignKey('ComponentCategoryModel',null=True,blank=True,on_delete=models.SET_NULL,related_name="GameModel_CategoryModel")
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+
+class ComponentCategoryModel(models.Model):
+    name=models.CharField(max_length=20,unique=True)
+    cover=models.ImageField(default="default_category_cover.jpg",upload_to="category_cover")
+    def __str__(self):
+        return self.name
