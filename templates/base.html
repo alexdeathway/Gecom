@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-
+{% load static %}
 <head>
   {% block head %}{% endblock head %}
   <title>{% block title %}{% endblock title %}</title>
@@ -31,11 +31,40 @@
         <a class="mr-5 hover:text-white">PC parts</a>
         <a class="mr-5 hover:text-white">Fourth Link</a>
       </nav>
-      <a href="{% url 'signup' %}">
+      {% comment %} <a href="{% url 'signup' %}">
         <button class="inline-flex text-white border-0 py-3 px-12 focus:outline-none text-md"
           style="background-color: #ff6d00;">Sign Up</button>
+      </a> {% endcomment %}
+      {% if user.is_authenticated %}
+        <div class="flex space-x-2">
+        <a href={% url 'users:profile' user.username %}>
+            <div class="relative w-10 h-10">
+              <img class="rounded-full border-2 border-gray-200 shadow-sm" src="{% static 'games/icons/profilelogo.png' %}" alt="user image" />
+            <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
+         </div>
+        </a> 
+        </div>
+        <div class="px-8">
+        <a  href="{% url 'logout' %}" >
+        <button class="inline-flex items-center bg-red-500 border-0 py-1 px-3 text-white-500 focus:outline-none hover:bg-red-300 text-red-500 rounded text-base mt-4 md:mt-0">Logout
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </a>  
+        </div>   
+      {% else %}
+      <a href="{% url 'signup' %}" class="mr-5 hover:text-white">Sign up</a>
+      <a href="{% url 'login' %}">
+      <button class="inline-flex items-center bg-gray-300 border-0 py-1 px-3 text-blue-500 focus:outline-none hover:bg-gray-600 rounded text-base mt-4 md:mt-0">Login
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
+      </svg>
+      </button>
       </a>
     </div>
+    {% endif %}
+  
 
 
   </header>

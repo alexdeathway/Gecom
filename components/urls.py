@@ -1,7 +1,7 @@
 from django.urls import path
-from components.views import component 
+#from components.views 
 app_name="components"
 
 urlpatterns = [
-    path('', component,name="component"),
+    #path('',,name="component"),
 ]
