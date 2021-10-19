@@ -8,7 +8,7 @@ from django.views.generic import (
                                 )
 from .models import ComponentsModel,ComponentCategoryModel
 from games.models import PublisherModel as OrganisationModel
-from games.forms import GameCreationForm,PublisherCreationForm
+from .forms import ComponentCreationForm
 
 class ComponentsListView(ListView):
     template_name="components/components_list.html"
@@ -18,50 +18,38 @@ class ComponentsListView(ListView):
 
 
 class ComponentsDetailView(DetailView):
-      template_name="games/games_detail.html"
+      template_name="components/components_detail.html"
       context_object_name="component"
       model=ComponentsModel
 
-"""
-class GamesCreateView(LoginRequiredMixin ,CreateView):
-    template_name="games/games_create.html"
-    form_class=GameCreationForm
+
+class ComponentCreateView(LoginRequiredMixin ,CreateView):
+    template_name="components/components_create.html"
+    form_class=ComponentCreationForm
 
     def get_form_kwargs(self,**kwargs):
-        kwargs=super(GamesCreateView,self).get_form_kwargs(**kwargs)
+        kwargs=super(ComponentCreateView,self).get_form_kwargs(**kwargs)
         kwargs.update({
             "request":self.request
         })
         return kwargs
 
     def get_success_url(self):
-        return reverse("home")
+        return reverse("components:components")
 
 
-class PublisherDetailView(DetailView):
-    template_name="games/publisher_detail.html"
-    model=PublisherModel
-    context_object_name="publisher"
-    slug_url_kwarg = "name"
-    slug_field = "name"
 
-    def get_context_data(self,**kwargs):
-        context=super(PublisherDetailView,self).get_context_data(**kwargs)
-        games=self.get_object().GameModel_PublisherModel.all()              
-        context["games"]=games
-        return context
 
-class CategoryDetailView(DetailView):
-    template_name="games/category_detail.html"
-    model=CategoryModel
+class ComponentCategoryDetailView(DetailView):
+    template_name="components/component_category_detail.html"
+    model=ComponentCategoryModel
     context_object_name="category"
     slug_url_kwarg = "name"
     slug_field = "name"
 
     def get_context_data(self,**kwargs):
-        context=super(CategoryDetailView,self).get_context_data(**kwargs)
-        games=self.get_object().GameModel_CategoryModel.all()              
-        context["games"]=games
+        context=super(ComponentCategoryDetailView,self).get_context_data(**kwargs)
+        components=self.get_object().ComponentsModel_ComponentCategoryModel.all()              
+        context["components"]=components
         return context
 
-"""
