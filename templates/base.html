@@ -28,8 +28,11 @@
       <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
         <a href="{% url 'home' %}" class="mr-5 hover:text-white">Home</a>
         <a href="{% url 'games:games' %}" class="mr-5 hover:text-white">Explore</a>
-        <a class="mr-5 hover:text-white">PC parts</a>
-        <a class="mr-5 hover:text-white">Fourth Link</a>
+        <a href="{% url 'components:components' %}" class="mr-5 font-mono hover:text-white">PC parts</a>
+        {% if user.is_publisher %}
+        <a href="{% url 'games:gamecreate' %}" class="mr-5 hover:text-white">Create Game</a>
+        <a href="{% url 'components:componentcreate' %}" class="mr-5 hover:text-white">Create Component</a>
+        {% endif %}
       </nav>
       {% comment %} <a href="{% url 'signup' %}">
         <button class="inline-flex text-white border-0 py-3 px-12 focus:outline-none text-md"
@@ -40,7 +43,8 @@
         <a href={% url 'users:profile' user.username %}>
           <div class="relative w-10 h-10">
             <img class="rounded-full border-2 border-gray-200 shadow-sm"
-              src="{% static 'games/icons/profilelogo.png' %}" alt="user image" />
+              {% comment %} src="{% static 'games/icons/profilelogo.png' %}" alt="user image" /> {% endcomment %}
+              src="https://thispersondoesnotexist.com/image" alt="user image" /> 
             <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
           </div>
         </a>
@@ -48,7 +52,7 @@
       <div class="px-8">
         <a href="{% url 'logout' %}">
           <button
-            class="inline-flex items-center bg-red-500 border-0 py-1 px-3 text-white-500 focus:outline-none hover:bg-red-300 text-red-500 rounded text-base mt-4 md:mt-0">Logout
+            class="inline-flex items-center bg-red-500 border-0 py-1 px-3 text-white-500 focus:outline-none hover:bg-red-700 text-white-900 rounded text-base mt-4 md:mt-0">Logout
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               class="w-4 h-4 ml-1" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>

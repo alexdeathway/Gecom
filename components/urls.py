@@ -15,5 +15,4 @@ urlpatterns = [
     path('<int:pk>/',ComponentsDetailView.as_view(),name="componentdetail"),
     path('create/',ComponentCreateView.as_view(),name="componentcreate"),
     path('category/<str:name>/',ComponentCategoryDetailView.as_view(),name="categorydetail"),
-
 ]
