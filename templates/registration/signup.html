@@ -2,13 +2,24 @@
 {% load tailwind_filters %}
 
 {% block body %}
-<div class="min-h-screen flex items-center justify-center bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-8 px-4 sm:px-6 lg:px-8"
+	style="background-color: #111827;">
 	<form method="post">
 
-{% csrf_token %}
-{{ form|crispy }}
-<button>Signup </button>
+		{% csrf_token %}
+		{{ form|crispy }}
+		<button>Sign up</button>
 
-</form>
+	</form>
 </div>
+<style>
+	button {
+        width: 100%;
+        margin: 1em auto;
+        background-color: #ff6d00;
+        padding: 0.5em 2.4em;
+        color: #fff;
+        font-weight: bold;
+    }
+</style>
 {% endblock body %}
