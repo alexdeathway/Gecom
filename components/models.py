@@ -11,7 +11,7 @@ class ComponentsModel(models.Model):
     price=models.PositiveIntegerField(default=0)
     description=models.CharField(max_length=50)
     vendor=models.ForeignKey(OrganisationModel, on_delete=models.CASCADE,related_name="ComponentsModel_OrganisationModel")
-    category=models.ForeignKey('ComponentCategoryModel',null=True,blank=True,on_delete=models.SET_NULL,related_name="ComponentsModel_ComponentCategoryModel")
+    category=models.ForeignKey("ComponentCategoryModel",null=True,blank=True,on_delete=models.SET_NULL,related_name="ComponentsModel_ComponentCategoryModel")
 
     def __str__(self):
         return f"{self.name}"
