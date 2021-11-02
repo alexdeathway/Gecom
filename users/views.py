@@ -22,7 +22,7 @@ class UserProfileView(LoginRequiredMixin ,DetailView):
 
     def get_context_data(self,**kwargs):
         context=super(UserProfileView,self).get_context_data(**kwargs)
-        publishers=self.get_object().PublisherModel_User.all()              
+        publishers=self.get_object().OrganisationModel_User.all()              
         context["publishers"]=publishers
         return context
     

@@ -1,6 +1,6 @@
-from django import forms
+from django import  forms
 from .models import ComponentsModel
-from games.models import PublisherModel as OrganisationModel
+from games.models import  OrganisationModel
 
 
 class ComponentCreationForm(forms.ModelForm):

@@ -13,7 +13,7 @@
         </div>
         <p class="leading-relaxed  mb-4">User bio goes here</p>
         <div class="flex border-t border-gray-800 py-2">
-          {% if userprofile.is_publisher %}
+          {% if userprofile.is_organiser %}
           <div class="flex space-x-2">
         <h2> Publisher Organisations</h3>   
         <a href="">
@@ -24,7 +24,7 @@
         </a> 
         </div>
           {% else %} 
-          <a href="{% url 'games:publishercreate' %}"> <span class="text-gray-500 underline">Create publisher account?</span> </a>
+          <a href="{% url 'games:organisercreate' %}"> <span class="text-gray-500 underline">Create publisher account?</span> </a>
           {% comment %} <span class="ml-auto text-white">this</span> {% endcomment %}
           {% endif %}
         </div>

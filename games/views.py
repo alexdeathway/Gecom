@@ -6,9 +6,9 @@ from django.views.generic import (
                             ListView,
                             DetailView,                    
                                 )
-from .models import CategoryModel, GamesModel, PublisherModel
+from .models import CategoryModel, GamesModel, OrganisationModel
 
-from games.forms import GameCreationForm,PublisherCreationForm
+from games.forms import GameCreationForm,OrganisationCreationForm
 
 class GamesListView(ListView):
     template_name="games/games_list.html"
@@ -37,30 +37,30 @@ class GamesCreateView(LoginRequiredMixin ,CreateView):
     def get_success_url(self):
         return reverse("home")
 
-class PublisherCreateView(LoginRequiredMixin ,CreateView):
-    template_name="games/publisher_create.html"
-    form_class=PublisherCreationForm
+class OrganisationCreateView(LoginRequiredMixin ,CreateView):
+    template_name="games/organisation_create.html"
+    form_class=OrganisationCreationForm
     
     def form_valid(self,form):
-        publisher = form.save(commit=False)
-        publisher.owner = self.request.user
-        publisher.save()
+        organisation = form.save(commit=False)
+        organisation.owner = self.request.user
+        organisation.save()
 
-        return super(PublisherCreateView,self).form_valid(form)
+        return super(OrganisationCreateView,self).form_valid(form)
 
     def get_success_url(self):
         return reverse("home")
 
 class PublisherDetailView(DetailView):
     template_name="games/publisher_detail.html"
-    model=PublisherModel
+    model=OrganisationModel
     context_object_name="publisher"
     slug_url_kwarg = "name"
     slug_field = "name"
 
     def get_context_data(self,**kwargs):
         context=super(PublisherDetailView,self).get_context_data(**kwargs)
-        games=self.get_object().GameModel_PublisherModel.all()              
+        games=self.get_object().GameModel_OrganisationModel.all()              
         context["games"]=games
         return context
 

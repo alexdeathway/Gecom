@@ -12,21 +12,21 @@ class GamesModel(models.Model):
     price=models.PositiveIntegerField ()
     discription=models.CharField(max_length=500)
     sale=models.BooleanField(default=False)
-    publisher=models.ForeignKey('PublisherModel',on_delete=models.CASCADE,related_name="GameModel_PublisherModel")
+    publisher=models.ForeignKey('OrganisationModel',on_delete=models.CASCADE,related_name="GameModel_OrganisationModel")
     release_date=models.DateField(auto_now=True) 
 
     def __str__(self):
         return self.name
 
-class PublisherModel(models.Model):
-    owner=models.ForeignKey(User,on_delete=models.CASCADE,related_name="PublisherModel_User")
+class OrganisationModel(models.Model):
+    owner=models.ForeignKey(User,on_delete=models.CASCADE,related_name="OrganisationModel_User")
     name=models.CharField(max_length=50,unique=True)
     email=models.EmailField(blank=True, max_length=50)
 
     def __str__(self):
         return f"{self.name}"
 
-
+    
 class CategoryModel(models.Model):
     name=models.CharField(max_length=20,unique=True)
     cover=models.ImageField(default="default_category_cover.jpg",upload_to="category_cover")

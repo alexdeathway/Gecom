@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from games.models import PublisherModel as OrganisationModel
+from games.models import OrganisationModel
 # Create your models here.
 
 User=get_user_model()
