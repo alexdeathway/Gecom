@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+{% load static %}
+
+<head>
+  {% block head %}{% endblock head %}
+  <title>{% block title %}{% endblock title %}</title>
+  <!--
+<meta name="description" content="Gecom first page">
+<meta name="keywords" content="">
+-->
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- This example requires Tailwind CSS v2.0+ -->
+  <header class="text-gray-400 body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+          stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+          viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+        <span class="ml-3 text-xl ">Gecom</span>
+      </a>
+      <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+        <a href="{% url 'home' %}" class="mr-5 hover:text-white">Home</a>
+        <a href="{% url 'games:games' %}" class="mr-5 hover:text-white">Explore</a>
+        <a href="{% url 'components:components' %}" class="mr-5 font-mono hover:text-white">PC parts</a>
+        {% if user.is_organiser %}
+        <a href="{% url 'games:gamecreate' %}" class="mr-5 hover:text-white">Create Game</a>
+        <a href="{% url 'components:componentcreate' %}" class="mr-5 hover:text-white">Create Component</a>
+        {% endif %}
+      </nav>
+      {% comment %} <a href="{% url 'signup' %}">
+        <button class="inline-flex text-white border-0 py-3 px-12 focus:outline-none text-md"
+          style="background-color: #ff6d00;">Sign Up</button>
+      </a> {% endcomment %}
+      {% if user.is_authenticated %}
+      <div class="flex space-x-2">
+        <a href={% url 'users:profile' user.username %}>
+          <div class="relative w-10 h-10">
+            <img class="rounded-full border-2 border-gray-200 shadow-sm"
+              {% comment %} src="{% static 'games/icons/profilelogo.png' %}" alt="user image" /> {% endcomment %}
+              src="https://thispersondoesnotexist.com/image" alt="user image" /> 
+            <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
+          </div>
+        </a>
+      </div>
+       <div class="px-6">
+       <button>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+        </svg>
+      </button>
+      </div>
+      <div class="px-8">
+        <a href="{% url 'logout' %}">
+          <button
+            class="inline-flex items-center bg-red-500 border-0 py-1 px-3 text-white-500 focus:outline-none hover:bg-red-700 text-white-900 rounded text-base mt-4 md:mt-0">Logout
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </a>
+      </div>
+     
+      </div>  
+      {% else %}
+
+
+      <!-- Login Button -->
+      <div class="btns">
+        <a href="{% url 'login' %}"
+          class="loginBtn inline-flex text-white border-0 py-2 px-8 focus:outline-none text-md"
+          style="border:1px solid #ff6d00;">Login</a>
+
+        <!-- Sign up Button -->
+        <a href="{% url 'signup' %}"
+          class="signupBtn inline-flex text-white border-0 py-2 px-8 focus:outline-none text-md"
+          style="background-color: #ff6d00; border:1px solid #ff6d00;">Sign up</a>
+      </div>
+
+
+    </div>
+    {% endif %}
+  </header>
+
+
+  <style>
+    header {
+      width: 100%;
+      position: fixed;
+      z-index: 99;
+    }
+
+    header.stick {
+      width: 100%;
+      background-color: #111827;
+    }
+    footer{
+      background-color: #111827;
+    }
+    .loginBtn:hover {
+      background-color: #e76a09;
+    }
+
+    .signupBtn:hover {
+      background-color: #e76a09;
+    }
+  </style>
+  <script>
+    window.addEventListener("scroll", function () {
+      var header = document.querySelector("header");
+      header.classList.toggle("stick", window.scrollY > 0);
+    })
+  </script>
+  {% block body %}{% endblock body %}
+</body>
+<footer>
+  {% block footer %}
+  <footer class="text-gray-600 body-font">
+    <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+      <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+          stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+          viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+        <span class="ml-3 text-xl text-white">Tailblocks</span>
+      </a>
+      <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2020
+        Tailblocks —
+        <a href="https://twitter.com/knyttneve" class="text-gray-600 ml-1" rel="noopener noreferrer"
+          target="_blank">@knyttneve</a>
+      </p>
+      <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+        <a class="text-gray-500">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+            viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+            viewBox="0 0 24 24">
+            <path
+              d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+            </path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            class="w-5 h-5" viewBox="0 0 24 24">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0"
+            class="w-5 h-5" viewBox="0 0 24 24">
+            <path stroke="none"
+              d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+          </svg>
+        </a>
+      </span>
+    </div>
+  {% endblock footer %}
+</footer>
+
+</html>

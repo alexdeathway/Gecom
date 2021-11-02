@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
+  <div class="container px-5 py-24 mx-auto my-auto">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap">
+      <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+        <h2 class="text-sm title-font text-gray-500 tracking-widest">This user</h2>
+        <h1 class="text-white text-3xl title-font font-medium mb-4">{{userprofile.username}}</h1>
+        <div class="flex mb-4">
+          <a class="flex-grow text-blue-400 border-b-2 border-blue-500 py-2 text-lg px-1">Description</a>
+        </div>
+        <p class="leading-relaxed  mb-4">User bio goes here</p>
+        <div class="flex border-t border-gray-800 py-2">
+          {% if userprofile.is_organiser %}
+          <div class="flex space-x-2">
+        <h2> Publisher Organisations</h3>   
+        <a href="">
+            <div class="relative w-10 h-10">
+              <img class="rounded-full border-2 border-gray-200 shadow-sm" src="{% static 'games/icons/profilelogo.png' %}" alt="user image" />
+            <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
+         </div>
+        </a> 
+        </div>
+          {% else %} 
+          <a href="{% url 'games:organisercreate' %}"> <span class="text-gray-500 underline">Create publisher account?</span> </a>
+          {% comment %} <span class="ml-auto text-white">this</span> {% endcomment %}
+          {% endif %}
+        </div>
+       
+        <div class="flex  py-2">
+        {% if userprofile.is_vendor %}
+         <div class="flex space-x-2">
+        <h2> Publisher Organisations</h3>   
+        <a href={% url 'users:profile' user.username %}>
+            <div class="relative w-10 h-10">
+              <img class="rounded-full border-2 border-gray-200 shadow-sm" src="{% static 'games/icons/profilelogo.png' %}" alt="user image" />
+            <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
+         </div>
+        </a> 
+        </div>
+
+        {% else %}
+          <a href="">  <span class="text-gray-500">Create Vendor account?</span> </a>
+        {% endif %}
+        </div>
+        
+        <div class="flex">
+          {% comment %} <span class="title-font font-medium text-2xl text-white">text info</span> {% endcomment %}
+          <button class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Update</button>
+          <button class="rounded-full w-10 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://thispersondoesnotexist.com/image">
+    </div>
+  </div>
+</section>
+{% endblock body %}
+
