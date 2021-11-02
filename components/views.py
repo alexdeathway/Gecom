@@ -7,7 +7,7 @@ from django.views.generic import (
                             DetailView,                    
                                 )
 from .models import ComponentsModel,ComponentCategoryModel
-from games.models import PublisherModel as OrganisationModel
+from games.models import OrganisationModel
 from .forms import ComponentCreationForm
 
 class ComponentsListView(ListView):

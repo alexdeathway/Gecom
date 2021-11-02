@@ -1,12 +1,12 @@
 from django import forms
-from games.models import GamesModel,PublisherModel
+from games.models import GamesModel, OrganisationModel
 
 
 class GameCreationForm(forms.ModelForm):
       
       def __init__(self,*args, **kwargs):
             request=kwargs.pop("request")
-            publisher=PublisherModel.objects.filter(owner=request.user)
+            publisher=OrganisationModel.objects.filter(owner=request.user)
             super(GameCreationForm,self).__init__(*args,**kwargs)
             self.fields["publisher"]=forms.ModelChoiceField(queryset=publisher)
                
@@ -27,13 +27,13 @@ class GameCreationForm(forms.ModelForm):
 
          
 
-class PublisherCreationForm(forms.ModelForm):
+class OrganisationCreationForm(forms.ModelForm):
 
    class Meta:
-      model=PublisherModel
+      model=OrganisationModel
       labels={
-            "name": "Publisher/Organisation name",
-            "email":"Publisher/Organisation email",
+            "name": "Organisation name",
+            "email":"Organisation email",
         }
       
       fields=[
