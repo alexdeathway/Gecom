@@ -39,4 +39,18 @@ class OrganisationCreationForm(forms.ModelForm):
       fields=[
          "name",
          "email",
-      ]         
+      ]
+
+class OrganisationUpdateForm(forms.ModelForm):
+
+   class Meta:
+      model=OrganisationModel
+      labels={
+            "name": "Organisation name",
+            "email":"Organisation email",
+        }
+      
+      fields=[
+         "name",
+         "email",
+      ]

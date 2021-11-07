@@ -15,13 +15,14 @@
         <div class="flex border-t border-gray-800 py-2">
           {% if userprofile.is_organiser %}
           <div class="flex space-x-2">
-        <h2> Publisher Organisations</h3>   
-        <a href="">
-            <div class="relative w-10 h-10">
-              <img class="rounded-full border-2 border-gray-200 shadow-sm" src="{% static 'games/icons/profilelogo.png' %}" alt="user image" />
-            <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
-         </div>
+          <h2> Publisher Organisations</h3>
+         <div class="flex border-t border-gray-800 py-9">
+        <a href="" >
+            <div class="text-yellow-600">
+            {{organisation.name}}
+            </div>
         </a> 
+        </div>
         </div>
           {% else %} 
           <a href="{% url 'games:organisercreate' %}"> <span class="text-gray-500 underline">Create publisher account?</span> </a>
