@@ -1,3 +1,4 @@
+from django.http.response import Http404
 from django.shortcuts import render,reverse
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -6,9 +7,10 @@ from django.views.generic import (
                             ListView,
                             DetailView,                    
                                 )
+from django.views.generic.edit import UpdateView
 from .models import CategoryModel, GamesModel, OrganisationModel
 
-from games.forms import GameCreationForm,OrganisationCreationForm
+from games.forms import GameCreationForm,OrganisationCreationForm,OrganisationUpdateForm
 
 class GamesListView(ListView):
     template_name="games/games_list.html"
@@ -55,8 +57,8 @@ class PublisherDetailView(DetailView):
     template_name="games/publisher_detail.html"
     model=OrganisationModel
     context_object_name="publisher"
-    slug_url_kwarg = "name"
-    slug_field = "name"
+    #slug_url_kwarg = "name"
+    #slug_field = "name"
 
     def get_context_data(self,**kwargs):
         context=super(PublisherDetailView,self).get_context_data(**kwargs)
@@ -76,4 +78,23 @@ class CategoryDetailView(DetailView):
         games=self.get_object().GameModel_CategoryModel.all()              
         context["games"]=games
         return context
+
+
+class OrganisationUpdateView(LoginRequiredMixin,UpdateView):
+    template_name="users/user_update.html"
+    #form_class=UserUpdateForm
+    model=OrganisationModel
+    form_class=OrganisationUpdateForm
+    # slug_url_kwarg="username"
+    # slug_field="username"
+    
+    def dispatch(self, request, *args, **kwargs):
+        organisation=self.get_object()
+        if organisation.owner != self.request.user:
+            raise Http404("Knock knock , Not you!")
+        return super().dispatch(request, *args, **kwargs)
+    
+
+    def get_success_url(self):
+        return reverse("home")
 

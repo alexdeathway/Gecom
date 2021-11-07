@@ -12,7 +12,7 @@ Gecom
 <!--  <section class="text-white-600 body-font"> -->
     <div class='w-full h-full bg-no-repeat bg-cover bg-left bg-fixed'
       style="background-image: linear-gradient(90deg, hsla(220, 100%, 8%, 1) 0%, hsla(219, 100%, 10%, 0.8) 100%), url({% static 'games/assests/landing2.jpg' %});">
-      <div class="container mx-auto flex px-32 py-64 md:flex-row flex-col items-center">
+      <div class="container mx-auto flex px-32 py-32 md:flex-row flex-col items-center">
         <div class="lg:max-w-lg lg:w-full md:w-1/2 w-12/6 mb-10 md:mb-0">
           <img class="object-cover object-center rounded" alt="Latest Release Cover Image"
             src="{{latest_release.cover.url}}">
@@ -49,6 +49,14 @@ Gecom
             <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">{{game.category}}</h2>
             <h1 class="title-font text-lg font-medium text-white mb-3">{{game.name}}</h1>
             <p class="leading-relaxed mb-3">{{game.discription|slice:":120"}}</p>
+            <span
+                class="text-yellow-200 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 ">
+                 <a href="{% url 'games:publisherdetail' game.publisher.id %}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>{{game.publisher}}
+               </a>
+              </span>     
             <div class="flex items-center flex-wrap ">
               <a href="{% url 'games:gamedetail' game.pk %}"
                 class="text-indigo-400 inline-flex items-center md:mb-2 lg:mb-0">${{game.price}}
@@ -57,23 +65,7 @@ Gecom
                   <path d="M5 12h14"></path>
                   <path d="M12 5l7 7-7 7"></path>
                 </svg>
-              </a>
-              <span
-                class="text-gray-500 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-800">
-                <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
-                  stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>1.2K
-              </span>
-              <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
-                  stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path
-                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                  </path>
-                </svg>6
-              </span>
+              </a>       
             </div>
           </div>
         </div>

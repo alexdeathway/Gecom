@@ -1,3 +1,4 @@
+from django.http.response import Http404
 from django.shortcuts import render,reverse
 from django.views.generic import CreateView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -25,8 +26,8 @@ class UserProfileView(LoginRequiredMixin ,DetailView):
 
     def get_context_data(self,**kwargs):
         context=super(UserProfileView,self).get_context_data(**kwargs)
-        publishers=self.get_object().OrganisationModel_User.all()              
-        context["publishers"]=publishers
+        organisation=self.get_object().OrganisationModel_User.all()              
+        context["organisation"]=organisation
         return context
     
 
@@ -39,6 +40,13 @@ class UserProfileUpdateView(LoginRequiredMixin,UpdateView):
     slug_url_kwarg="username"
     slug_field="username"
     
+    def dispatch(self, request, *args, **kwargs):
+        profile=self.get_object()
+        if profile != self.request.user:
+            raise Http404("Knock knock , Not you!")
+        return super().dispatch(request, *args, **kwargs)
+    
+
     def get_success_url(self):
         return reverse("home")
 
