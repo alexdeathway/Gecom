@@ -10,7 +10,12 @@ from django.views.generic import (
 from django.views.generic.edit import UpdateView
 from .models import CategoryModel, GamesModel, OrganisationModel
 
-from games.forms import GameCreationForm,OrganisationCreationForm,OrganisationUpdateForm
+from games.forms import ( 
+                            GameCreationForm,
+                            OrganisationCreationForm,
+                            OrganisationUpdateForm,
+                            GameUpdateForm,
+                        )    
 
 class GamesListView(ListView):
     template_name="games/games_list.html"
@@ -81,7 +86,7 @@ class CategoryDetailView(DetailView):
 
 
 class OrganisationUpdateView(LoginRequiredMixin,UpdateView):
-    template_name="users/user_update.html"
+    template_name="games/organisation_update.html"
     #form_class=UserUpdateForm
     model=OrganisationModel
     form_class=OrganisationUpdateForm
@@ -98,3 +103,20 @@ class OrganisationUpdateView(LoginRequiredMixin,UpdateView):
     def get_success_url(self):
         return reverse("home")
 
+class GameUpdateView(LoginRequiredMixin,UpdateView):
+    template_name="games/games_update.html"
+    #form_class=UserUpdateForm
+    model=GamesModel
+    form_class=GameUpdateForm
+    # slug_url_kwarg="username"
+    # slug_field="username"
+    
+    def dispatch(self, request, *args, **kwargs):
+        game=self.get_object()
+        if game.publisher.owner != self.request.user:
+            raise Http404("Knock knock , Not you!")
+        return super().dispatch(request, *args, **kwargs)
+    
+
+    def get_success_url(self):
+        return reverse("home")
