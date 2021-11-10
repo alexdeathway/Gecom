@@ -104,13 +104,19 @@ class OrganisationUpdateView(LoginRequiredMixin,UpdateView):
         return reverse("home")
 
 class GameUpdateView(LoginRequiredMixin,UpdateView):
-    template_name="games/games_update.html"
-    #form_class=UserUpdateForm
+    template_name="games/game_update.html"
     model=GamesModel
     form_class=GameUpdateForm
     # slug_url_kwarg="username"
     # slug_field="username"
     
+    def get_form_kwargs(self,**kwargs):
+        kwargs=super(GameUpdateView,self).get_form_kwargs(**kwargs)
+        kwargs.update({
+            "request":self.request
+        })
+        return kwargs
+
     def dispatch(self, request, *args, **kwargs):
         game=self.get_object()
         if game.publisher.owner != self.request.user:
