@@ -1,10 +1,14 @@
+
 # Client-Gecom 
+<div align="center">
+<img width="300" src="./docs/assets/project_id_name_logo.png"  alt="logo"/>
+</div>
 Gecom is Games and PC component <b>Concept</b> store.
 
 **Resources**
    
- - Read project overview (Developers).    
- - Choose Tasks/Quests
+ - [Read project overview (Developers)](https://github.com/alexdeathway/Gecom/blob/dev-unstable/docs/contribution/overview.md).    
+ - [Choose Tasks/Quests](https://github.com/alexdeathway/Gecom/blob/dev-unstable/docs/contribution/quests.md)
 
 
 
