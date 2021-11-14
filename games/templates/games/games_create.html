@@ -3,7 +3,7 @@
 
 {% block body %}
 <div class="min-h-screen flex justify-center p-20 bg-gray-900 text-white px-4 sm:px-6 lg:px-8">
-    <form method="post">
+    <form method="POST" enctype="multipart/form-data" >
 
 {% csrf_token %}
 {{ form|crispy }}

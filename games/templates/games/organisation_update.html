@@ -4,7 +4,7 @@
 {% block body %}
 <div class="min-h-screen flex  justify-center bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
 
-<form action={% url 'games:organisationupdate'  %} method="POST">
+<form method="POST" enctype="multipart/form-data" >
 {% csrf_token %}
 {{form|crispy}}
  <input type="submit" value="Submit">
