@@ -4,7 +4,7 @@
 *.pyc
 __pycache__
 db.sqlite3 #<excluded for dev-unstable>
-media
+#media
 
 # Backup files # 
 *.bak 
