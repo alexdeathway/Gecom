@@ -15,23 +15,21 @@
 <body>
 
   <!-- This example requires Tailwind CSS v2.0+ -->
-  <header class="text-gray-400 body-font">
+  <header class="text-gray-200 font-medium body-font">
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-      <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
-          stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
-          viewBox="0 0 24 24">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-        </svg>
-        <span class="ml-3 text-xl ">Gecom</span>
+      <a class="flex title-font font-medium items-center  mb-4 md:mb-0">
+       <svg xmlns="http://www.w3.org/2000/svg"  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="h-6 w-6 text-yellow-400" fill="text-yellow-400" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+          </svg>
+        <span class="ml-3 text-3xl ">Gecom</span>
       </a>
       <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-        <a href="{% url 'home' %}" class="mr-5 hover:text-white">Home</a>
-        <a href="{% url 'games:games' %}" class="mr-5 hover:text-white">Explore</a>
-        <a href="{% url 'components:components' %}" class="mr-5 font-mono hover:text-white">PC parts</a>
+        <a href="{% url 'home' %}" class="mr-5  {% if request.resolver_match.url_name == "home" %}  text-yellow-400 {% endif %} hover:text-white">Home</a>
+        <a href="{% url 'games:games' %}" class="mr-5 {% if request.resolver_match.url_name == "games" %}  text-yellow-400 {% endif %}  hover:text-white">Explore</a>
+        <a href="{% url 'components:components' %}" class="mr-5 {% if request.resolver_match.url_name == "components" %}  text-yellow-400 {% endif %}  hover:text-white">PC parts</a>
         {% if user.is_organiser %}
-        <a href="{% url 'games:gamecreate' %}" class="mr-5 hover:text-white">Create Game</a>
-        <a href="{% url 'components:componentcreate' %}" class="mr-5 hover:text-white">Create Component</a>
+        <a href="{% url 'games:gamecreate' %}" class="mr-5 {% if request.resolver_match.url_name == "gamecreate" %}  text-yellow-400 {% endif %}  hover:text-white">Create Game</a>
+        <a href="{% url 'components:componentcreate' %}" class="mr-5 {% if request.resolver_match.url_name == "componentcreate" %}  text-yellow-400 {% endif %}  hover:text-white">Create Component</a>
         {% endif %}
       </nav>
       {% comment %} <a href="{% url 'signup' %}">
@@ -42,27 +40,26 @@
       <div class="flex space-x-2">
         <a href={% url 'users:profile' user.username %}>
           <div class="relative w-10 h-10">
-            <img class="rounded-full border-2 border-gray-200 shadow-sm"
-              {% comment %} src="{% static 'games/icons/profilelogo.png' %}" alt="user image" /> {% endcomment %}
+            <img class="rounded-full border-2 border-yellow-400 shadow-sm"
+              {% comment %} src="{% static 'games/icons/profilelogo.png' %}" alt="user image" />  {% endcomment %}
               src="https://thispersondoesnotexist.com/image" alt="user image" /> 
             <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
           </div>
         </a>
       </div>
-       <div class="px-6">
-       <button>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+       <div class=" mx-5">
+       <button class="">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current text-gray-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
       </button>
       </div>
       <div class="px-8">
         <a href="{% url 'logout' %}">
           <button
-            class="inline-flex items-center bg-red-500 border-0 py-1 px-3 text-white-500 focus:outline-none hover:bg-red-700 text-white-900 rounded text-base mt-4 md:mt-0">Logout
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            class="inline-flex items-center bg-red-500 border-0 py-1 px-3 text-gray-300 focus:outline-none hover:bg-red-700 hover:text-gray-50 rounded text-base mt-4 md:mt-0">Logout 
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
           </button>
         </a>
@@ -125,17 +122,13 @@
   <footer class="text-gray-600 body-font">
     <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
       <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
-          stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
-          viewBox="0 0 24 24">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        <svg xmlns="http://www.w3.org/2000/svg"  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="h-6 w-6 text-yellow-400" fill="text-yellow-400" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
         </svg>
-        <span class="ml-3 text-xl text-white">Tailblocks</span>
+        <span class="ml-3 text-xl text-white">Gecom</span>
       </a>
-      <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2020
-        Tailblocks —
-        <a href="https://twitter.com/knyttneve" class="text-gray-600 ml-1" rel="noopener noreferrer"
-          target="_blank">@knyttneve</a>
+      <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2021
+        Gecom |
       </p>
       <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
         <a class="text-gray-500">

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block body %}
-<section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
+<section class="text-gray-400 bg-gray-900 body-font overflow-hidden pt-12">
   <div class="container px-5 py-20 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
       <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="{{game.cover.url}}">
@@ -48,20 +48,20 @@
         </div>
         <p class="leading-relaxed">{{game.discription|slice:':250' }}</p>
         <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-800 mb-5">
-          <div class="flex">
+          {% comment %} <div class="flex">
             <span class="mr-3">Color</span>
             <button class="border-2 border-gray-800 rounded-full w-6 h-6 focus:outline-none"></button>
             <button class="border-2 border-gray-800 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>
             <button class="border-2 border-gray-800 ml-1 bg-blue-500 rounded-full w-6 h-6 focus:outline-none"></button>
-          </div>
+          </div> {% endcomment %}
           <div class="flex ml-6 items-center">
-            <span class="mr-3">Size</span>
+            <span class="mr-3">Platform</span>
             <div class="relative">
-              <select class="rounded border border-gray-700 focus:ring-2 focus:ring-blue-900 bg-transparent appearance-none py-2 focus:outline-none focus:border-blue-500 text-white pl-3 pr-10">
-                <option>SM</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option>
+              <select class="rounded border border-gray-700 focus:ring-2 focus:ring-blue-900 bg-transparent appearance-none py-2 focus:outline-none focus:border-blue-500 text-gray-600 pl-3 pr-10">
+                <option>Pc</option>
+                <option>Playstation</option>
+                <option>Xbox</option>
+                <option>KFC Console</option>
               </select>
               <span class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24">
