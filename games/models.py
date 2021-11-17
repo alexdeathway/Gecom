@@ -21,6 +21,7 @@ class GamesModel(models.Model):
 class OrganisationModel(models.Model):
     owner=models.ForeignKey(User,on_delete=models.CASCADE,related_name="OrganisationModel_User")
     name=models.CharField(max_length=50,unique=True)
+    #username=models.CharField(max_length=20)
     email=models.EmailField(blank=True, max_length=50)
 
     def __str__(self):
@@ -30,6 +31,7 @@ class OrganisationModel(models.Model):
 class CategoryModel(models.Model):
     name=models.CharField(max_length=20,unique=True)
     cover=models.ImageField(default="default_category_cover.jpg",upload_to="category_cover")
+    description=models.CharField(null=True, max_length=400)
     def __str__(self):
         return self.name
 

@@ -1,3 +1,4 @@
+from django.http.response import Http404
 from django.shortcuts import render,reverse
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -6,9 +7,10 @@ from django.views.generic import (
                             ListView,
                             DetailView,                    
                                 )
+from django.views.generic.edit import UpdateView
 from .models import ComponentsModel,ComponentCategoryModel
 from games.models import OrganisationModel
-from .forms import ComponentCreationForm
+from .forms import ComponentCreationForm,ComponentUpdateForm
 
 class ComponentsListView(ListView):
     template_name="components/components_list.html"
@@ -52,4 +54,28 @@ class ComponentCategoryDetailView(DetailView):
         components=self.get_object().ComponentsModel_ComponentCategoryModel.all()              
         context["components"]=components
         return context
+
+
+class ComponentUpdateView(LoginRequiredMixin ,UpdateView):
+    template_name="components/component_update.html"
+    form_class=ComponentUpdateForm
+    model=ComponentsModel
+
+    def get_form_kwargs(self,**kwargs):
+        kwargs=super(ComponentUpdateView,self).get_form_kwargs(**kwargs)
+        kwargs.update({
+            "request":self.request
+        })
+        return kwargs
+    
+    def dispatch(self, request, *args, **kwargs):
+        component=self.get_object()
+        if component.vendor.owner != self.request.user:
+            raise Http404("Knock knock , Not you!")
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse("components:components")
+
+
 
