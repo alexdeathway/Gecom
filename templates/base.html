@@ -42,7 +42,7 @@
           <div class="relative w-10 h-10">
             <img class="rounded-full border-2 border-yellow-400 shadow-sm"
               {% comment %} src="{% static 'games/icons/profilelogo.png' %}" alt="user image" />  {% endcomment %}
-              src="https://thispersondoesnotexist.com/image" alt="user image" /> 
+              src={{ request.user.profile_image.url }} alt="user image" /> 
             <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
           </div>
         </a>

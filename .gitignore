@@ -104,3 +104,6 @@ GitHub.sublime-settings
 
 #secret Keys
 secret_keys.py
+
+#environmental variable
+.env
