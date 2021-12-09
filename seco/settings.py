@@ -12,7 +12,14 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from pathlib import Path
+import environ
 from .secgen import generate_secret_key
+
+#environ
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,17 +29,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+"""
 try:
     from .secret_keys import SECRET_KEY
 except ModuleNotFoundError:
     SETTINGS_DIR=os.path.abspath(os.path.dirname(__file__))
     generate_secret_key(os.path.join(SETTINGS_DIR,"secret_keys.py"))
     from .secret_keys import SECRET_KEY 
-#
-# SECRET_KEY = ""
+"""
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -126,6 +137,16 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+#Email settings
+EMAIL_BACKEND=env('EMAIL_BACKEND')
+EMAIL_HOST=env('EMAIL_HOST')
+EMAIL_PORT=env('EMAIL_PORT')
+EMAIL_USE_TLS=env('EMAIL_USE_TLS')
+EMAIL_HOST_USER=env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=env('EMAIL_HOST_PASSWORD')
+
+
 
 
 # Static files (CSS, JavaScript, Images)

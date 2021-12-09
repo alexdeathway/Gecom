@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import UpdateView
 from .forms import CustomUserCreationForm,UserUpdateForm
 from django.contrib.auth import get_user_model
-
+from django.core.mail import send_mail
 
 User=get_user_model()
 
@@ -13,6 +13,17 @@ User=get_user_model()
 class UserSignupView(CreateView):
     template_name="registration/signup.html"
     form_class=CustomUserCreationForm
+    
+    def form_valid(self,form):
+        user_Email=form.data['email']
+        send_mail(
+            "test subject",
+            "this is test email for signup",
+            "admin@gecom.com",
+            [user_Email],
+        )
+
+        return super(UserSignupView,self).form_valid(form)
 
     def get_success_url(self):
         return reverse("home")
@@ -29,8 +40,8 @@ class UserProfileView(LoginRequiredMixin ,DetailView):
         organisation=self.get_object().OrganisationModel_User.all()              
         context["organisation"]=organisation
         return context
-    
 
+    
 
 class UserProfileUpdateView(LoginRequiredMixin,UpdateView):
     template_name="users/user_update.html"
