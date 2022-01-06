@@ -42,7 +42,7 @@ class GamesCreateView(LoginRequiredMixin ,CreateView):
         return kwargs
 
     def get_success_url(self):
-        return reverse("home")
+        return reverse("games:gamedetail",kwargs={"pk":self.get_object().id})
 
 class OrganisationCreateView(LoginRequiredMixin ,CreateView):
     template_name="games/organisation_create.html"
@@ -125,4 +125,4 @@ class GameUpdateView(LoginRequiredMixin,UpdateView):
     
 
     def get_success_url(self):
-        return reverse("home")
+        return reverse("games:gamedetail",kwargs={"pk":self.get_object().id})

@@ -104,3 +104,5 @@ GitHub.sublime-settings
 
 #secret Keys
 secret_keys.py
+db.sqlite3
+
