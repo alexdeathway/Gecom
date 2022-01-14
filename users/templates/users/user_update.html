@@ -4,7 +4,7 @@
 {% block body %}
 <div class="min-h-screen flex items-center justify-center bg-gray-50 py-8 px-4 sm:px-6 lg:px-8" style="background-color: #111827;">
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
 
         {% csrf_token %}
         {{ form|crispy }}
