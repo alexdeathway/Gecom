@@ -3,11 +3,12 @@
 <h3><u>Newbie</u></h3>
    <i>backend</i>
     
- - [ ]  Redirect to detailview after successful update. [hint](https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/)
+ - [x]  Redirect to detailview after successful update. [hint](https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/)
  - [ ]  Send  success message after success update. [hint](https://docs.djangoproject.com/en/3.2/ref/contrib/messages/)
  - [ ]  Add pagination on explore page. [hint](https://docs.djangoproject.com/en/3.2/topics/pagination/)
- - [ ]  Option to Delete Component and games.[hint](https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/#django.views.generic.edit.DeleteView)
+ - [ ]  Option to Delete Component and games and organisation.[hint](https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-editing/#django.views.generic.edit.DeleteView)
 
+- [ ]  Organization detail view.
   <i>frontend</i>
    
  - [ ] Display success message received from backend after update. [hint](https://docs.djangoproject.com/en/3.2/ref/contrib/messages/)
