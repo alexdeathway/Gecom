@@ -82,6 +82,10 @@ Gecom
 <!--games-->
 
 <section class="text-gray-400 bg-gray-900 body-font">
+
+<div class='w-full h-full bg-no-repeat bg-cover bg-left bg-fixed'
+      style="background-image: linear-gradient(90deg, hsla(220, 100%, 8%, 1) 0%, hsla(219, 100%, 10%, 0.8) 100%), url({% static 'games/assests/background3.jpg' %});">
+
   <div class="container px-32 py-32 mx-auto">
     <div class="title-font sm:text-1xl text-2xl mb-4 font-medium text-white">Games List</div>
     <div class="flex flex-wrap -m-4">
@@ -113,6 +117,9 @@ Gecom
 <!--category-->
 <section class="text-gray-400 body-font bg-gray-900">
 
+  <div class='w-full h-full bg-no-repeat bg-cover bg-left '
+      style="background-image: linear-gradient(90deg, hsla(220, 100%, 8%, 1) 0%, hsla(219, 100%, 10%, 0.8) 100%), url({% static 'games/assests/NewRelease.jpg' %});">
+
   <div class="container px-32 py-32 mx-auto">
     <div class="flex flex-wrap w-full mb-4">
       <div class="title-font sm:text-1xl text-2xl mb-4 font-medium text-white">Browse Games</div>
@@ -141,5 +148,6 @@ Gecom
     </div>
   </div>
   </div>
+  
 </section>
 {% endblock body %}

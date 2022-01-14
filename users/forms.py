@@ -25,4 +25,5 @@ class UserUpdateForm(forms.ModelForm):
         fields=[
             "username",
             "email",
+            "profile_image",
         ]
