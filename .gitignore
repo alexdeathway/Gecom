@@ -4,7 +4,7 @@
 *.pyc
 __pycache__
 db.sqlite3 #<excluded for dev-unstable>
-media
+#media
 
 # Backup files # 
 *.bak 
@@ -104,5 +104,9 @@ GitHub.sublime-settings
 
 #secret Keys
 secret_keys.py
-db.sqlite3
+
+
+#environmental variable
+.env
+
 

@@ -11,7 +11,7 @@
         <div class="flex mb-4">
           <a class="flex-grow text-blue-400 border-b-2 border-blue-500 py-2 text-lg px-1">Description</a>
         </div>
-        <p class="leading-relaxed  mb-4">User bio goes here</p>
+        <p class="leading-relaxed  mb-4">{{userprofile.discription}}</p>
         <div class="flex border-t border-gray-800 py-2">
           {% if userprofile.is_organiser %}
             <div class="flex space-x-2">
@@ -59,7 +59,7 @@
           </button>
         </div>
       </div>
-      <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://thispersondoesnotexist.com/image">
+      <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src={{userprofile.profile_image.url}}>
     </div>
   </div>
 </section>
