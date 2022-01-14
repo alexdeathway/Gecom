@@ -5,3 +5,7 @@ def generate_secret_key(path):
     secret="SECRET_KEY="+"\""+get_random_secret_key()+"\"" + "\n"
     secret_file.write(secret)
     secret_file.close()
+
+if  __name__=="__main__":
+    secret="SECRET_KEY="+"\""+get_random_secret_key()+"\"" + "\n"
+    print(secret) 
