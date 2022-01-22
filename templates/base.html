@@ -1,7 +1,6 @@
+{% load static %}
 <!doctype html>
 <html>
-{% load static %}
-
 <head>
   {% block head %}{% endblock head %}
   <title>{% block title %}{% endblock title %}</title>
@@ -9,7 +8,8 @@
 <meta name="description" content="Gecom first page">
 <meta name="keywords" content="">
 -->
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  {% comment %} <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> {% endcomment %}
+  <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
 </head>
 
 <body>
