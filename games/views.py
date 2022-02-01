@@ -62,8 +62,8 @@ class PublisherDetailView(DetailView):
     template_name="games/publisher_detail.html"
     model=OrganisationModel
     context_object_name="publisher"
-    #slug_url_kwarg = "name"
-    #slug_field = "name"
+    slug_url_kwarg = "username"
+    slug_field = "username"
 
     def get_context_data(self,**kwargs):
         context=super(PublisherDetailView,self).get_context_data(**kwargs)
