@@ -29,8 +29,38 @@
         </div>
         {% endfor %}
       </div>
+
+    <div class="mt-12 content-center justify-center">      
+        <nav aria-label="Pagination" class="flex items-center text-gray-600">
+          {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}" class="p-2 mr-4 rounded hover:bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+         </a>
+         {% endif %}
+         {% if page_obj.has_previous %}
+         <a href="?page={{page_obj.previous_page_number }}" class="px-4 py-2 rounded hover:bg-gray-100"> 1 </a>
+         {% endif %}
+          <a href="#" class="px-4 py-2 rounded bg-gray-200 text-gray-900 font-medium hover:bg-gray-100"> {{ page_obj.number  }} </a>
+          {% if page_obj.has_next %}
+          <a href="?page={{page_obj.next_page_number }}" class="px-4 py-2 rounded hover:bg-gray-100"> {{ page_obj.next_page_number }} </a>
+          {% endif %}
+          <a href="#" class="px-4 py-2 rounded hover:bg-gray-100"> ... </a>
+          {% if page_obj.has_next %}
+          <a href="?page={{page_obj.next_page_number }}" class="p-2 ml-4 rounded hover:bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+          {% endif %}
+        </nav>
+  </div>
     </div>
   </div>
+
+
+  
 
 
 </section>

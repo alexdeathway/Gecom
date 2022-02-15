@@ -6,7 +6,7 @@ from django.views.generic.edit import UpdateView
 from .forms import CustomUserCreationForm,UserUpdateForm
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
-
+from django.contrib import messages
 User=get_user_model()
 
 
@@ -57,6 +57,9 @@ class UserProfileUpdateView(LoginRequiredMixin,UpdateView):
             raise Http404("Knock knock , Not you!")
         return super().dispatch(request, *args, **kwargs)
     
+    def form_valid(self):
+        messages.success(self.request, f"Account created successfully")
+        pass
 
     def get_success_url(self):
         return reverse("home")
