@@ -24,6 +24,7 @@ class UserUpdateForm(forms.ModelForm):
         model =User
         fields=[
             "username",
-            "email",
             "profile_image",
+            "email",
+            "bio",
         ]

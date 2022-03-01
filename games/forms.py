@@ -1,3 +1,4 @@
+import re
 from django import forms
 from games.models import GamesModel, OrganisationModel
 
@@ -38,8 +39,14 @@ class OrganisationCreationForm(forms.ModelForm):
       
       fields=[
          "name",
+         "username",
          "email",
       ]
+   def clean_code_name(self):
+        username= self.cleaned_data['username']
+        if not re.match(r'^[0-9a-zA-Z]*$',username) or username.lower() != username:
+                raise forms.ValidationError("Sorry , you can only have lower alphanumeric in username") 
+        return username     
 
 class OrganisationUpdateForm(forms.ModelForm):
 
@@ -52,8 +59,16 @@ class OrganisationUpdateForm(forms.ModelForm):
       
       fields=[
          "name",
+         "username",
          "email",
+         "about",
+
       ]
+   def clean_code_name(self):
+        username= self.cleaned_data['username']
+        if not re.match(r'^[0-9a-zA-Z]*$',username):
+                raise forms.ValidationError("Sorry , you can only have alphanumeric in username") 
+        return username   
 
 class GameUpdateForm(forms.ModelForm):
       

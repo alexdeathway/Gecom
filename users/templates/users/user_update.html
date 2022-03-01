@@ -8,7 +8,9 @@
 
         {% csrf_token %}
         {{ form|crispy }}
-        <input type="submit" value="Update">
+        <button class="inline-flex items-center bg-yellow-200 border-0 py-1 px-3 mb-1 text-yellow-700 focus:outline-none hover:text-yellow-900 rounded text-base mt-4 md:mt-0">
+            update
+        </button>
     </form>
 
 </div>
