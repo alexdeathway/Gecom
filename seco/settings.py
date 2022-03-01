@@ -51,6 +51,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'seco',
     'users',
     'games',
     'components',
@@ -149,8 +150,15 @@ EMAIL_HOST_PASSWORD=env('EMAIL_HOST_PASSWORD')
 
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    '/var/www/static/',
+]
+
 EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend"
 STATIC_URL = '/static/'
 AUTH_USER_MODEL="users.User"

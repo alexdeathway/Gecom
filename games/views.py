@@ -9,7 +9,7 @@ from django.views.generic import (
                                 )
 from django.views.generic.edit import UpdateView
 from .models import CategoryModel, GamesModel, OrganisationModel
-
+from django.contrib import messages
 from games.forms import ( 
                             GameCreationForm,
                             OrganisationCreationForm,
@@ -20,7 +20,7 @@ from games.forms import (
 class GamesListView(ListView):
     template_name="games/games_list.html"
     context_object_name="games"
-    paginate_by=16
+    paginate_by=15
     queryset=GamesModel.objects.all()
 
 
@@ -56,14 +56,14 @@ class OrganisationCreateView(LoginRequiredMixin ,CreateView):
         return super(OrganisationCreateView,self).form_valid(form)
 
     def get_success_url(self):
-        return reverse("home")
+         return reverse("games:publisherdetail",kwargs={"pk":self.get_object().id})
 
 class PublisherDetailView(DetailView):
     template_name="games/publisher_detail.html"
     model=OrganisationModel
     context_object_name="publisher"
-    #slug_url_kwarg = "name"
-    #slug_field = "name"
+    slug_url_kwarg = "username"
+    slug_field = "username"
 
     def get_context_data(self,**kwargs):
         context=super(PublisherDetailView,self).get_context_data(**kwargs)
@@ -98,10 +98,13 @@ class OrganisationUpdateView(LoginRequiredMixin,UpdateView):
         if organisation.owner != self.request.user:
             raise Http404("Knock knock , Not you!")
         return super().dispatch(request, *args, **kwargs)
-    
+
+    def form_valid(self,form):
+        messages.success(self.request,"successfully update")
+        return super(OrganisationUpdateView,self).form_valid(form) 
 
     def get_success_url(self):
-        return reverse("home")
+         return reverse("games:publisherdetail",kwargs={"pk":self.get_object().id})
 
 class GameUpdateView(LoginRequiredMixin,UpdateView):
     template_name="games/game_update.html"
@@ -117,11 +120,16 @@ class GameUpdateView(LoginRequiredMixin,UpdateView):
         })
         return kwargs
 
+    def form_valid(self,form):
+        messages.success(self.request,"successfully update")
+        return super(GameUpdateView,self).form_valid(form) 
+    
     def dispatch(self, request, *args, **kwargs):
         game=self.get_object()
         if game.publisher.owner != self.request.user:
             raise Http404("Knock knock , Not you!")
         return super().dispatch(request, *args, **kwargs)
+    
     
 
     def get_success_url(self):
