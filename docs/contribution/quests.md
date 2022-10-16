@@ -17,7 +17,7 @@
 
 <h3><u>Familiar</u></h3>
 <i>Backend</i>
-
+ - [ ] Add Auto dummy data on new project startup.
  - [ ] Add cart functionality
  - [ ] Rating and reviews to games and component.
  - [ ] User Email verification.
