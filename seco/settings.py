@@ -51,7 +51,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'seco',
     'users',
     'games',
     'components',
