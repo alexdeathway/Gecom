@@ -62,7 +62,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_tailwind',
-    'debug_toolbar'
+    'debug_toolbar',
+    'django_extensions',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [
