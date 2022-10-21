@@ -51,7 +51,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'seco',
     'users',
     'games',
     'components',
@@ -63,6 +62,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_tailwind',
+    'debug_toolbar',
+    'django_extensions',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'seco.urls'
@@ -94,6 +97,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'seco.wsgi.application'
+
+
+#Django tool bar configuration
+#For interactive debug panel in the browser
+INTERNAL_IPS = [
+    '127.0.0.1'
+    ] 
+        
 
 
 # Database
