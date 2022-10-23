@@ -25,11 +25,21 @@ Gecom is Games and PC component <b>Concept</b> store.
 **Quick development Guide**
 
 1. Create virtual environment
+
 > virtualenv < virtual environment name>
 
 2. Install required packages
+
 > pip install -r requirements.txt
-3. Read project overview for app & structure understanding. 
 
-4. Choose issue/task to work from quests or work on own feature.
+3. Read [project overview](https://github.com/alexdeathway/Gecom/blob/dev-unstable/docs/contribution/overview.md) for app & structure understanding. 
+4. Create .env file in project root dir and fill/copy content from template.env.
 
+
+5.Load development Database
+
+>python manage.py loaddata db.json
+
+6. Choose issue/task to work from [quests or work](https://github.com/alexdeathway/Gecom/blob/dev-unstable/docs/contribution/quests.md) on own feature.
+
+---
