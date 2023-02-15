@@ -43,9 +43,8 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
-
-ALLOWED_HOSTS = []
+DEBUG = os.environ.get('DEBUG', False) == 'True'
+ALLOWED_HOSTS = ["127.0.0.1","0.0.0.0"]
 
 
 # Application definition
@@ -99,24 +98,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'seco.wsgi.application'
 
 
-#Django tool bar configuration
-#For interactive debug panel in the browser
-INTERNAL_IPS = [
-    '127.0.0.1'
-    ] 
-        
 
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "HOST": os.environ.get("DJANGO_POSTGRES_HOST"),
+        "PORT": os.environ.get("DJANGO_POSTGRES_PORT"),
+        "USER": os.environ.get("DJANGO_POSTGRES_USER"),
+        "PASSWORD": os.environ.get("DJANGO_POSTGRES_PASSWORD"),
+        "NAME": os.environ.get("DJANGO_POSTGRES_DATABASE"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -165,16 +161,14 @@ EMAIL_HOST_PASSWORD=env('EMAIL_HOST_PASSWORD')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    '/var/www/static/',
-]
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend"
-STATIC_URL = '/static/'
 AUTH_USER_MODEL="users.User"
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
 CRISPY_TEMPLATE_PACK="tailwind"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL='home'
+#DEBUG_PROPAGATE_EXCEPTIONS=True
