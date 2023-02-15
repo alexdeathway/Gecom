@@ -1,19 +1,24 @@
-FROM python:3.8.5-alpine
-RUN  pip install --upgrade pip
+FROM python:3.8-slim
 
-COPY requirements.txt .
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 
-RUN apk update \
-    && apk add --virtual build-deps gcc python3-dev musl-dev \
-    && apk add jpeg-dev zlib-dev libjpeg \
-    && pip install Pillow 
-    #&& apk del build-deps
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends build-essential libpq-dev \
+  && rm -rf /var/lib/apt/lists/*
 
-RUN pip install -r requirements.txt
-COPY ./ /project
-WORKDIR /project
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt \
+    && rm -rf /tmp/requirements.txt \
+    && useradd -U app_user \
+    && install -d -m 0755 -o app_user -g app_user /app/static \
+    && install -d -m 0755 -o app_user -g app_user /app/media
 
-COPY entrypoint.sh /
 
-ENTRYPOINT ["sh","/entrypoint.sh"]
+WORKDIR /app
+USER app_user:app_user
+COPY --chown=app_user:app_user . .
+RUN chmod +x docker/*.sh
 
+ENTRYPOINT [ "docker/entrypoint.sh" ]
+CMD [ "docker/start.sh", "server" ]

@@ -1,27 +1,52 @@
-version: '3.7'
-
-services:
-  django_gunicorn:
-    
-    volumes:
-      - static:/static 
-    env_file:  
-      - .env
-    build:
-         context: .
-    ports:
-      - "8000:8000" 
-  
-  
-  nginx:
-    
-    build: ./nginx
-    volumes:
-      - static:/static
-    ports:
-      - "8000:8000"
-    depends_on:
-      - django_gunicorn    
+version: "3.8"
 
 volumes:
-  static:
+    app_data:
+        name: app_data
+    app_broker:
+        name: app_broker
+    static_files:
+        name: static_files
+    media_files:
+        name: media_files
+
+services:
+    django: &django
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: seco:development
+        command: /app/docker/start.sh server
+        depends_on:
+            - postgres
+        env_file:
+            - .env
+        ports:
+            - 8000:8000
+        volumes:
+            - static_files:/app/static
+            - media_files:/app/media
+
+    postgres:
+        image: postgres:13.3-alpine
+        volumes:
+            - app_data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_HOST: gecompostgres
+            POSTGRES_PASSWORD: gecompostgres
+            POSTGRES_USER: gecompostgres
+            POSTGRES_DB: gecompostgres
+    
+    
+    nginx:
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        image: nginx:development
+        ports:
+            - 80:80
+        depends_on:
+            - django
+        volumes:
+            - static_files:/app/static:ro
+            - media_files:/app/media:ro
