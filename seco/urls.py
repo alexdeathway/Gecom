@@ -28,6 +28,8 @@ from django.contrib.auth.views import (
                                         PasswordResetConfirmView,
                                         PasswordResetCompleteView,
                                       )
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,7 +44,8 @@ urlpatterns = [
     path('games/',include('games.urls',namespace='games')),
     path('users/',include('users.urls',namespace='users')),
     path('components/',include('components.urls',namespace='components')),
-]
+    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('favicon/favicon.ico')))
+ ]
 
 
 if settings.DEBUG:

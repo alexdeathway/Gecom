@@ -5,7 +5,7 @@
 <div class="min-h-screen flex items-center justify-end bg-gray-50 py-2 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-cover " 
 style="background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url({% static 'games/assests/login_cover.jpg' %});">
 
-    <form class="mr-40 py-16 px-8 rounded-xl bg-black " method="post">
+    <form class="mr-40 py-16 px-8 rounded-xl bg-black " enctype="multipart/form-data" method="post">
 
         {% csrf_token %}
         {{ form|crispy }}
