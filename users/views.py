@@ -57,9 +57,10 @@ class UserProfileUpdateView(LoginRequiredMixin,UpdateView):
             raise Http404("Knock knock , Not you!")
         return super().dispatch(request, *args, **kwargs)
     
-    def form_valid(self):
-        messages.success(self.request, f"Account created successfully")
-        pass
+    # def form_valid(self):
+    #     messages.success(self.request, f"Account updated successfully")
+    #     return super(UserProfileUpdateView,self).form_valid(form)
+
 
     def get_success_url(self):
         return reverse("home")
