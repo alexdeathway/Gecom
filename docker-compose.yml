@@ -11,7 +11,7 @@ volumes:
         name: media_files
 
 services:
-    django: &django
+    django:
         build:
             context: .
             dockerfile: Dockerfile
@@ -32,7 +32,7 @@ services:
         volumes:
             - app_data:/var/lib/postgresql/data
         environment:
-            POSTGRES_HOST: gecompostgres
+           # POSTGRES_HOST: gecompostgres
             POSTGRES_PASSWORD: gecompostgres
             POSTGRES_USER: gecompostgres
             POSTGRES_DB: gecompostgres

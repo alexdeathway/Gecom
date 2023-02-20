@@ -16,6 +16,7 @@ from games.forms import (
                             OrganisationUpdateForm,
                             GameUpdateForm,
                         )    
+from games.models import OrganisationModel
 
 class GamesListView(ListView):
     template_name="games/games_list.html"
@@ -47,6 +48,7 @@ class GamesCreateView(LoginRequiredMixin ,CreateView):
 class OrganisationCreateView(LoginRequiredMixin ,CreateView):
     template_name="games/organisation_create.html"
     form_class=OrganisationCreationForm
+    model=OrganisationModel
     
     def form_valid(self,form):
         organisation = form.save(commit=False)
