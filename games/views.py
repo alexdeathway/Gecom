@@ -5,7 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
                             CreateView,
                             ListView,
-                            DetailView,                    
+                            DetailView,   
+                            TemplateView,                 
                                 )
 from django.views.generic.edit import UpdateView
 from .models import CategoryModel, GamesModel, OrganisationModel
@@ -58,7 +59,7 @@ class OrganisationCreateView(LoginRequiredMixin ,CreateView):
         return super(OrganisationCreateView,self).form_valid(form)
 
     def get_success_url(self):
-         return reverse("games:publisherdetail",kwargs={"pk":self.get_object().id})
+         return reverse("games:publisherdetail",kwargs={'username':self.object.username})
 
 class PublisherDetailView(DetailView):
     template_name="games/publisher_detail.html"
@@ -106,7 +107,7 @@ class OrganisationUpdateView(LoginRequiredMixin,UpdateView):
         return super(OrganisationUpdateView,self).form_valid(form) 
 
     def get_success_url(self):
-         return reverse("games:publisherdetail",kwargs={"pk":self.get_object().id})
+         return reverse("games:publisherdetail",kwargs={'username':self.object.username})
 
 class GameUpdateView(LoginRequiredMixin,UpdateView):
     template_name="games/game_update.html"
@@ -136,3 +137,6 @@ class GameUpdateView(LoginRequiredMixin,UpdateView):
 
     def get_success_url(self):
         return reverse("games:gamedetail",kwargs={"pk":self.get_object().id})
+
+class DemoNoPaymentView(TemplateView):
+    template_name = "games/demo_payment.html"
