@@ -8,6 +8,7 @@ from .views import (
                    CategoryDetailView,
                    OrganisationUpdateView,
                    GameUpdateView,
+                   DemoNoPaymentView
                     )
 
 app_name="games"
@@ -22,4 +23,5 @@ urlpatterns = [
     path("publisher/<slug:username>/",PublisherDetailView.as_view(),name="publisherdetail"),
     path("organisation/<int:pk>/update/",OrganisationUpdateView.as_view(),name="organisationupdate"),
     path("category/<str:name>/",CategoryDetailView.as_view(),name="categorydetail"),
+    path("nopurchase/",DemoNoPaymentView.as_view(),name="nopurchase")
 ]
