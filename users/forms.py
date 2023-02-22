@@ -13,8 +13,8 @@ class CustomUserCreationForm(UserCreationForm):
         }
         fields=[
             "username",
-            "profile_image",
-            "bio",
+            # "profile_image",
+            # "bio",
             "email",
             "password1",
             "password2",
