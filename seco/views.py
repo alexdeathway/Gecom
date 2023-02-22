@@ -12,7 +12,7 @@ class HomeView(ListView):
     def get_context_data(self,**kwargs):
             context=super(HomeView,self).get_context_data(**kwargs)
             try:              
-                context["latest_release"]=GamesModel.objects.all().order_by('-release_date')[1]
+                context["latest_release"]=GamesModel.objects.latest('release_date')
                 context["games_sales"]=GamesModel.objects.filter(sale=True)[:3]
                 context["categories"]=CategoryModel.objects.all()[:4] 
             except IndexError:
