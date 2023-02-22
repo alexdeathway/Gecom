@@ -19,6 +19,8 @@ Gecom is Games and PC component <b>Concept</b> store.
 **Home Page Section** 
 ![Gecom Screenshot](./docs/assets/gecom_screenshot_2.png)
 
+**Login Page** 
+![Gecom Screenshot](./docs/assets/gecom_login_screenshot.png)
 
 ---
 
