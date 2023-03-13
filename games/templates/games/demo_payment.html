@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
 {% block body %}
-<section class="text-gray-600 body-font">
-    <div class="container px-5 py-24 mx-auto">
-      <div class="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
-        <h1 class="flex-grow sm:pr-16 text-2xl font-medium title-font text-gray-900">Hey!this is demo website.So no purchase allowed.</h1>
-        <a href="{% url 'home' %}">
-        <button class="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">return</button>
-        </a>
-    </div>
-    </div>
-</section>
+<main class="h-screen w-full flex flex-col justify-center items-center bg-gray-800">
+	<h1 class="text-9xl font-extrabold text-white tracking-widest">Error!</h1>
+	<div class="bg-red-500 px-2 text-sm rounded rotate-12 absolute">
+	  Purchase not allowed in Demo website!
+	</div>
+	<button class="mt-5">
+    <a href="{% url 'home' %}"
+        class="relative inline-block text-sm font-medium text-white group active:text-orange-500 focus:outline-none focus:ring"
+      >
+        <span
+          class="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-yellow-400 group-hover:translate-y-0 group-hover:translate-x-0"
+          style="background-color: #FF6A3D;"
+        ></span>
+        
+        <span class="relative block px-8 py-3 bg-gray-900 border border-current"
+        style="background-color: #ff6d00; border:1px solid #ff6d00;">
+
+          <router-link to="{% url 'home' %}">Go Home</router-link>
+        </span>
+      </a>
+    </button>
+</main>
 {% endblock body %}

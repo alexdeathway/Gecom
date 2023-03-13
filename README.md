@@ -24,6 +24,16 @@ Gecom is Games and PC component <b>Concept</b> store.
 
 ---
 
+**Bring Site up [local host]**
+1. Create .env file(use template.env for refrence).
+
+2. Start Docker     
+
+> sudo docker-compose build
+
+> sudo docker-compose up
+
+
 **Quick development Guide**
 
 1. Create virtual environment
