@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block body %}
-<section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
+<section class="h-height text-gray-400 bg-gray-900 body-font overflow-hidden">
+  
   <div class="container px-5 py-20 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
       <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="{{component.cover.url}}">
@@ -48,12 +49,12 @@
         </div>
         <p class="leading-relaxed">{{component.discription|slice:':250' }}</p>
         <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-800 mb-5">
-          <div class="flex">
+          {% comment %} <div class="flex">
             <span class="mr-3">Color</span>
             <button class="border-2 border-gray-800 rounded-full w-6 h-6 focus:outline-none"></button>
             <button class="border-2 border-gray-800 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>
             <button class="border-2 border-gray-800 ml-1 bg-blue-500 rounded-full w-6 h-6 focus:outline-none"></button>
-          </div>
+          </div> {% endcomment %}
           <div class="flex ml-6 items-center">
             <span class="mr-3">Amount</span>
             <div class="relative">
@@ -85,5 +86,15 @@
       </div>
     </div>
   </div>
+
+  <div class="max-w-lg mx-auto">
+    <div class="flex bg-yellow-50 rounded-lg p-4 mb-4 text-sm text-yellow-500" role="alert">
+        <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+        <div>
+            <span class="font-medium">Alert!</span> It is important to note that the information and data presented here are intended solely for demonstration purposes and should not be used as a benchmark for official products !
+        </div>
+    </div>
+  </div>
+
 </section>
 {% endblock body %}
