@@ -14,6 +14,10 @@ class GamesModel(models.Model):
     sale=models.BooleanField(default=False)
     publisher=models.ForeignKey('OrganisationModel',on_delete=models.CASCADE,related_name="GameModel_OrganisationModel")
     release_date=models.DateField(auto_now=True) 
+    
+    @property
+    def all_image(self):
+        return GameImageModel.objects.filter(game=self)
 
     def __str__(self):
         return self.name
@@ -35,6 +39,13 @@ class CategoryModel(models.Model):
     description=models.CharField(null=True, max_length=400)
     def __str__(self):
         return self.name
+
+class GameImageModel(models.Model):
+    game=models.ForeignKey("GamesModel", on_delete=models.CASCADE,related_name="GameImageModel_GameModel")
+    url=models.URLField(max_length=200)
+
+    def __str__(self):
+        return f"{self.game}'s image"
 
 class BoughtModel(models.Model):
       buyer=models.ForeignKey(User, on_delete=models.CASCADE,related_name="BoughtModel_User")
