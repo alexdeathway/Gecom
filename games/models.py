@@ -47,9 +47,10 @@ class GameImageModel(models.Model):
     def __str__(self):
         return f"{self.game}'s image"
 
-class BoughtModel(models.Model):
+class CartItemModel(models.Model):
       buyer=models.ForeignKey(User, on_delete=models.CASCADE,related_name="BoughtModel_User")
       game=models.ForeignKey("GamesModel", on_delete=models.CASCADE,related_name="BoughtModel_GamesModel")
       
       def __str__(self):
           return f"{self.buyer} bought {self.game}"
+

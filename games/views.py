@@ -1,4 +1,4 @@
-from django.http.response import Http404
+from django.http.response import Http404,HttpResponse
 from django.shortcuts import render,reverse
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -6,10 +6,10 @@ from django.views.generic import (
                             CreateView,
                             ListView,
                             DetailView,   
-                            TemplateView,                 
+                            View                 
                                 )
 from django.views.generic.edit import UpdateView
-from .models import CategoryModel, GamesModel, OrganisationModel
+from .models import CategoryModel, GamesModel, OrganisationModel, CartItemModel
 from django.contrib import messages
 from games.forms import ( 
                             GameCreationForm,
@@ -138,5 +138,28 @@ class GameUpdateView(LoginRequiredMixin,UpdateView):
     def get_success_url(self):
         return reverse("games:gamedetail",kwargs={"pk":self.get_object().id})
 
-class DemoNoPaymentView(TemplateView):
-    template_name = "games/demo_payment.html"
+class DemoNoPaymentView(View):
+    def get(self, request):
+        return render(request, "games/demo_payment.html")
+
+    def post(self, request):
+        return render(request, "games/demo_payment_error.html")
+
+
+class UserCart(View):
+    def get(self, request):
+        items=CartItemModel.objects.filter(buyer=self.request.user.id)
+        context={
+            "items":items
+        }
+        return render(request, "games/cart.html",context=context)
+
+    def post(self, request):
+        return render(request, "games/demo_payment_error.html")
+
+def user_cart_item_count(request):
+    try:
+        items = CartItemModel.objects.filter(buyer=request.user).count()
+        return HttpResponse(items)
+    except Exception as e:
+        return HttpResponse(status=403)

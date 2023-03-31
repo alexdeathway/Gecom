@@ -9,6 +9,7 @@
 <meta name="keywords" content="">
 -->
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
   {% comment %} <link href="{% static 'css/style.css' %}" rel="stylesheet"> {% endcomment %}
 </head>
 
@@ -47,23 +48,32 @@
           </div>
         </a>
       </div>
-       <div class=" mx-5">
-       <button class="">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current text-gray-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+      <!--this is cart -->
+      <div class="mx-5">
+        <a href="{% url 'games:usercart' %}">
+        <button class="bg-gray-700 flex text-gray-50 rounded-full px-2 py-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      </button>
+          </svg>
+          <span class="-ml-1 px-1  rounded-3xl bg-red-600 font-semibold text-sm">
+            <p id="#cart-item-count">0<span hx-get="{% url 'games:usercartitemcount' %}" hx-trigger="load" hx-swap="outerHTML" hx-target="#cart-item-count"></span></p>  
+          </span>
+        </button>
+        </a>
       </div>
+      
       <div class="px-8">
         <a href="{% url 'logout' %}">
-          <button
-            class="inline-flex items-center bg-red-500 border-0 py-1 px-3 text-gray-300 focus:outline-none hover:bg-red-700 hover:text-gray-50 rounded text-base mt-4 md:mt-0">Logout 
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          <button class="inline-flex items-center bg-red-500 border-0 py-2 px-4 text-white rounded-md shadow-md transition-all hover:bg-red-600 hover:shadow-lg">
+            logout
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
           </button>
         </a>
       </div>
+      
      
       </div>  
       {% else %}
@@ -133,7 +143,24 @@
     window.addEventListener("scroll", function () {
       var header = document.querySelector("header");
       header.classList.toggle("stick", window.scrollY > 0);
-    })
+    });
+
+    const updateCartItemCount = async () => {
+      try {
+        const response = await fetch({% url 'games:usercartitemcount' %});
+        const data = await response.json();
+        const itemCount = data.cart_item_count;
+        const cartItemCount = document.querySelector('#cart-item-count');
+        cartItemCount.innerHTML = itemCount;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
+    window.addEventListener('load', () => {
+      updateCartItemCount();
+    });
+    
   </script>
   {% block body %}{% endblock body %}
 </body>

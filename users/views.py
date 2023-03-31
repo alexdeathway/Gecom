@@ -1,8 +1,7 @@
 from django.http.response import Http404
-from django.shortcuts import render,reverse
-from django.views.generic import CreateView,DetailView
+from django.shortcuts import render,reverse,redirect
+from django.views.generic import CreateView,DetailView, UpdateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import UpdateView
 from .forms import CustomUserCreationForm,UserUpdateForm
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
@@ -65,6 +64,9 @@ class UserProfileUpdateView(LoginRequiredMixin,UpdateView):
     def get_success_url(self):
         return reverse("home")
 
-    
-def testprofile(request):
-    return render(request,"users/profile.html")
+def make_organiser(request):
+   user = User.objects.get(username=request.user.username)
+   user.is_organiser = True
+   user.save()
+   profile_url = reverse('users:profile', kwargs={'username': request.user.username})
+   return redirect(profile_url)
