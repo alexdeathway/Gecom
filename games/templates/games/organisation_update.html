@@ -2,12 +2,17 @@
 {% load tailwind_filters %}
 
 {% block body %}
-<div class="min-h-screen flex  justify-center bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen flex  justify-center bg-gray-800 py-10 px-4 sm:px-6 lg:px-8">
 
 <form method="POST" enctype="multipart/form-data" >
 {% csrf_token %}
 {{form|crispy}}
- <input type="submit" value="Submit">
+ 
+ <div class="flex items-center justify-between mt-4">
+    <button type="submit" value="Submit" class="px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-yellow-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+       update
+    </button>
+</div>
 </form>
 </div>
 {% endblock body %}

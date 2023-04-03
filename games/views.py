@@ -1,5 +1,5 @@
 from django.http.response import Http404,HttpResponse
-from django.shortcuts import render,reverse
+from django.shortcuts import render,reverse,redirect
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
@@ -9,7 +9,7 @@ from django.views.generic import (
                             View                 
                                 )
 from django.views.generic.edit import UpdateView
-from .models import CategoryModel, GamesModel, OrganisationModel, CartItemModel
+from .models import CategoryModel, GamesModel, OrganisationModel
 from django.contrib import messages
 from games.forms import ( 
                             GameCreationForm,
@@ -18,6 +18,8 @@ from games.forms import (
                             GameUpdateForm,
                         )    
 from games.models import OrganisationModel
+from games.mixin import OrganiserAndOrganisationRequiredMixin
+
 
 class GamesListView(ListView):
     template_name="games/games_list.html"
@@ -32,7 +34,7 @@ class GamesDetailView(DetailView):
       model=GamesModel
 
 
-class GamesCreateView(LoginRequiredMixin ,CreateView):
+class GamesCreateView(OrganiserAndOrganisationRequiredMixin ,CreateView):
     template_name="games/games_create.html"
     form_class=GameCreationForm
 
@@ -64,7 +66,7 @@ class OrganisationCreateView(LoginRequiredMixin ,CreateView):
 class PublisherDetailView(DetailView):
     template_name="games/publisher_detail.html"
     model=OrganisationModel
-    context_object_name="publisher"
+    context_object_name="organisation"
     slug_url_kwarg = "username"
     slug_field = "username"
 
@@ -93,8 +95,8 @@ class OrganisationUpdateView(LoginRequiredMixin,UpdateView):
     #form_class=UserUpdateForm
     model=OrganisationModel
     form_class=OrganisationUpdateForm
-    # slug_url_kwarg="username"
-    # slug_field="username"
+    slug_url_kwarg="username"
+    slug_field="username"
     
     def dispatch(self, request, *args, **kwargs):
         organisation=self.get_object()
@@ -138,28 +140,5 @@ class GameUpdateView(LoginRequiredMixin,UpdateView):
     def get_success_url(self):
         return reverse("games:gamedetail",kwargs={"pk":self.get_object().id})
 
-class DemoNoPaymentView(View):
-    def get(self, request):
-        return render(request, "games/demo_payment.html")
-
-    def post(self, request):
-        return render(request, "games/demo_payment_error.html")
 
 
-class UserCart(View):
-    def get(self, request):
-        items=CartItemModel.objects.filter(buyer=self.request.user.id)
-        context={
-            "items":items
-        }
-        return render(request, "games/cart.html",context=context)
-
-    def post(self, request):
-        return render(request, "games/demo_payment_error.html")
-
-def user_cart_item_count(request):
-    try:
-        items = CartItemModel.objects.filter(buyer=request.user).count()
-        return HttpResponse(items)
-    except Exception as e:
-        return HttpResponse(status=403)
