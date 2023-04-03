@@ -25,7 +25,8 @@ class GamesModel(models.Model):
 class OrganisationModel(models.Model):
     owner=models.ForeignKey(User,on_delete=models.CASCADE,related_name="OrganisationModel_User")
     name=models.CharField(max_length=50,unique=True)
-    about=models.CharField(max_length=120, null=True,blank= True)
+    logo=models.ImageField(default="organisation_logo/default_organisation_logo.png", upload_to="organisation_logo",)
+    about=models.TextField(max_length=500, null=True,blank= True)
     username=models.CharField(max_length=20)
     email=models.EmailField(blank=True, max_length=50)
 
@@ -46,11 +47,3 @@ class GameImageModel(models.Model):
 
     def __str__(self):
         return f"{self.game}'s image"
-
-class CartItemModel(models.Model):
-      buyer=models.ForeignKey(User, on_delete=models.CASCADE,related_name="BoughtModel_User")
-      game=models.ForeignKey("GamesModel", on_delete=models.CASCADE,related_name="BoughtModel_GamesModel")
-      
-      def __str__(self):
-          return f"{self.buyer} bought {self.game}"
-

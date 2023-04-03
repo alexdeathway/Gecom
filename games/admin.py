@@ -4,7 +4,6 @@ from games.models import (
                     GamesModel,
                     OrganisationModel,
                     CategoryModel,
-                    CartItemModel,
                     GameImageModel,
                     )
 
@@ -12,5 +11,4 @@ from games.models import (
 admin.site.register(GamesModel)
 admin.site.register(OrganisationModel)
 admin.site.register(CategoryModel)
-admin.site.register(CartItemModel)
 admin.site.register(GameImageModel)

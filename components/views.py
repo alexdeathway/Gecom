@@ -11,6 +11,7 @@ from django.views.generic.edit import UpdateView
 from .models import ComponentsModel,ComponentCategoryModel
 from games.models import OrganisationModel
 from .forms import ComponentCreationForm,ComponentUpdateForm
+from games.mixin import OrganiserAndOrganisationRequiredMixin
 
 class ComponentsListView(ListView):
     template_name="components/components_list.html"
@@ -25,7 +26,7 @@ class ComponentsDetailView(DetailView):
       model=ComponentsModel
 
 
-class ComponentCreateView(LoginRequiredMixin ,CreateView):
+class ComponentCreateView(OrganiserAndOrganisationRequiredMixin  ,CreateView):
     template_name="components/components_create.html"
     form_class=ComponentCreationForm
 

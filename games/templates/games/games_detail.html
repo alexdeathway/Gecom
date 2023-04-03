@@ -85,14 +85,19 @@
         </div>
         <div class="flex">
           <span class="title-font px-2 mx-1 font-medium text-2xl text-white">${{game.price}}</span>
-          <a href="{% url 'games:nopurchase' %}">
+          <a href="{% url 'checkout:nopurchase' %}">
           <button class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Procced to payment</button>
           </a>
-          <button class="rounded-full  w-10 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-            </svg>
-          </button>
+          <form method="POST" action="{% url 'checkout:usercart' %}">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{game.id}}">
+            <input type="hidden" name="type" value="game">
+            <button class="rounded-full  w-10 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4 hover:text-white hover:font-bold ">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </button>
+          </form>
         </div>
       </div>
   
