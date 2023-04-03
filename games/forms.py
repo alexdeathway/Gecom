@@ -59,6 +59,7 @@ class OrganisationUpdateForm(forms.ModelForm):
       
       fields=[
          "name",
+         "logo",
          "username",
          "email",
          "about",

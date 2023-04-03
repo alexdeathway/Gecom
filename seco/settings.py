@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'users',
     'games',
     'components',
+    'checkout',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -106,10 +107,10 @@ WSGI_APPLICATION = 'seco.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "HOST": os.environ.get("DJANGO_POSTGRES_HOST"),
-        "PORT": os.environ.get("DJANGO_POSTGRES_PORT"),
-        # 'HOST': '172.18.0.2',
-        # 'PORT': '5432',
+        #"HOST": os.environ.get("DJANGO_POSTGRES_HOST"),
+        #"PORT": os.environ.get("DJANGO_POSTGRES_PORT"),
+         'HOST': '172.23.0.2',
+         'PORT': '5432',
         "USER": os.environ.get("DJANGO_POSTGRES_USER"),
         "PASSWORD": os.environ.get("DJANGO_POSTGRES_PASSWORD"),
         "NAME": os.environ.get("DJANGO_POSTGRES_DATABASE"),

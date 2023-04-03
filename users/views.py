@@ -21,11 +21,11 @@ class UserSignupView(CreateView):
             "admin@gecom.com",
             [user_Email],
         )
-
+        messages.success(self.request, 'Account created!')
         return super(UserSignupView,self).form_valid(form)
 
     def get_success_url(self):
-        return reverse("home")
+        return reverse("login")
 
 class UserProfileView(LoginRequiredMixin ,DetailView):
     model=User
@@ -36,8 +36,8 @@ class UserProfileView(LoginRequiredMixin ,DetailView):
 
     def get_context_data(self,**kwargs):
         context=super(UserProfileView,self).get_context_data(**kwargs)
-        organisation=self.get_object().OrganisationModel_User.all()              
-        context["organisation"]=organisation
+        organisations=self.get_object().OrganisationModel_User.all()              
+        context["organisations"]=organisations[:6]
         return context
 
     
@@ -62,7 +62,7 @@ class UserProfileUpdateView(LoginRequiredMixin,UpdateView):
 
 
     def get_success_url(self):
-        return reverse("home")
+        return reverse('users:profile', kwargs={'username': self.request.user.username})
 
 def make_organiser(request):
    user = User.objects.get(username=request.user.username)

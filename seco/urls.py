@@ -43,6 +43,7 @@ urlpatterns = [
     path('reset-password-complete/',PasswordResetCompleteView.as_view(),name="password_reset_complete"),
     path('games/',include('games.urls',namespace='games')),
     path('users/',include('users.urls',namespace='users')),
+    path('checkout/',include('checkout.urls',namespace='checkout')),
     path('components/',include('components.urls',namespace='components')),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('favicon/favicon.ico')))
  ]
