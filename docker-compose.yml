@@ -21,7 +21,8 @@ services:
             - .env
         ports:
             - 8000:8000
-        volumes:
+        volumes:       
+            - .:/app
             - static_files:/app/static
             - media_files:/app/media
 
