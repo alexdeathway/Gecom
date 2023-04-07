@@ -2,20 +2,18 @@ version: "3.8"
 
 volumes:
     app_data:
-        name: app_data
-    app_broker:
-        name: app_broker
+        name: gecom_app_data
     static_files:
-        name: static_files
+        name: gecom_static_files
     media_files:
-        name: media_files
+        name: gecom_media_files
 
 services:
     django:
         build:
             context: .
             dockerfile: Dockerfile
-        image: seco:development
+        image: seco:production
         command: /app/docker/start.sh server
         depends_on:
             - postgres
@@ -29,10 +27,10 @@ services:
 
     postgres:
         image: postgres:13.3-alpine
+        hostname: gecom-postgres
         volumes:
             - app_data:/var/lib/postgresql/data
         environment:
-           # POSTGRES_HOST: gecompostgres
             POSTGRES_PASSWORD: gecompostgres
             POSTGRES_USER: gecompostgres
             POSTGRES_DB: gecompostgres
