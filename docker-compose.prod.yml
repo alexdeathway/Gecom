@@ -7,6 +7,10 @@ volumes:
         name: gecom_static_files
     media_files:
         name: gecom_media_files
+    certbot_web:
+        name: gecom_certbot_web
+    certbot_certs:
+        name: gecom_certbot_certs
 
 services:
     django:
@@ -31,10 +35,8 @@ services:
         hostname: gecom-postgres
         volumes:
             - app_data:/var/lib/postgresql/data
-        environment:
-            POSTGRES_PASSWORD: gecompostgres
-            POSTGRES_USER: gecompostgres
-            POSTGRES_DB: gecompostgres
+        env_file:
+            - .env
     
     
     nginx:
@@ -49,3 +51,15 @@ services:
         volumes:
             - static_files:/app/static:ro
             - media_files:/app/media:ro
+
+    certbot:
+            build:
+              context: ./certbot
+            command: certbot certonly --webroot --webroot-path "/vol/www/" -d "$DOMAIN" --email $EMAIL --rsa-key-size 4096 --agree-tos --noninteractive
+            depends_on:
+              - nginx
+            env_file:
+              - .env
+            volumes:
+              - certbot_web:/vol/www:rw
+              - certbot_certs:/etc/letsencrypt/:rw
