@@ -14,15 +14,8 @@ if [ "$PROCESS_TYPE" = "server" ]; then
         echo ""
         echo "........................................Starting in DEBUG Mode......................................................."
         echo ""
-        gunicorn \
-            --reload \
-            --bind 0.0.0.0:8000 \
-            --workers 2 \
-            --worker-class eventlet \
-            --log-level DEBUG \
-            --access-logfile "-" \
-            --error-logfile "-" \
-            seco.wsgi
+        python manage.py runserver \
+            0.0.0.0:8000
     else
         echo ""
         echo "......................................Starting in PRODUCTION Mode..................................................."

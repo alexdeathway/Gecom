@@ -37,7 +37,7 @@ class GamesDetailView(DetailView):
 class GamesCreateView(OrganiserAndOrganisationRequiredMixin ,CreateView):
     template_name="games/games_create.html"
     form_class=GameCreationForm
-
+    model=GamesModel
     def get_form_kwargs(self,**kwargs):
         kwargs=super(GamesCreateView,self).get_form_kwargs(**kwargs)
         kwargs.update({
@@ -46,7 +46,7 @@ class GamesCreateView(OrganiserAndOrganisationRequiredMixin ,CreateView):
         return kwargs
 
     def get_success_url(self):
-        return reverse("games:gamedetail",kwargs={"pk":self.get_object().id})
+        return reverse("games:gamedetail",kwargs={"pk":self.object.id})
 
 class OrganisationCreateView(LoginRequiredMixin ,CreateView):
     template_name="games/organisation_create.html"
