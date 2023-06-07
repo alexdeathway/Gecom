@@ -44,7 +44,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False) == 'True'
-ALLOWED_HOSTS = ["127.0.0.1","0.0.0.0"]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 
 # Application definition
@@ -107,13 +107,13 @@ WSGI_APPLICATION = 'seco.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "HOST": os.environ.get("DJANGO_POSTGRES_HOST"),
-        "PORT": os.environ.get("DJANGO_POSTGRES_PORT"),
+        "HOST": os.environ.get("POSTGRES_HOST"),
+        "PORT": os.environ.get("POSTGRES_PORT"),
         # 'HOST': '172.23.0.2',
         # 'PORT': '5432',
-        "USER": os.environ.get("DJANGO_POSTGRES_USER"),
-        "PASSWORD": os.environ.get("DJANGO_POSTGRES_PASSWORD"),
-        "NAME": os.environ.get("DJANGO_POSTGRES_DATABASE"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "NAME": os.environ.get("POSTGRES_DATABASE"),
     }
 }
 

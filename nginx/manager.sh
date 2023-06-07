@@ -11,7 +11,7 @@ set -e
 echo "Checking for fullchain.pem"
 if [ ! -f "/etc/letsencrypt/live/${DOMAIN}/fullchain.pem" ]; then
   echo "No SSL cert, enabling HTTP only..."
-  envsubst < /etc/nginx/nginx.dev.conf > /etc/nginx/conf.d/default.conf
+  envsubst '' < /etc/nginx/nginx.dev.conf > /etc/nginx/conf.d/default.conf
 else
   echo "SSL cert exists, enabling HTTPS..."
   envsubst '${DOMAIN}' < /etc/nginx/nginx.prod.conf > /etc/nginx/conf.d/default.conf

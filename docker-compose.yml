@@ -14,7 +14,7 @@ services:
             context: .
             dockerfile: Dockerfile
         image: seco:development
-        container_name: django_production
+        container_name: gecom_django
         command: /app/docker/start.sh server
         depends_on:
             - postgres
@@ -32,10 +32,8 @@ services:
         hostname: gecom-postgres
         volumes:
             - app_data:/var/lib/postgresql/data
-        environment:
-            POSTGRES_PASSWORD: gecompostgres
-            POSTGRES_USER: gecompostgres
-            POSTGRES_DB: gecompostgres
+        env_file:
+            - .env
     
     
     nginx:
