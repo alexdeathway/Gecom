@@ -46,11 +46,16 @@ services:
         image: nginx:development
         ports:
             - 80:80
+            - 443:443
         depends_on:
             - django
         volumes:
             - static_files:/app/static:ro
             - media_files:/app/media:ro
+            - certbot_web:/vol/www:ro
+            - certbot_certs:/etc/letsencrypt/:ro
+        env_file:
+            - .env
 
     certbot:
             build:
