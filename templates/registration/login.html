@@ -9,7 +9,7 @@ style="background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
 
         {% csrf_token %}
         {{ form|crispy }}
-        <a class="forget-btn font-normal" href='{% url 'reset-password' %}'>Forgot password? </a>
+        <a class="forget-btn font-normal" href='{% url 'reset-password' %}'>Forgot password?</a>
         <br>
         <button>Login</button>
 
