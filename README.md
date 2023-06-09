@@ -2,6 +2,11 @@
 # Client-Gecom 
 <div align="center">
 <img width="300" src="./docs/assets/project_id_name_logo.png"  alt="logo"/>
+
+[![Unit Tests](https://github.com/alexdeathway/gecom/actions/workflows/test.yaml/badge.svg)](https://github.com/alexdeathway/gecom/actions/workflows/test.yaml)
+
+[![Build](https://github.com/alexdeathway/gecom/actions/workflows/deploy.yaml/badge.svg)](https://github.com/alexdeathway/gecom/actions/workflows/deploy.yaml)
+
 </div>
 
 Gecom is Games and PC component <b>Concept</b> store.
