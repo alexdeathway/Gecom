@@ -49,7 +49,7 @@ Gecom is Games and PC component <b>Concept</b> store.
 
 > pip install -r requirements.txt
 
-3. Read [project overview](https://github.com/alexdeathway/Gecom/blob/dev-unstable/docs/contribution/overview.md) for app & structure understanding. 
+3. Read the [project overview](https://github.com/alexdeathway/Gecom/blob/dev-unstable/docs/contribution/overview.md) for app & structure understanding. 
 4. Create .env file in project root dir and fill/copy content from template.env.
 
 
