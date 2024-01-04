@@ -1,200 +1,205 @@
 {% load static %}
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  {% block head %}{% endblock head %}
-  <title>{% block title %}{% endblock title %}</title>
-  <!--
-<meta name="description" content="Gecom first page">
-<meta name="keywords" content="">
--->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
-  {% comment %} <link href="{% static 'css/style.css' %}" rel="stylesheet"> {% endcomment %}
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="icon" href="{% static 'images/icon.png' %}" type="image/gif" sizes="16x16">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" >
+    <meta content="Gecom - Gamers own platform " name="description" >
+    <meta content="{% block meta  %}{% endblock meta  %}" name="keywords" >
+    <meta content="Alex Deathway" name="author" >
+    <!-- CSS Files
+    ================================================== -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" id="bootstrap">
+    <link href="{% static 'css/plugins.css' %}" rel="stylesheet" type="text/css" >
+    <link href="{% static 'css/swiper.css' %}" rel="stylesheet" type="text/css" >
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" >
+    <link href="{% static 'css/coloring.css' %}" rel="stylesheet" type="text/css" >
+    <!-- color scheme -->
+    <link id="colors" href="{% static 'css/colors/scheme-01.css' %}" rel="stylesheet" type="text/css" >
 </head>
 
-<body>
+<body class="dark-scheme">
+    <div id="wrapper">
+        <div class="float-text show-on-scroll">
+            <span><a href="#">Scroll to top</a></span>
+        </div>
+        <div class="scrollbar-v show-on-scroll"></div>
+        <!-- page preloader begin -->
+        <div id="de-loader"></div>
+        <!-- page preloader close -->
 
-  <!-- This example requires Tailwind CSS v2.0+ -->
-  <header class="text-gray-200 font-medium body-font">
-    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-      <a class="flex title-font font-medium items-center  mb-4 md:mb-0">
-       <svg xmlns="http://www.w3.org/2000/svg"  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="h-6 w-6 text-yellow-400" fill="text-yellow-400" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-          </svg>
-        <span class="ml-3 text-3xl ">Gecom</span>
-      </a>
-      <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-        <a href="{% url 'home' %}" class="mr-5  {% if request.resolver_match.url_name == "home" %}  text-yellow-400 {% endif %} hover:text-white">Home</a>
-        <a href="{% url 'games:games' %}" class="mr-5 {% if request.resolver_match.url_name == "games" %}  text-yellow-400 {% endif %}  hover:text-white">Explore</a>
-        <a href="{% url 'components:components' %}" class="mr-5 {% if request.resolver_match.url_name == "components" %}  text-yellow-400 {% endif %}  hover:text-white">PC parts</a>
-        {% if user.is_organiser %}
-        <a href="{% url 'games:gamecreate' %}" class="mr-5 {% if request.resolver_match.url_name == "gamecreate" %}  text-yellow-400 {% endif %}  hover:text-white">Create Game</a>
-        <a href="{% url 'components:componentcreate' %}" class="mr-5 {% if request.resolver_match.url_name == "componentcreate" %}  text-yellow-400 {% endif %}  hover:text-white">Create Component</a>
-        {% endif %}
-      </nav>
-      {% comment %} <a href="{% url 'signup' %}">
-        <button class="inline-flex text-white border-0 py-3 px-12 focus:outline-none text-md"
-          style="background-color: #ff6d00;">Sign Up</button>
-      </a> {% endcomment %}
-      {% if user.is_authenticated %}
-      <div class="flex space-x-2">
-        <a href={% url 'users:profile' user.username %}>
-          <div class="relative w-10 h-10">
-            <img class="rounded-full border-2 border-yellow-400 shadow-sm"
-              {% comment %} src="{% static 'games/icons/profilelogo.png' %}" alt="user image" />  {% endcomment %}
-              src={{ request.user.profile_image.url }} alt="user image" /> 
-            <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
-          </div>
-        </a>
-      </div>
-
-      <!--this is cart -->
-      <div class="mx-5">
-        <a href="{% url 'checkout:usercart' %}">
-        <button class="bg-gray-700 flex text-gray-50 rounded-full px-2 py-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-          <span class="-ml-1 px-1  rounded-3xl bg-red-600 font-semibold text-sm">
-            <p id="cart-item-count">0<span hx-get="{% url 'checkout:usercartitemcount' %}" hx-trigger="load" hx-swap="outerHTML" hx-target="#cart-item-count"></span></p>
-          </span>
-        </button>
-        </a>
-      </div>
-      
-      <div class="px-8">
-        <a href="{% url 'logout' %}">
-          <button class="inline-flex items-center bg-red-500 border-0 py-2 px-4 text-white rounded-md shadow-md transition-all hover:bg-red-600 hover:shadow-lg">
-            logout
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-            </svg>
-          </button>
-        </a>
-      </div>
-      
-     
-      </div>  
-      {% else %}
-
-
-      <!-- Login Button -->
-      <div class="btns">
-        <a href="{% url 'login' %}"
-          class="loginBtn inline-flex text-white border-0 py-2 px-8 focus:outline-none text-md"
-          style="border:1px solid #ff6d00;">Login</a>
-
-        <!-- Sign up Button -->
-        <a href="{% url 'signup' %}"
-          class="signupBtn inline-flex text-white border-0 py-2 px-8 focus:outline-none text-md"
-          style="background-color: #ff6d00; border:1px solid #ff6d00;">Sign up</a>
-      </div>
-
-
+        <!-- header begin -->
+        <header class="transparent">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="de-flex sm-pt10">
+                            <div class="de-flex-col">
+                                <div class="de-flex-col">
+                                    <!-- logo begin -->
+                                    <div id="logo">
+                                        <a href="index.html">
+                                          <img class="logo-main" src="{% static 'images/logo.png' %}" alt="" >
+                                          <img class="logo-mobile" src="{% static 'images/logo-mobile.png' %}" alt="" >
+                                        </a>
+                                    </div>
+                                    <!-- logo close -->
+                                </div>
+                            </div>
+                            <div class="de-flex-col header-col-mid">
+                                <ul id="mainmenu">
+                                    <li><a class="menu-item" href="index.html">Home</a>
+                                        <ul>
+                                            <li><a class="menu-item" href="index.html">Homepage One</a></li>
+          
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="menu-item" href="game-server-1.html">Game Servers</a>
+                                        <ul>
+                                            <li><a class="menu-item" href="game-server-1.html">Games Server One</a></li>
+                                            <li><a class="menu-item" href="game-server-2.html">Games Server Two</a></li>
+                                            <li><a class="menu-item" href="pricing-table-one.html">Pricing Table One</a></li>
+                                            <li><a class="menu-item" href="pricing-table-two.html">Pricing Table Two</a></li>
+                                            <li><a class="menu-item" href="pricing-table-three.html">Pricing Table Three</a></li>
+                                            <li><a class="menu-item" href="pricing-table-four.html">Pricing Table Four</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="menu-item" href="locations.html">Locations</a></li>
+                                    <li><a class="menu-item" href="#">Support</a>
+                                        <ul>
+                                            <li><a class="menu-item" href="knowledgebase.html">Knowledgebase</a></li>
+                                            <li><a class="menu-item" href="faq.html">FAQ</a></li>
+                                            <li><a class="menu-item" href="contact.html">Contact</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="menu-item" href="news.html">News</a></li>
+                                    <li><a class="menu-item" href="#">Company</a>
+                                        <ul>
+                                            <li><a class="menu-item" href="about.html">About Us</a></li>
+                                            <li><a class="menu-item" href="affliate.html">Affliates</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="menu-item" href="#">More Pages</a>
+                                        <ul>
+                                            <li><a class="menu-item" href="login.html">Login</a></li>
+                                            <li><a class="menu-item" href="register.html">Register</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="de-flex-col">
+                                <div class="menu_side_area">
+                                    <a href="game-server-1.html" class="btn-main btn-line"><span>Get Hosting</span></a>
+                                    <span id="menu-btn"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header close -->
+        <!-- content begin -->
+        {% block content %}{% endblock content %}
+        <!-- content close -->
+        
+        <!-- ` begin -->
+        <footer>
+            <div class="container">
+                <div class="row gx-5">
+                    <div class="col-lg-4">
+                        <img src="images/logo.png" alt="" >
+                        <div class="spacer-20"></div>
+                        <p>Lorem ipsum culpa tempor tempor eu laboris adipisicing sunt excepteur enim laborum officia eiusmod laborum sint do aliqua incididunt est aute deserunt in elit non sed ut velit ullamco aliquip. Nulla cupidatat elit amet sed labore ut et consequat nostrud laboris aliqua ex est fugiat quis aliqua duis quis esse dolor laboris non duis sunt.</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="widget">
+                                    <h5>Game Server</h5>
+                                    <ul>
+                                        <li><a href="#">Thunder and City</a></li>
+                                        <li><a href="#">Mystic Racing Z</a></li>
+                                        <li><a href="#">Silent Wrath</a></li>
+                                        <li><a href="#">Funk Dungeon</a></li>
+                                        <li><a href="#">Galactic Oddsey</a></li>
+                                        <li><a href="#">Warfare Legend</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="widget">
+                                    <h5>Pages</h5>
+                                    <ul>
+                                        <li><a href="#">Game Server</a></li>
+                                        <li><a href="#">Knowledgebase</a></li>
+                                        <li><a href="#">About Us</a></li>
+                                        <li><a href="#">Affliates</a></li>
+                                        <li><a href="#">Locations</a></li>
+                                        <li><a href="#">News</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget">
+                            <h5>Newsletter</h5>
+                            <form action="blank.php" class="row form-dark" id="form_subscribe" method="post" name="form_subscribe">
+                                <div class="col text-center">
+                                    <input class="form-control" id="txt_subscribe" name="txt_subscribe" placeholder="enter your email" type="text" > <a href="#" id="btn-subscribe"><i class="arrow_right bg-color-secondary"></i></a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                            <div class="spacer-10"></div>
+                            <small>Your email is safe with us. We don't spam.</small>
+                            <div class="spacer-30"></div>
+                            <div class="widget">
+                                <h5>Follow Us on</h5>
+                                <div class="social-icons">
+                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+                                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="subfooter">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                           Copyright Gecom | {% now "Y" %}  
+                        </div>
+                        <div class="col-lg-6 col-sm-6 text-lg-end text-sm-start">
+                            <ul class="menu-simple">
+                                <li><a href="#">Terms &amp; Conditions</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer close -->
     </div>
-    {% endif %}
-<div class="container">
-{% if messages %}   
-    <div class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-      <div class="flex items-center justify-center w-12 bg-green-400">
-          <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"/>
-          </svg>
-      </div>
-    {% for message in messages %}
-      <div class="px-4 py-2 -mx-3">
-          <div class="mx-3">
-              <span class="font-semibold text-green-400 dark:text-green-400">{{message.tags}}</span>
-              <p class="text-sm text-gray-600 dark:text-gray-200"> {{ message|safe }}</p>
-          </div>
-      </div>
-      {% endfor %}
-    </div>
-   
-   
-{% endif %}     
-</div> 
-
-  </header>
 
 
-  <style>
-    header {
-      width: 100%;
-      position: fixed;
-      z-index: 99;
-    }
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/designesia.js' %}"></script>
+    <script src="{% static 'js/swiper.js' %}"></script>
+    <script src="{% static 'js/custom-marquee.js' %}"></script>
+    <script src="{% static 'js/custom-swiper-1.js' %}"></script>
 
-    header.stick {
-      width: 100%;
-      background-color: #111827;
-    }
-    footer{
-      background-color: #111827;
-    }
-    .loginBtn:hover {
-      background-color: #e76a09;
-    }
-
-    .signupBtn:hover {
-      background-color: #e76a09;
-    }
-  </style>
-  <script>
-    window.addEventListener("scroll", function () {
-      var header = document.querySelector("header");
-      header.classList.toggle("stick", window.scrollY > 0);
-    })    
-  </script>
-  {% block body %}{% endblock body %}
 </body>
-<footer>
-  {% block footer %}
-  <footer class="text-gray-600 body-font">
-    <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-      <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-        <svg xmlns="http://www.w3.org/2000/svg"  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="h-6 w-6 text-yellow-400" fill="text-yellow-400" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-        </svg>
-        <span class="ml-3 text-xl text-white">Gecom</span>
-      </a>
-      <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© {% now "Y" %}
-        Gecom |
-      </p>
-      <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-        <a class="text-gray-500">
-          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-            viewBox="0 0 24 24">
-            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-          </svg>
-        </a>
-        <a class="ml-3 text-gray-500">
-          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-            viewBox="0 0 24 24">
-            <path
-              d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-            </path>
-          </svg>
-        </a>
-        <a class="ml-3 text-gray-500">
-          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            class="w-5 h-5" viewBox="0 0 24 24">
-            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-          </svg>
-        </a>
-        <a class="ml-3 text-gray-500">
-          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0"
-            class="w-5 h-5" viewBox="0 0 24 24">
-            <path stroke="none"
-              d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
-            <circle cx="4" cy="4" r="2" stroke="none"></circle>
-          </svg>
-        </a>
-      </span>
-    </div>
-  {% endblock footer %}
-</footer>
-  
+
 </html>
