@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+{% load static %}
+{% block body %}
+<div class="min-h-screen flex items-center justify-end bg-gray-50 py-2 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-cover " 
+style="background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url({% static 'games/assests/login_cover.jpg' %});">
+
+    <form class="mr-40 py-16 px-8 rounded-xl bg-black " enctype="multipart/form-data" method="post">
+
+        {% csrf_token %}
+        {{ form|crispy }}
+        <a class="forget-btn font-semibold font-sans text-sm" href='{% url 'login' %}'>already have account? </a>
+        {% comment %} <br> {% endcomment %}
+        <button>Sign up</button>
+
+    </form>
+
+</div>
+<style>
+    .forget-btn {
+        opacity: 0.4;
+        color: #ff6d00;
+    }
+
+    .forget-btn:hover {
+        opacity: 1;
+    }
+
+    button {
+        width: 100%;
+        margin: 1em auto;
+        background-color: #ff6d00;
+        padding: 0.5em 2.4em;
+        color: #fff;
+        font-weight: bold;
+    }
+</style>
+{% endblock body %}
