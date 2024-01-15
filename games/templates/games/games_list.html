@@ -1,67 +1,55 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block body %}
-
-<section class="text-gray-400 bg-gray-900 body-font">
-  <div class='w-full h-full bg-no-repeat bg-cover bg-left bg-fixed'
-      style="background-image: linear-gradient(90deg, hsla(220, 100%, 8%, 0.8) 0%, hsla(219, 100%, 10%, 0.8) 100%), url({% static 'games/assests/background1.jpg' %});">
-    <div class="container px-12 py-32 mx-auto">
-      <div class="title-font sm:text-1xl text-2xl mb-4 font-medium text-white">Games List</div>
-      <div class="flex flex-wrap -m-3">
-        {% for game in games %}
-        <div class="lg:w-1/5 md:w-1/3 p-3 w-full" style="z-index: 1;">
-          <a class="block relative h-64 overflow-hidden border-2 border-gray-800 rounded-lg">
-            <img alt="ecommerce" class="object-cover object-center w-full h-full block" src="{{game.cover.url}}">
-          </a>
-          <div class="mt-4">
-            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{game.category}}</h3>
-            <h2 class="text-white title-font text-lg font-medium">{{game.name}}</h2>
-            <!--   <p class="mt-1">${{game.price}}</p> -->
-            <a href="{% url 'games:gamedetail' game.pk %}"
-              class="text-indigo-400 inline-flex items-center md:mb-2 lg:mb-0">${{game.price}}
-              <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="M12 5l7 7-7 7"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-
-    <div class="mt-12 content-center justify-center">      
-        <nav aria-label="Pagination" class="flex items-center text-gray-600">
-          {% if page_obj.has_previous %}
-          <a href="?page={{ page_obj.previous_page_number }}" class="p-2 mr-4 rounded hover:bg-gray-100">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-         </a>
-         {% endif %}
-         {% if page_obj.has_previous %}
-         <a href="?page={{page_obj.previous_page_number }}" class="px-4 py-2 rounded hover:bg-gray-100"> 1 </a>
-         {% endif %}
-          <a href="#" class="px-4 py-2 rounded bg-gray-200 text-gray-900 font-medium hover:bg-gray-100"> {{ page_obj.number  }} </a>
-          {% if page_obj.has_next %}
-          <a href="?page={{page_obj.next_page_number }}" class="px-4 py-2 rounded hover:bg-gray-100"> {{ page_obj.next_page_number }} </a>
-          {% endif %}
-          <a href="#" class="px-4 py-2 rounded hover:bg-gray-100"> ... </a>
-          {% if page_obj.has_next %}
-          <a href="?page={{page_obj.next_page_number }}" class="p-2 ml-4 rounded hover:bg-gray-100">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-          {% endif %}
-        </nav>
-  </div>
-    </div>
-  </div>
-
-
+{% block content %}
+ <!-- content begin -->
+ <div class="no-bottom no-top" id="content">
+  <div id="top"></div>
   
+  <section class="jarallax">
+      <img src="{% static 'images/background/3.webp' %} " class="jarallax-img" alt="">
+      <div class="de-gradient-edge-top"></div>
+      <div class="de-gradient-edge-bottom"></div>
+      <div class="container z-1000">
+          <div class="row align-items-center">
+              <div class="col-lg-12">
+                  <div class="subtitle wow fadeInUp mb-3">Most complete</div>
+              </div>
+              <div class="col-lg-6">
+                  <h2 class="wow fadeInUp" data-wow-delay=".2s">Game Collection</h2>
+                  <div class="spacer-20"></div>
+              </div>
+              <div class="col-lg-6">
+                  <ul id="filters" class="float-lg-end float-sm-start wow fadeInUp" data-wow-delay="0s">
+                      <li><a href="#" data-filter="*" class="selected">All Games</a></li>
+                      <li><a href="#" data-filter=".popular">popular</a></li>
+                      <li><a href="#" data-filter=".fps">fps</a></li>
+                      <li><a href="#" data-filter=".survival">survival</a></li>
+                      <li><a href="#" data-filter=".sandbox">sandbox</a></li>
+                  </ul>
+              </div>
+          </div>
 
+          <div id="gallery" class="row g-4">
+            
+            {% for game in games %}
+              <div class="col-lg-4 col-md-6 item sandbox survival">
+                  <div class="de-item">
+                      <div class="d-overlay">
+                          <div class="d-label">
+                              20% OFF
+                          </div>
+                          <div class="d-text">
+                              <h4>{{game.name}}</h4>
+                              <p class="d-price">Starting at <span class="price">$14.99</span></p>
+                              <a class="btn-main btn-fullwidth" href="{% url 'games:gamedetail' game.pk %}"><span>Order Now</span></a>
+                          </div>
+                      </div>
+                      <img src="{{game.cover.url}}" class="img-fluid" alt="">
+                  </div>
+              </div>
+            {% endfor %}
 
-</section>
-{% endblock body %}
+          </div>
+      </div>
+  </section>
+{% endblock content %}
