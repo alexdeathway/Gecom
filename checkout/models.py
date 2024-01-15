@@ -21,4 +21,5 @@ class CartComponentItemModel(models.Model):
       
       def __str__(self):
           return f"{self.buyer} bought component: {self.component}"
+      
 

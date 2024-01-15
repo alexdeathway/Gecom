@@ -1,155 +1,547 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% block title %}Gecom{% endblock title %}
 {% load static %}
+{% block content %}
+<!-- content begin -->
+        <div class="no-bottom no-top" id="content">
 
-{% block title %}
-Gecom
-{% endblock title %}
-{% block body %}
+            <div id="top"></div>
 
-<!--leading Game of year-->
-<section class="text-gray-400 bg-gray-900 body-font ">
-<!--  <section class="text-white-600 body-font"> -->
-    <div class='w-full h-full bg-no-repeat bg-cover bg-left bg-fixed'
-      style="background-image: linear-gradient(90deg, hsla(220, 100%, 8%, 1) 0%, hsla(219, 100%, 10%, 0.8) 100%), url({% static 'games/assests/landing2.jpg' %});">
-      <div class="container mx-auto flex px-32 py-32 md:flex-row flex-col items-center">
-        <div class="lg:max-w-lg lg:w-full md:w-1/2 w-12/6 mb-10 md:mb-0">
-          <img class="object-cover object-center rounded" alt="Latest Release Cover Image"
-            src="{{latest_release.cover.url}}">
+            <section class="no-top no-bottom position-relative z-1000">
+                <div class="v-center">
+                    <div id="swiper" class="swiper">
+                      <!-- Additional required wrapper -->
+                      <div class="swiper-wrapper">
+                        <!-- Slides -->
+                      
+                      {% for game in latest_releases %} 
+                        <div class="swiper-slide">
+                            <div class="swiper-inner" data-bgimage="url({{ game.cover.url }})">
+                                <div class="sw-caption">
+                                    <div class="container">
+                                        <div class="row gx-5 align-items-center">
+                                            <div class="col-lg-8 mb-sm-30">
+                                                <div class="subtitle blink mb-4">Game Now Available</div>
+                                                <h1 class="slider-title text-uppercase mb-1">{{ game.name }}</h1>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="slider-text">{{ game.description }}</p>
+                                                <div class="sw-price wow fadeInUp">
+                                                    <div class="d-starting">
+                                                        Starting at
+                                                    </div>
+                                                    <div class="d-price">
+                                                        <span class="d-cur">$</span>
+                                                        <span class="d-val">{{ game.price }}</span>
+                                                        {% comment %} <span class="d-period">/monthly</span> {% endcomment %}
+                                                    </div>
+                                                </div>
+                                                <div class="spacer-10"></div>
+                                                <a class="btn-main mb10" href="{% url 'games:gamedetail' game.pk %}"><span>Order Your Game Server Now</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sw-overlay"></div>
+                            </div>                            
+                        </div>
+                      {% endfor %}   
+                      
+                    </div>
+                      <!-- If we need pagination -->
+                      <div class="swiper-pagination"></div>
+
+                      <!-- If we need navigation buttons -->
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-button-next"></div>
+
+                      <!-- If we need scrollbar -->
+                      <div class="swiper-scrollbar"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="no-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="subtitle wow fadeInUp mb-3">Incredibly features</div>
+                            <h2 class="wow fadeInUp mb20" data-wow-delay=".2s">Premium Game Server</h2>
+                        </div>
+
+                        <div class="col-lg-6"></div>
+
+                        <div class="col-lg-3 col-md-6 mb-sm-20 wow fadeInRight" data-wow-delay="0s">
+                            <div>
+                                <img src="{% static 'images/icons/1.png' %}" class="mb20" alt="">
+                                <h4>Super Quick Setup</h4>
+                                <p>Use our intuitive interface to make speedy adjustments. Select processing power, graphics options, storage preferences, and network settings in a flash.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 mb-sm-20 wow fadeInRight" data-wow-delay=".2s">
+                            <div>
+                                <img src= "{% static 'images/icons/2.png' %}" class="mb20" alt="">
+                                <h4>Premium Hardware</h4>
+                                <p>Gaming excellence with premium hardware. Elevate your experience with top-tier processors, graphics, storage, and more for unparalleled performance.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 mb-sm-20 wow fadeInRight" data-wow-delay=".4s">
+                            <div>
+                                <img src="{% static 'images/icons/3.png' %}" class="mb20" alt="">
+                                <h4>DDos Protection</h4>
+                                <p>Our robust measures protect your gaming environment, ensuring a safe and secure gaming experience for all users.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 mb-sm-20 wow fadeInRight" data-wow-delay=".6s">
+                            <div>
+                                <img src="{% static 'images/icons/4.png' %}" class="mb20" alt="">
+                                <h4>Fast Support</h4>
+                                <p>Our 24/7 customer service is ready to assist you promptly, ensuring minimal downtime and a seamless gaming experience whenever you need assistance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="no-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="padding60 sm-padding40 sm-p-2 jarallax position-relative">
+                                <img src="{% static 'images/background/1.webp' %}" class="jarallax-img" alt="">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="subtitle wow fadeInUp mb-3">Start your game</div>
+                                        <h2 class="wow fadeInUp" data-wow-delay=".2s">Unlock Your Gaming Full Potential</h2>
+                                        <p class="wow fadeInUp">Get high-performance cloud servers optimized for gaming to customizable hosting plans tailored to your specific requirements, we provide a range of options to accommodate diverse gaming needs. Our services are backed by state-of-the-art technology, ensuring low-latency connections and reliable performance for an immersive gaming experience.</p>
+                                        <div class="spacer-10"></div>
+                                        <a class="btn-main mb10 wow fadeInUp" href="{% url 'games:games' %}"><span>Order Your Game Server Now</span></a>
+                                    </div>
+                                </div>
+
+                                <img src="{% static 'images/misc/avatar.webp' %}" class="sm-hide position-absolute bottom-0 end-0 wow fadeIn"  alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="no-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="subtitle mb20">Customer reviews</div>
+                            <h2 class="wow fadeInUp">4.85 out of 5</h2>
+                            <div class="spacer-20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="owl-carousel owl-theme wow fadeInUp" id="testimonial-carousel">
+                        <!--reviews -->
+                        {% for review in reviews %}
+                            <div class="item">
+                                <div class="de_testi type-2">
+                                    <blockquote>
+                                        <div class="de-rating-ext">
+                                            <span class="d-stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </span>
+                                        </div>
+                                        <p>"{{ review.review }}"
+                                        </p>
+                                        <div class="de_testi_by">
+                                            <img alt="" src="{{ review.picture }}"> <span>{{ review.name }}</span>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="no-bottom">
+                <div class="container">
+                    <div class="row align-items-center gx-5">
+                        <div class="col-lg-6">
+                            <img src="{% static 'images/misc/server.webp' %}" class="img-fluid mb-sm-30 wow fadeIn" alt="">
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="subtitle wow fadeInUp mb-3">Server locations</div>
+                            <h2 class="wow fadeInUp" data-wow-delay=".2s"><span class="text-gradient">Custom multiplayer</span> servers.</h2>
+                            <p class="wow fadeInUp">For multiplayer, we invite you to select and customize your own specifications, including RAM, processors, graphics cards, and other components, to tailor-build your custom server solution.</p>
+
+                            <ul class="de-server s2 wow fadeInUp">
+                                {% comment %} <li>London, England</li>
+                                <li>Paris, France</li>
+                                <li>Frankut, Germany</li>
+                                <li>Amsterdam, Netherlands</li>
+                                <li>Stockholm, Sweden</li>
+                                <li>Helsinki, Finland</li>
+                                <li>Los Angeles, USA</li> {% endcomment %}
+                                <li><a href="{% url "misc:development-status" %}">Build custom server</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="jarallax">
+                <img src="{% static 'images/background/3.webp' %}" class="jarallax-img" alt="">
+                <div class="de-gradient-edge-top"></div>
+                <div class="de-gradient-edge-bottom"></div>
+                <div class="container z-1000">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="subtitle wow fadeInUp mb-3">Most complete</div>
+                            <h2 class="wow fadeInUp mb20" data-wow-delay=".2s">Game Collection</h2>
+                        </div>
+                        <div class="col-lg-6 text-lg-end">
+                            <a class="btn-main mb-sm-30" href="game-server-1.html"><span>View all games</span></a>
+                        </div>
+                    </div>
+                    <div class="row g-4 sequence">
+                    
+                    {% for game in games %}   
+                        <div class="col-lg-4 col-md-6 gallery-item">
+                            <div class="de-item wow">
+                                <div class="d-overlay">
+                                    <div class="d-label">
+                                        20% OFF
+                                    </div>
+                                    <div class="d-text">
+                                        <h4>{{ game.name }}</h4>
+                                        <p class="d-price">Starting at <span class="price">${{ game.price }}</span></p>
+                                        <a class="btn-main btn-fullwidth" href="{% url 'games:gamedetail' game.pk %}"><span>Order Now</span></a>
+                                    </div>
+                                </div>
+                                <img src={{ game.cover.url }} class="img-fluid " alt="">
+                            </div>
+                        </div>
+                    {% endfor %} 
+                    
+                </div>
+                </div>
+            </section>
+
+            
+            
+            
+            <section class="no-top no-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">                            
+                            <div class="subtitle wow fadeInUp mb-3">Do you have</div>
+                            <h2 class="wow fadeInUp mb20" data-wow-delay=".2s">Any questions?</h2>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-lg-6">
+                            <div class="accordion s2 wow fadeInUp">
+                                <div class="accordion-section">
+                                    <div class="accordion-section-title" data-tab="#accordion-a1">
+                                        What is game hosting?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-a1">
+                                        <p>Game hosting refers to the process of renting or setting up servers to run multiplayer online games. These servers allow players to connect and play together in the same game world.</p>
+                                    </div>
+                                    <div class="accordion-section-title" data-tab="#accordion-a2">
+                                        Why do I need game hosting?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-a2">
+                                        <p>Game hosting is essential for multiplayer gaming. It provides a dedicated server where players can join, ensuring a smooth and lag-free gaming experience. It also allows you to customize game settings and mods.</p>
+                                    </div>
+                                    <div class="accordion-section-title" data-tab="#accordion-a3">
+                                        How do I choose a game hosting provider?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-a3">
+                                        <p>Consider factors like server location, performance, scalability, customer support, and price when choosing a game hosting provider. Read reviews and ask for recommendations from fellow gamers.</p>
+                                    </div>
+                                    <div class="accordion-section-title" data-tab="#accordion-a4">
+                                        What types of games can I host?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-a4">
+                                        <p>You can host various types of games, including first-person shooters, role-playing games, survival games, strategy games, and more. The type of game hosting you need depends on the game's requirements.</p>
+                                    </div>
+                                    <div class="accordion-section-title" data-tab="#accordion-a5">
+                                        What is server latency or ping?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-a5">
+                                        <p>Server latency or ping measures the time it takes for data to travel between your computer and the game server. Lower ping values indicate better responsiveness and less lag.</p>
+                                    </div>
+                                    <div class="accordion-section-title" data-tab="#accordion-a6">
+                                        What is cloud gaming and custom server building?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-a6">
+                                        <p>Cloud gaming services not only provide game hosting but also allow customers to build servers with custom components. This enables a flexible and personalized gaming experience in the cloud.</p>
+                                    </div>
+                                    <div class="accordion-section-title" data-tab="#accordion-a7">
+                                        Can I use game hosting for single-player games?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-a7">
+                                        <p>Yes, game hosting can be used for single-player games as well. While multiplayer hosting is common, having a dedicated server for a single-player game can enhance performance and provide a more stable gaming environment.</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="accordion s2 wow fadeInUp">
+                                <div class="accordion-section">
+                                    <div class="accordion-section-title" data-tab="#accordion-b1">
+                                        How do I manage a game server?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-b1">
+                                        <p>Game server management varies depending on the hosting provider and game type. Typically, you'll have access to a control panel or command-line interface to configure settings, mods, and player access.</p>
+                                    </div>
+                                    <div class="accordion-section-title" data-tab="#accordion-b2">
+                                        Can I run mods on my game server?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-b2">
+                                        <p>Yes, many game hosting providers support mods. You can install and manage mods to enhance gameplay or customize the game to your liking.</p>
+                                    </div>
+                                    <div class="accordion-section-title" data-tab="#accordion-b3">
+                                        What is DDoS protection, and do I need it?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-b3">
+                                        <p>DDoS (Distributed Denial of Service) protection helps defend your game server from malicious attacks that could disrupt gameplay. It's essential for maintaining server stability, especially for popular games.</p>
+                                    </div>
+                                    <div class="accordion-section-title" data-tab="#accordion-b4">
+                                        How much does game hosting cost?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-b4">
+                                        <p>Game hosting costs vary depending on the provider, server type, and game. Prices can range from a few dollars per month for small servers to hundreds for high-performance dedicated servers.</p>
+                                    </div>
+                                    {% comment %} <div class="accordion-section-title" data-tab="#accordion-b5">
+                                        Is there 24/7 customer support?
+                                    </div>
+                                    <div class="accordion-section-content" id="accordion-b5">
+                                        <p>Many reputable game hosting providers offer 24/7 customer support to assist with technical issues and server management.</p>
+                                    </div> {% endcomment %}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            
+
+            <section class="no-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="padding60 sm-padding40 jarallax position-relative">
+                                <img src="{% static 'images/background/7.webp' %}" class="jarallax-img" alt="">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="subtitle wow fadeInUp mb-3">Download now</div>
+                                        <h2 class="wow fadeInUp" data-wow-delay=".2s">Manage your server from mobile device</h2>
+                                        <p>Experience gaming freedom like never before with Gecom. Our platform empowers you to manage and play your favorite games from any device, whether it's a high-end gaming PC, a sleek laptop, a tablet, or even your smartphone. Break free from device limitations and enjoy your gaming universe on the go.</p>                            
+                                        <a href="download.html"><img src="{% static 'images/misc/download-appstore.webp' %}" class="img-fluid mb-sm-20" alt="download"></a>&nbsp;
+                                        <a href="download.html"><img src="{% static 'images/misc/download-playstore.webp' %}" class="img-fluid mb-sm-20" alt="download"></a>
+                                    </div>
+                                </div>
+
+                                <img src="{% static 'images/misc/minecraft.png' %}" class="sm-hide position-absolute bottom-0 end-0 wow fadeIn"  alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-server" class="no-bottom jarallax">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="subtitle wow fadeInUp mb-3">Server locations</div>
+                        </div>
+                        <div class="col-lg-6">
+                            <h2 class="wow fadeInUp mb20" data-wow-delay=".2s">Choose location to host server for your multiplayer gaming.</h2>
+                        </div>
+                        <div class="col-lg-6">
+                            At Gecom, we understand that server location is a critical factor in delivering optimal gaming performance. That's why we strategically position our servers in data centers across the globe to ensure low-latency connections for players worldwide. Our network spans key regions, providing you with the flexibility to choose a server location that best suits your gaming community.
+                        </div>
+
+                        <div class="spacer-10"></div>
+
+                        <div class="col-lg-12 wow fadeInUp">
+                            <div class="p-sm-30 pb-sm-0 mb-sm-0">
+                                <div class="de-map-hotspot">
+                                    <div class="de-spot wow fadeIn" style="top:39%; left:20%">
+                                        <span>United&nbsp;States</span>
+                                        <div class="de-circle-1"></div>
+                                        <div class="de-circle-2"></div>
+                                    </div>
+                                    <div class="de-spot wow fadeIn" style="top:76%; left:87%">
+                                        <span>Australia</span>
+                                        <div class="de-circle-1"></div>
+                                        <div class="de-circle-2"></div>
+                                    </div>
+                                    <div class="de-spot wow fadeIn" style="top:68%; left:80%">
+                                        <span>Indonesia</span>
+                                        <div class="de-circle-1"></div>
+                                        <div class="de-circle-2"></div>
+                                    </div>
+                                    <div class="de-spot wow fadeIn" style="top:23%; left:18%">
+                                        <span>Canada</span>
+                                        <div class="de-circle-1"></div>
+                                        <div class="de-circle-2"></div>
+                                    </div>
+                                    <div class="de-spot wow fadeIn" style="top:68%; left:33%">
+                                        <span>Brazil</span>
+                                        <div class="de-circle-1"></div>
+                                        <div class="de-circle-2"></div>
+                                    </div>
+                                    <div class="de-spot wow fadeIn" style="top:45%; left:75%">
+                                        <span>China</span>
+                                        <div class="de-circle-1"></div>
+                                        <div class="de-circle-2"></div>
+                                    </div>
+                                    <div class="de-spot wow fadeIn" style="top:36%; left:48%">
+                                        <span>France</span>
+                                        <div class="de-circle-1"></div>
+                                        <div class="de-circle-2"></div>
+                                    </div>
+                                    <div class="de-spot wow fadeIn" style="top:23%; left:51%">
+                                        <span>Sweden</span>
+                                        <div class="de-circle-1"></div>
+                                        <div class="de-circle-2"></div>
+                                    </div>
+                                    <div class="de-spot wow fadeIn" style="top:78%; left:53%">
+                                        <span>South&nbsp;Africa</span>
+                                        <div class="de-circle-1"></div>
+                                        <div class="de-circle-2"></div>
+                                    </div>
+                                    <img src="{% static 'images/misc/world-map.webp' %}" class="img-fluid" alt="">
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+
+                <div class="no-bottom wow fadeInRight d-flex z-1000">
+                  <div class="de-marquee-list wow">
+                    <div class="d-item">
+                      <span class="d-item-txt">London</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                      <span class="d-item-txt">Paris</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                      <span class="d-item-txt">Frankurt</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                      <span class="d-item-txt">Amsterdam</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                      <span class="d-item-txt">Stockholm</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                      <span class="d-item-txt">Helsinki</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                      <span class="d-item-txt">Los Angeles</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                      <span class="d-item-txt">Quebec</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                      <span class="d-item-txt">Singapore</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                      <span class="d-item-txt">Sydney</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                      <span class="d-item-txt">Sau Paulo</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                      <span class="d-item-txt">Bangkok</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                      <span class="d-item-txt">Jakarta</span>
+                      <span class="d-item-display">
+                        <i class="d-item-block"></i>
+                      </span>
+                     </div>
+                  </div>
+                </div>
+
+            </section>
+
+            <section>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="subtitle wow fadeInUp mb-3">Payment Methods</div>
+                            <h2 class="wow fadeInUp" data-wow-delay=".2s">We accept</h2>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row g-4">
+                                <div class="col-sm-2 col-4">
+                                    <div class="p-2 rounded-10" data-bgcolor="rgba(255, 255, 255, .05)">
+                                        <img src="{% static 'images/payments/visa.webp' %}" class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-4">
+                                    <div class="p-2 rounded-10" data-bgcolor="rgba(255, 255, 255, .05)">
+                                        <img src="{% static 'images/payments/mastercard.webp' %}" class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-4">
+                                    <div class="p-2 rounded-10" data-bgcolor="rgba(255, 255, 255, .05)">
+                                        <img src="{% static 'images/payments/paypal.webp' %}" class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-4">
+                                    <div class="p-2 rounded-10" data-bgcolor="rgba(255, 255, 255, .05)">
+                                        <img src="{% static 'images/payments/skrill.webp' %}" class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-4">
+                                    <div class="p-2 rounded-10" data-bgcolor="rgba(255, 255, 255, .05)">
+                                        <img src="{% static 'images/payments/jcb.webp' %}" class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-4">
+                                    <div class="p-2 rounded-10" data-bgcolor="rgba(255, 255, 255, .05)">
+                                        <img src="{% static 'images/payments/american-express.webp' %}" class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
         </div>
-        <div
-          class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-          <h1 class="title-font sm:text-6xl text-2xl mb-4 font-medium text-white">{{ latest_release.name }}</h1>
-          <p class="mb-8 leading-relaxed  text-1xl md:w-5/6">{{latest_release.discription|slice:":300"}}..</p>
-          <div class="flex justify-center">
-            <a href="{% url 'games:gamedetail' latest_release.pk %}">
-            <button class="inline-flex text-white  border-2 py-3 px-6 focus:outline-none text-md"
-              style="background-color: #ff6d00;">view
-            </button>
-           </a>
-            <!-- <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">View more</button> -->
-          </div>
-        </div>
-      </div>
-    </div> 
-  </section>
-
-
-<!--New relase-->
-<section class="text-gray-400 bg-gray-900 body-font">
-  <!-- <div class='w-full h-full bg-no-repeat bg-cover bg-left'
-    style="background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url({% static 'games/assests/NewRelease.jpg' %});"> -->
-  <div class="container px-32 py-32 mx-auto">
-    <div class="title-font sm:text-1xl text-2xl mb-4 font-medium text-white">Latest Release</div>
-    <div class="flex flex-wrap -m-4">
-
-      <!--Sales games here-->
-      {% for game in games_sales %}
-      <div class="p-4 md:w-1/3">
-        <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
-          <img class="lg:h-64 md:h-36 w-full object-cover object-center" src="{{game.cover.url}}" alt="blog">
-          <div class="p-6">
-            <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">{{game.category}}</h2>
-            <h1 class="title-font text-lg font-medium text-white mb-3">{{game.name}}</h1>
-            <p class="leading-relaxed mb-3">{{game.discription|slice:":120"}}...</p>
-          
-            <div class="flex items-center flex-wrap ">
-              <a href="{% url 'games:gamedetail' game.pk %}"
-                class="text-yellow-400 inline-flex items-center md:mb-2 lg:mb-0">View
-                <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
-              
-              <span
-                class="text-white mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 ">
-                 <a href="{% url 'games:publisherdetail' game.publisher.id %}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>{{game.publisher}}
-               </a>
-              </span> 
-              
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-
-    </div>
-  </div>
-  </div>
-</section>
-<!--games-->
-
-<section class="text-gray-400 bg-gray-900 body-font">
-
-<div class='w-full h-full bg-no-repeat bg-cover bg-left bg-fixed'
-      style="background-image: linear-gradient(90deg, hsla(220, 100%, 8%, 1) 0%, hsla(219, 100%, 10%, 0.8) 100%), url({% static 'games/assests/background3.jpg' %});">
-
-  <div class="container px-32 py-32 mx-auto">
-    <div class="title-font sm:text-1xl text-2xl mb-4 font-medium text-white">Games List</div>
-    <div class="flex flex-wrap -m-4">
-      {% for game in games %}
-      <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-        <a class="block relative h-48 overflow-hidden border-2 border-gray-800 rounded-lg">
-          <img alt="ecommerce" class="object-cover object-center w-full h-full block" src="{{game.cover.url}}">
-        </a>
-        <div class="mt-4">
-          <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{game.category}}</h3>
-          <h2 class="text-white title-font text-lg font-medium">{{game.name}}</h2>
-          <!--   <p class="mt-1">${{game.price}}</p> -->
-          <a href="{% url 'games:gamedetail' game.pk %}"
-            class="text-indigo-400 inline-flex items-center md:mb-2 lg:mb-0">${{game.price}}
-            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14"></path>
-              <path d="M12 5l7 7-7 7"></path>
-            </svg>
-          </a>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-  </div>
-</section>
-
-<!--category-->
-<section class="text-gray-400 body-font bg-gray-900">
-
-  <div class='w-full h-full bg-no-repeat bg-cover bg-left '
-      style="background-image: linear-gradient(90deg, hsla(220, 100%, 8%, 1) 0%, hsla(219, 100%, 10%, 0.8) 100%), url({% static 'games/assests/NewRelease.jpg' %});">
-
-  <div class="container px-32 py-32 mx-auto">
-    <div class="flex flex-wrap w-full mb-4">
-      <div class="title-font sm:text-1xl text-2xl mb-4 font-medium text-white">Browse Games</div>
-
-    </div>
-    <div class="flex flex-wrap -m-4">
-
-      {% for category in categories  %}
-      <div class="xl:w-1/4 md:w-1/2 p-4">
-  
-        <div class="bg-gray-900 bg-opacity-40 p-6 rounded-lg">
-          <img class="h-40 rounded w-full object-cover object-center mb-6" src="{{category.cover.url}}" alt="content">
-          <h3 class="tracking-widest text-yellow-400 text-xs font-medium title-font">Library</h3>
-          <h2 class="text-lg text-white font-medium title-font mb-4">{{category.name}}</h2>
-          <p class="leading-relaxed text-base">{{category.description|slice:":80"}}...</p>
-          <a href="{% url 'games:categorydetail' category.name  %}" class="text-yellow-500 inline-flex items-center">browse
-          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </a>
-        </div>
-
-      </div>
-      {% endfor %}
-
-    </div>
-  </div>
-  </div>
-  
-</section>
-{% endblock body %}
+        <!-- content close -->
+{% endblock content %}
