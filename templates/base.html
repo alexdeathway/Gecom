@@ -17,6 +17,11 @@
     <link href="{% static 'css/swiper.css' %}" rel="stylesheet" type="text/css" >
     <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" >
     <link href="{% static 'css/coloring.css' %}" rel="stylesheet" type="text/css" >
+    {% block head %}
+    <!--give head ;)  -->
+    {% endblock head %}
+
+    
     <!-- color scheme -->
     <link id="colors" href="{% static 'css/colors/scheme-01.css' %}" rel="stylesheet" type="text/css" >
 </head>
@@ -41,7 +46,7 @@
                                 <div class="de-flex-col">
                                     <!-- logo begin -->
                                     <div id="logo">
-                                        <a href="index.html">
+                                        <a href="{% url 'home' %}">
                                           <img class="logo-main" src="{% static 'images/logo.png' %}" alt="" >
                                           <img class="logo-mobile" src="{% static 'images/logo-mobile.png' %}" alt="" >
                                         </a>
@@ -51,51 +56,64 @@
                             </div>
                             <div class="de-flex-col header-col-mid">
                                 <ul id="mainmenu">
-                                    <li><a class="menu-item" href="index.html">Home</a>
-                                        <ul>
+                                    <li>
+                                    <a class="menu-item" href="{% url 'home' %}">Home</a>
+                                        {% comment %} <ul>
                                             <li><a class="menu-item" href="index.html">Homepage One</a></li>
           
-                                        </ul>
+                                        </ul> {% endcomment %}
                                     </li>
                                     <li>
-                                        <a class="menu-item" href="game-server-1.html">Game Servers</a>
-                                        <ul>
+                                        <a class="menu-item" href="{% url 'games:games' %}">Game Servers</a>
+                                        {% comment %} <ul>
                                             <li><a class="menu-item" href="game-server-1.html">Games Server One</a></li>
                                             <li><a class="menu-item" href="game-server-2.html">Games Server Two</a></li>
                                             <li><a class="menu-item" href="pricing-table-one.html">Pricing Table One</a></li>
                                             <li><a class="menu-item" href="pricing-table-two.html">Pricing Table Two</a></li>
                                             <li><a class="menu-item" href="pricing-table-three.html">Pricing Table Three</a></li>
                                             <li><a class="menu-item" href="pricing-table-four.html">Pricing Table Four</a></li>
-                                        </ul>
+                                        </ul> {% endcomment %}
                                     </li>
-                                    <li><a class="menu-item" href="locations.html">Locations</a></li>
-                                    <li><a class="menu-item" href="#">Support</a>
+                                    {% comment %} <li><a class="menu-item" href="locations.html">Locations</a></li>{% endcomment %}
+                                    <li><a class="menu-item" href="{% url "misc:development-status" %}">Support</a>
                                         <ul>
-                                            <li><a class="menu-item" href="knowledgebase.html">Knowledgebase</a></li>
-                                            <li><a class="menu-item" href="faq.html">FAQ</a></li>
-                                            <li><a class="menu-item" href="contact.html">Contact</a></li>
+                                            <li><a class="menu-item" href="{% url "misc:development-status" %}">Knowledgebase</a></li>
+                                            <li><a class="menu-item" href="{% url "misc:development-status" %}">FAQ</a></li>
+                                            <li><a class="menu-item" href="{% url "misc:development-status" %}"">Contact</a></li>
                                         </ul>
                                     </li>
+                                    {% comment %}
                                     <li><a class="menu-item" href="news.html">News</a></li>
                                     <li><a class="menu-item" href="#">Company</a>
                                         <ul>
                                             <li><a class="menu-item" href="about.html">About Us</a></li>
                                             <li><a class="menu-item" href="affliate.html">Affliates</a></li>
                                         </ul>
-                                    </li>
-                                    <li><a class="menu-item" href="#">More Pages</a>
-                                        <ul>
+                                    </li> {% endcomment %}
+                                    <li><a class="menu-item" href="{% url "login" %}">Login</a>
+                                        {% comment %} <ul>
                                             <li><a class="menu-item" href="login.html">Login</a></li>
                                             <li><a class="menu-item" href="register.html">Register</a></li>
-                                        </ul>
+                                        </ul> {% endcomment %}
                                     </li>
                                 </ul>
                             </div>
                             <div class="de-flex-col">
+                
+                                {% if user.is_authenticated %}
                                 <div class="menu_side_area">
-                                    <a href="game-server-1.html" class="btn-main btn-line"><span>Get Hosting</span></a>
+                                    <form action="{% url 'logout' %}" method="post" class="logout-form">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn-main btn-line"><span>Logout</span></button>
+                                    </form>
+                                    <span id="menu-btn"></span>
+                                </div>                                
+                                {% else %}
+                                <div class="menu_side_area">
+                                    <a href="{% url 'signup' %}" class="btn-main btn-line" style="background-color: red;"><span>Signup</span></a>
                                     <span id="menu-btn"></span>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -112,14 +130,14 @@
             <div class="container">
                 <div class="row gx-5">
                     <div class="col-lg-4">
-                        <img src="images/logo.png" alt="" >
+                        <img src="{% static 'images/logo.png' %}" alt="" >
                         <div class="spacer-20"></div>
-                        <p>Lorem ipsum culpa tempor tempor eu laboris adipisicing sunt excepteur enim laborum officia eiusmod laborum sint do aliqua incididunt est aute deserunt in elit non sed ut velit ullamco aliquip. Nulla cupidatat elit amet sed labore ut et consequat nostrud laboris aliqua ex est fugiat quis aliqua duis quis esse dolor laboris non duis sunt.</p>
+                        <p>We redefine the cloud gaming landscape by not only offering a cutting-edge cloud gaming service but also providing users the unprecedented ability to build their custom servers. Tailor your gaming experience with handpicked components, ensuring a personalized environment for unparalleled performance and enjoyment.</p>
                     </div>
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="col-lg-6 col-sm-6">
-                                <div class="widget">
+                                {% comment %} <div class="widget">
                                     <h5>Game Server</h5>
                                     <ul>
                                         <li><a href="#">Thunder and City</a></li>
@@ -129,18 +147,18 @@
                                         <li><a href="#">Galactic Oddsey</a></li>
                                         <li><a href="#">Warfare Legend</a></li>
                                     </ul>
-                                </div>
+                                </div> {% endcomment %}
                             </div>
                             <div class="col-lg-6 col-sm-6">
                                 <div class="widget">
                                     <h5>Pages</h5>
                                     <ul>
-                                        <li><a href="#">Game Server</a></li>
-                                        <li><a href="#">Knowledgebase</a></li>
-                                        <li><a href="#">About Us</a></li>
+                                        <li><a href="{% url "home" %}">Home</a></li>
+                                        <li><a href="{% url "games:games" %}">Games</a></li>
+                                        {% comment %} <li><a href="ur">About Us</a></li>
                                         <li><a href="#">Affliates</a></li>
                                         <li><a href="#">Locations</a></li>
-                                        <li><a href="#">News</a></li>
+                                        <li><a href="#">News</a></li> {% endcomment %}
                                     </ul>
                                 </div>
                             </div>
@@ -161,11 +179,12 @@
                             <div class="widget">
                                 <h5>Follow Us on</h5>
                                 <div class="social-icons">
-                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                                    <a href="#"><i class="fa-brands fa-discord"></i></a>
-                                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                                    <a href="https://github.com/alexdeathway" target=" _blank"><i class="fa-brands fa-facebook-f"></i></a>
+                                    <a href="https://twitter.com/alexdeathway" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                                    <a href="https://github.com/alexdeathway" target="_blank"><i class="fa-brands fa-discord"></i></a>
+                                    <a href="https://github.com/alexdeathway" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                                    <a href="https://github.com/alexdeathway" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                    <a href="https://github.com/alexdeathway" target="_blank"><i class="fa-brands fa-github"></i></a>
                                 </div>
                             </div>
                         </div>
