@@ -1,38 +1,66 @@
 {% extends "base.html" %}
-{% load tailwind_filters %}
 {% load static %}
-{% block body %}
-<div class="min-h-screen flex items-center justify-end bg-gray-50 py-2 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-cover " 
-style="background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url({% static 'games/assests/login_cover.jpg' %});">
+{% block content %}
+{% load crispy_forms_tags %}
 
-    <form class="mr-40 py-16 px-8 rounded-xl bg-black " enctype="multipart/form-data" method="post">
+<!-- content begin -->
+<div class="no-bottom no-top" id="content">
+    <div id="top"></div>
+    
+    <section class="v-center jarallax">
+        <div class="de-gradient-edge-top"></div>
+        <div class="de-gradient-edge-bottom"></div>
+        <img src="{% static 'images/background/5.webp' %}" class="jarallax-img" alt="">
+        <div class="container z-1000">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 offset-lg-2">
+                        <div class="p-5 rounded-10 shadow-soft bg-dark-1">
+                            <form enctype="multipart/form-data" method="post">
+                                <h4>Don't have an account? Register now.</h4>
+                                <p>Welcome to Gecom. We're excited to have you on board. By creating an account with us, you'll gain access to a range of benefits and convenient features that will enhance your car rental experience.</p>
+                                <div class="row">
 
-        {% csrf_token %}
-        {{ form|crispy }}
-        <a class="forget-btn font-semibold font-sans text-sm" href='{% url 'login' %}'>already have account? </a>
-        {% comment %} <br> {% endcomment %}
-        <button>Sign up</button>
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
 
-    </form>
+                                    
+
+                                    <div class="col-lg-6 offset-lg-3 text-center">
+                                        <div id='submit'>
+                                            <input type='submit' id='send_message' value='Register Now' class="btn-main color-2">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+
+                                        <div id='mail_success' class='success'>Your message has been sent successfully.</div>
+                                        <div id='mail_fail' class='error'>Sorry, error occured this time sending your message.</div>
+                                        <div class="clearfix"></div>
+
+                                    </div>
+
+                                    <div class="col-lg-6 offset-lg-3">
+                                        <div class="title-line">Or&nbsp;sign&nbsp;up&nbsp;with</div>
+                                        <div class="row g-2">
+                                            <div class="col-lg-6">
+                                                <a class="btn-sc btn-fullwidth mb10" href="#"><img src="{% static 'images/svg/google_icon.svg' %}" alt="">Google</a>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <a class="btn-sc btn-fullwidth mb10" href="#"><img src="{% static 'images/svg/facebook_icon.svg' %}" alt="">Facebook</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    
 
 </div>
-<style>
-    .forget-btn {
-        opacity: 0.4;
-        color: #ff6d00;
-    }
-
-    .forget-btn:hover {
-        opacity: 1;
-    }
-
-    button {
-        width: 100%;
-        margin: 1em auto;
-        background-color: #ff6d00;
-        padding: 0.5em 2.4em;
-        color: #fff;
-        font-weight: bold;
-    }
-</style>
-{% endblock body %}
+{% endblock content %}

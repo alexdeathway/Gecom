@@ -1,0 +1,200 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+  {% block head %}{% endblock head %}
+  <title>{% block title %}{% endblock title %}</title>
+  <!--
+<meta name="description" content="Gecom first page">
+<meta name="keywords" content="">
+-->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+  {% comment %} <link href="{% static 'css/style.css' %}" rel="stylesheet"> {% endcomment %}
+</head>
+
+<body>
+
+  <!-- This example requires Tailwind CSS v2.0+ -->
+  <header class="text-gray-200 font-medium body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center  mb-4 md:mb-0">
+       <svg xmlns="http://www.w3.org/2000/svg"  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="h-6 w-6 text-yellow-400" fill="text-yellow-400" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+          </svg>
+        <span class="ml-3 text-3xl ">Gecom</span>
+      </a>
+      <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+        <a href="{% url 'home' %}" class="mr-5  {% if request.resolver_match.url_name == "home" %}  text-yellow-400 {% endif %} hover:text-white">Home</a>
+        <a href="{% url 'games:games' %}" class="mr-5 {% if request.resolver_match.url_name == "games" %}  text-yellow-400 {% endif %}  hover:text-white">Explore</a>
+        <a href="{% url 'components:components' %}" class="mr-5 {% if request.resolver_match.url_name == "components" %}  text-yellow-400 {% endif %}  hover:text-white">PC parts</a>
+        {% if user.is_organiser %}
+        <a href="{% url 'games:gamecreate' %}" class="mr-5 {% if request.resolver_match.url_name == "gamecreate" %}  text-yellow-400 {% endif %}  hover:text-white">Create Game</a>
+        <a href="{% url 'components:componentcreate' %}" class="mr-5 {% if request.resolver_match.url_name == "componentcreate" %}  text-yellow-400 {% endif %}  hover:text-white">Create Component</a>
+        {% endif %}
+      </nav>
+      {% comment %} <a href="{% url 'signup' %}">
+        <button class="inline-flex text-white border-0 py-3 px-12 focus:outline-none text-md"
+          style="background-color: #ff6d00;">Sign Up</button>
+      </a> {% endcomment %}
+      {% if user.is_authenticated %}
+      <div class="flex space-x-2">
+        <a href={% url 'users:profile' user.username %}>
+          <div class="relative w-10 h-10">
+            <img class="rounded-full border-2 border-yellow-400 shadow-sm"
+              {% comment %} src="{% static 'games/icons/profilelogo.png' %}" alt="user image" />  {% endcomment %}
+              src={{ request.user.profile_image.url }} alt="user image" /> 
+            <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
+          </div>
+        </a>
+      </div>
+
+      <!--this is cart -->
+      <div class="mx-5">
+        <a href="{% url 'checkout:usercart' %}">
+        <button class="bg-gray-700 flex text-gray-50 rounded-full px-2 py-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span class="-ml-1 px-1  rounded-3xl bg-red-600 font-semibold text-sm">
+            <p id="cart-item-count">0<span hx-get="{% url 'checkout:usercartitemcount' %}" hx-trigger="load" hx-swap="outerHTML" hx-target="#cart-item-count"></span></p>
+          </span>
+        </button>
+        </a>
+      </div>
+      
+      <div class="px-8">
+        <a href="{% url 'logout' %}">
+          <button class="inline-flex items-center bg-red-500 border-0 py-2 px-4 text-white rounded-md shadow-md transition-all hover:bg-red-600 hover:shadow-lg">
+            logout
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+          </button>
+        </a>
+      </div>
+      
+     
+      </div>  
+      {% else %}
+
+
+      <!-- Login Button -->
+      <div class="btns">
+        <a href="{% url 'login' %}"
+          class="loginBtn inline-flex text-white border-0 py-2 px-8 focus:outline-none text-md"
+          style="border:1px solid #ff6d00;">Login</a>
+
+        <!-- Sign up Button -->
+        <a href="{% url 'signup' %}"
+          class="signupBtn inline-flex text-white border-0 py-2 px-8 focus:outline-none text-md"
+          style="background-color: #ff6d00; border:1px solid #ff6d00;">Sign up</a>
+      </div>
+
+
+    </div>
+    {% endif %}
+<div class="container">
+{% if messages %}   
+    <div class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <div class="flex items-center justify-center w-12 bg-green-400">
+          <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"/>
+          </svg>
+      </div>
+    {% for message in messages %}
+      <div class="px-4 py-2 -mx-3">
+          <div class="mx-3">
+              <span class="font-semibold text-green-400 dark:text-green-400">{{message.tags}}</span>
+              <p class="text-sm text-gray-600 dark:text-gray-200"> {{ message|safe }}</p>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+   
+   
+{% endif %}     
+</div> 
+
+  </header>
+
+
+  <style>
+    header {
+      width: 100%;
+      position: fixed;
+      z-index: 99;
+    }
+
+    header.stick {
+      width: 100%;
+      background-color: #111827;
+    }
+    footer{
+      background-color: #111827;
+    }
+    .loginBtn:hover {
+      background-color: #e76a09;
+    }
+
+    .signupBtn:hover {
+      background-color: #e76a09;
+    }
+  </style>
+  <script>
+    window.addEventListener("scroll", function () {
+      var header = document.querySelector("header");
+      header.classList.toggle("stick", window.scrollY > 0);
+    })    
+  </script>
+  {% block body %}{% endblock body %}
+</body>
+<footer>
+  {% block footer %}
+  <footer class="text-gray-600 body-font">
+    <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+      <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+        <svg xmlns="http://www.w3.org/2000/svg"  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="h-6 w-6 text-yellow-400" fill="text-yellow-400" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+        </svg>
+        <span class="ml-3 text-xl text-white">Gecom</span>
+      </a>
+      <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© {% now "Y" %}
+        Gecom |
+      </p>
+      <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+        <a class="text-gray-500">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+            viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+            viewBox="0 0 24 24">
+            <path
+              d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+            </path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            class="w-5 h-5" viewBox="0 0 24 24">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0"
+            class="w-5 h-5" viewBox="0 0 24 24">
+            <path stroke="none"
+              d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+          </svg>
+        </a>
+      </span>
+    </div>
+  {% endblock footer %}
+</footer>
+  
+</html>

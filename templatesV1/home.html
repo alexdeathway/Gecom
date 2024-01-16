@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Gecom
+{% endblock title %}
+{% block body %}
+
+<!--leading Game of year-->
+<section class="text-gray-400 bg-gray-900 body-font ">
+<!--  <section class="text-white-600 body-font"> -->
+    <div class='w-full h-full bg-no-repeat bg-cover bg-left bg-fixed'
+      style="background-image: linear-gradient(90deg, hsla(220, 100%, 8%, 1) 0%, hsla(219, 100%, 10%, 0.8) 100%), url({% static 'games/assests/landing2.jpg' %});">
+      <div class="container mx-auto flex px-32 py-32 md:flex-row flex-col items-center">
+        <div class="lg:max-w-lg lg:w-full md:w-1/2 w-12/6 mb-10 md:mb-0">
+          <img class="object-cover object-center rounded" alt="Latest Release Cover Image"
+            src="{{latest_release.cover.url}}">
+        </div>
+        <div
+          class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+          <h1 class="title-font sm:text-6xl text-2xl mb-4 font-medium text-white">{{ latest_release.name }}</h1>
+          <p class="mb-8 leading-relaxed  text-1xl md:w-5/6">{{latest_release.description|slice:":300"}}..</p>
+          <div class="flex justify-center">
+            <a href="{% url 'games:gamedetail' latest_release.pk %}">
+            <button class="inline-flex text-white  border-2 py-3 px-6 focus:outline-none text-md"
+              style="background-color: #ff6d00;">view
+            </button>
+           </a>
+            <!-- <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">View more</button> -->
+          </div>
+        </div>
+      </div>
+    </div> 
+  </section>
+
+
+<!--New relase-->
+<section class="text-gray-400 bg-gray-900 body-font">
+  <!-- <div class='w-full h-full bg-no-repeat bg-cover bg-left'
+    style="background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url({% static 'games/assests/NewRelease.jpg' %});"> -->
+  <div class="container px-32 py-32 mx-auto">
+    <div class="title-font sm:text-1xl text-2xl mb-4 font-medium text-white">Latest Release</div>
+    <div class="flex flex-wrap -m-4">
+
+      <!--Sales games here-->
+      {% for game in games_sales %}
+      <div class="p-4 md:w-1/3">
+        <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
+          <img class="lg:h-64 md:h-36 w-full object-cover object-center" src="{{game.cover.url}}" alt="blog">
+          <div class="p-6">
+            <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">{{game.category}}</h2>
+            <h1 class="title-font text-lg font-medium text-white mb-3">{{game.name}}</h1>
+            <p class="leading-relaxed mb-3">{{game.description|slice:":120"}}...</p>
+          
+            <div class="flex items-center flex-wrap ">
+              <a href="{% url 'games:gamedetail' game.pk %}"
+                class="text-yellow-400 inline-flex items-center md:mb-2 lg:mb-0">View
+                <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+              
+              <span
+                class="text-white mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 ">
+                 <a href="{% url 'games:publisherdetail' game.publisher.id %}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>{{game.publisher}}
+               </a>
+              </span> 
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+  </div>
+</section>
+<!--games-->
+
+<section class="text-gray-400 bg-gray-900 body-font">
+
+<div class='w-full h-full bg-no-repeat bg-cover bg-left bg-fixed'
+      style="background-image: linear-gradient(90deg, hsla(220, 100%, 8%, 1) 0%, hsla(219, 100%, 10%, 0.8) 100%), url({% static 'games/assests/background3.jpg' %});">
+
+  <div class="container px-32 py-32 mx-auto">
+    <div class="title-font sm:text-1xl text-2xl mb-4 font-medium text-white">Games List</div>
+    <div class="flex flex-wrap -m-4">
+      {% for game in games %}
+      <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+        <a class="block relative h-48 overflow-hidden border-2 border-gray-800 rounded-lg">
+          <img alt="ecommerce" class="object-cover object-center w-full h-full block" src="{{game.cover.url}}">
+        </a>
+        <div class="mt-4">
+          <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{game.category}}</h3>
+          <h2 class="text-white title-font text-lg font-medium">{{game.name}}</h2>
+          <!--   <p class="mt-1">${{game.price}}</p> -->
+          <a href="{% url 'games:gamedetail' game.pk %}"
+            class="text-indigo-400 inline-flex items-center md:mb-2 lg:mb-0">${{game.price}}
+            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path>
+              <path d="M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+</section>
+
+<!--category-->
+<section class="text-gray-400 body-font bg-gray-900">
+
+  <div class='w-full h-full bg-no-repeat bg-cover bg-left '
+      style="background-image: linear-gradient(90deg, hsla(220, 100%, 8%, 1) 0%, hsla(219, 100%, 10%, 0.8) 100%), url({% static 'games/assests/NewRelease.jpg' %});">
+
+  <div class="container px-32 py-32 mx-auto">
+    <div class="flex flex-wrap w-full mb-4">
+      <div class="title-font sm:text-1xl text-2xl mb-4 font-medium text-white">Browse Games</div>
+
+    </div>
+    <div class="flex flex-wrap -m-4">
+
+      {% for category in categories  %}
+      <div class="xl:w-1/4 md:w-1/2 p-4">
+  
+        <div class="bg-gray-900 bg-opacity-40 p-6 rounded-lg">
+          <img class="h-40 rounded w-full object-cover object-center mb-6" src="{{category.cover.url}}" alt="content">
+          <h3 class="tracking-widest text-yellow-400 text-xs font-medium title-font">Library</h3>
+          <h2 class="text-lg text-white font-medium title-font mb-4">{{category.name}}</h2>
+          <p class="leading-relaxed text-base">{{category.description|slice:":80"}}...</p>
+          <a href="{% url 'games:categorydetail' category.name  %}" class="text-yellow-500 inline-flex items-center">browse
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+        </div>
+
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+  </div>
+  
+</section>
+{% endblock body %}

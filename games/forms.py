@@ -22,7 +22,7 @@ class GameCreationForm(forms.ModelForm):
             "cover",
             "price",
             "sale",
-            "discription",
+            "description",
             "publisher"      
          ]
 
@@ -90,6 +90,6 @@ class GameUpdateForm(forms.ModelForm):
             "cover",
             "price",
             "sale",
-            "discription",
+            "description",
             "publisher"      
          ]
