@@ -209,7 +209,7 @@
                             <h2 class="wow fadeInUp mb20" data-wow-delay=".2s">Game Collection</h2>
                         </div>
                         <div class="col-lg-6 text-lg-end">
-                            <a class="btn-main mb-sm-30" href="game-server-1.html"><span>View all games</span></a>
+                            <a class="btn-main mb-sm-30" href="{% url 'games:games' %}"><span>View all games</span></a>
                         </div>
                     </div>
                     <div class="row g-4 sequence">
@@ -353,8 +353,8 @@
                                         <div class="subtitle wow fadeInUp mb-3">Download now</div>
                                         <h2 class="wow fadeInUp" data-wow-delay=".2s">Manage your server from mobile device</h2>
                                         <p>Experience gaming freedom like never before with Gecom. Our platform empowers you to manage and play your favorite games from any device, whether it's a high-end gaming PC, a sleek laptop, a tablet, or even your smartphone. Break free from device limitations and enjoy your gaming universe on the go.</p>                            
-                                        <a href="download.html"><img src="{% static 'images/misc/download-appstore.webp' %}" class="img-fluid mb-sm-20" alt="download"></a>&nbsp;
-                                        <a href="download.html"><img src="{% static 'images/misc/download-playstore.webp' %}" class="img-fluid mb-sm-20" alt="download"></a>
+                                        <a href="{% url "misc:development-status" %}"><img src="{% static 'images/misc/download-appstore.webp' %}" class="img-fluid mb-sm-20" alt="download"></a>&nbsp;
+                                        <a href="{% url "misc:development-status" %}"><img src="{% static 'images/misc/download-playstore.webp' %}" class="img-fluid mb-sm-20" alt="download"></a>
                                     </div>
                                 </div>
 

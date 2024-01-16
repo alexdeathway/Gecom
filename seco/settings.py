@@ -189,6 +189,9 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL='home'
+
+CSRF_TRUSTED_ORIGINS=os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
+
 if DEBUG:
     #if DEBUG is False then we are in production and we want to use postgres.  
     #Error will be raised if postgres is not available.
