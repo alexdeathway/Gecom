@@ -112,7 +112,7 @@ DATABASES = {
         "PORT": os.environ.get("POSTGRES_PORT"),
         "USER": os.environ.get("POSTGRES_USER"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-        "NAME": os.environ.get("POSTGRES_DB"),
+        "NAME": os.environ.get("POSTGRES_DATABASE"),
         "CONN_MAX_AGE": int(os.environ.get("POSTGRES_CONN_MAX_AGE", 60))
     },
     "sqlite": {
