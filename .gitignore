@@ -109,4 +109,7 @@ secret_keys.py
 #environmental variable
 .env
 
-
+#these files are collected by collectstatic command and should not be uploaded to git
+#remove all files and folder except donot.delete 
+staticfiles/*
+!staticfiles/.keep

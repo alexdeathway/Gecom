@@ -1,5 +1,9 @@
-{% extends 'base.html' %} {% block body %}
-{% load static %}
+{% extends 'base.html' %} {% load static %}
+{% block title %}Cart{% endblock title %}
+{% block head %}
+<link href="{% static 'tailwindcss/style.css' %}" rel="stylesheet" type="text/css" >
+{% endblock head %}
+{% block content %}
 <!-- Shopping cart page -->
 
 <div
@@ -132,4 +136,4 @@
 </div>
 
 
-{% endblock body %}
+{% endblock content %}

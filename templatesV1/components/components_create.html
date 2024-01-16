@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load tailwind_filters %}
+
+{% block body %}
+<div class="min-h-screen flex justify-center p-20 bg-gray-900 text-white px-4 sm:px-6 lg:px-8">
+   <form method="POST" enctype="multipart/form-data" >
+
+{% csrf_token %}
+{{ form|crispy }}
+ <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+  Submit
+</button>
+</form>
+</div>
+{% endblock body %}
