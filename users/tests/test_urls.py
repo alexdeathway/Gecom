@@ -42,5 +42,11 @@ class TestUrl(TestCase):
     def test_profileupdate_url_is_resolved(self):
         url=reverse('users:profileupdate',args=[self.user_dummy_username])
         
-        self.assertEqual(resolve(url).func.view_class,UserProfileUpdateView)    
+        self.assertEqual(resolve(url).func.view_class,UserProfileUpdateView)   
+
+    def tearDown(self):
+        self.client.logout()
+        self.user.delete()
+       
+
 
