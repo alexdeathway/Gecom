@@ -10,7 +10,7 @@ class GamesModel(models.Model):
     cover=models.ImageField(default="default_cover.jpg", upload_to="games_cover")
     category=models.ForeignKey('CategoryModel',null=True,blank=True,on_delete=models.SET_NULL,related_name="GameModel_CategoryModel")
     price=models.PositiveIntegerField ()
-    discription=models.CharField(max_length=500)
+    description=models.CharField(max_length=500)
     sale=models.BooleanField(default=False)
     publisher=models.ForeignKey('OrganisationModel',on_delete=models.CASCADE,related_name="GameModel_OrganisationModel")
     release_date=models.DateField(auto_now=True) 

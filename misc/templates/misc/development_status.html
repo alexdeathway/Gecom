@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Website Under Maintenance</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .jumbotron {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #343a40;
+        }
+
+        p {
+            font-size: 1.5rem;
+            color: #6c757d;
+        }
+
+        .logo {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            margin-top: 20px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+        <img src="{% static "images/logo.png" %}" alt="Your Logo" class="logo bg-slate-700">
+        <h1>Gecom Under Maintenance</h1>
+        <p>Sorry for the inconvenience, but we (well, really just me <a href="https://github.com/alexdeathway/Gecom" target="_blank"> alexdeathway </a> ) performing some maintenance at the moment. Some features may not be available temporarily, but we'll be back shortly!</p>
+        <p>Thank you for your patience.</p>
+        <p>Track more information and updates at <a href="https://github.com/users/alexdeathway/projects/3/views/1" target="_blank">GitHub</a>.</p>
+        <a href="#" class="btn btn-primary">Home</a>
+        <div class="footer-text">© 2024 Gecom. All rights reserved.</div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies (Popper.js, Bootstrap JS) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>

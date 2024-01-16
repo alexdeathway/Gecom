@@ -13,8 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 from pathlib import Path
 import environ
-#from .secgen import generate_secret_key
-
+from seco import is_available
 #environ
 env = environ.Env(
     DEBUG=(bool, False)
@@ -22,8 +21,7 @@ env = environ.Env(
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -58,17 +56,20 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'crispy_tailwind',
+    'crispy_bootstrap5',
     'debug_toolbar',
     'django_extensions',
     'django_tables2',
     'checkout',
+    'misc',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -109,11 +110,14 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "HOST": os.environ.get("POSTGRES_HOST"),
         "PORT": os.environ.get("POSTGRES_PORT"),
-        # 'HOST': '172.23.0.2',
-        # 'PORT': '5432',
         "USER": os.environ.get("POSTGRES_USER"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-        "NAME": os.environ.get("POSTGRES_DATABASE"),
+        "NAME": os.environ.get("POSTGRES_DB"),
+        "CONN_MAX_AGE": int(os.environ.get("POSTGRES_CONN_MAX_AGE", 60))
+    },
+    "sqlite": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -164,14 +168,31 @@ EMAIL_HOST_PASSWORD=env('EMAIL_HOST_PASSWORD')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATICFILES_DIRS = [
+     os.path.join(BASE_DIR,'static'),
+ ]
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
 EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend"
 AUTH_USER_MODEL="users.User"
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
-CRISPY_TEMPLATE_PACK="tailwind"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL='home'
+if DEBUG:
+    #if DEBUG is False then we are in production and we want to use postgres.  
+    #Error will be raised if postgres is not available.
+    #otherwise in development we want to use sqlite or postgres if available.
+    if not(is_available.postgres_connection()):
+        DATABASES['default'] = DATABASES['sqlite'] 
 #DEBUG_PROPAGATE_EXCEPTIONS=True

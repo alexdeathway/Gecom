@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
-
-
-{% block body %}
+{% load static %}
+{% block title %}logout{% endblock title %}
+{% block head %}
+<link href="{% static 'tailwindcss/style.css' %}" rel="stylesheet" type="text/css" >
+{% endblock head %}
+{% block content %}
 <div class="p-56 bg-gray-900">
 <p class="p-13 text-purple-100">You have successfully logged out! </p>
 <hr>
@@ -11,4 +14,4 @@
 </button>
 </a>
 </div>
-{% endblock body %}
+{% endblock content %}
