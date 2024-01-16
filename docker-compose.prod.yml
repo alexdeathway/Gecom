@@ -3,8 +3,8 @@ version: "3.8"
 volumes:
     app_data:
         name: gecom_app_data
-    static_files:
-        name: gecom_static_files
+    # static_files:
+    #     name: gecom_static_files
     media_files:
         name: gecom_media_files
     certbot_web:
@@ -27,7 +27,7 @@ services:
         ports:
             - 8000:8000
         volumes:
-            - static_files:/app/static
+        #    - static_files:/app/static
             - media_files:/app/media
 
     postgres:
@@ -50,7 +50,7 @@ services:
         depends_on:
             - django
         volumes:
-            - static_files:/app/static:ro
+        #    - static_files:/app/static:ro
             - media_files:/app/media:ro
             - certbot_web:/vol/www:ro
             - certbot_certs:/etc/letsencrypt/:ro
