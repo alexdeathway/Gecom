@@ -191,6 +191,7 @@ LOGIN_URL = "login"
 LOGIN_REDIRECT_URL='home'
 
 CSRF_TRUSTED_ORIGINS=os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 if DEBUG:
     #if DEBUG is False then we are in production and we want to use postgres.  
