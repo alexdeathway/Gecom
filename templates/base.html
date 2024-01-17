@@ -79,7 +79,7 @@
                                         <ul>
                                             <li><a class="menu-item" href="{% url "misc:development-status" %}">Knowledgebase</a></li>
                                             <li><a class="menu-item" href="{% url "misc:development-status" %}">FAQ</a></li>
-                                            <li><a class="menu-item" href="{% url "misc:development-status" %}"">Contact</a></li>
+                                            <li><a class="menu-item" href="{% url "misc:development-status" %}">Contact</a></li>
                                         </ul>
                                     </li>
                                     {% comment %}
@@ -90,27 +90,32 @@
                                             <li><a class="menu-item" href="affliate.html">Affliates</a></li>
                                         </ul>
                                     </li> {% endcomment %}
+                                    {% if user.is_authenticated %}
+                                    <li><a class="menu-item d-block d-md-none" onclick="document.getElementById('logout-form').submit()" href="#">Logout</a>
+                                    {% else %}
                                     <li><a class="menu-item" href="{% url "login" %}">Login</a>
                                         {% comment %} <ul>
                                             <li><a class="menu-item" href="login.html">Login</a></li>
                                             <li><a class="menu-item" href="register.html">Register</a></li>
                                         </ul> {% endcomment %}
                                     </li>
+                                    <li><a class="menu-item d-block d-md-none" href="{% url "signup" %}">signup</a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                             <div class="de-flex-col">
                 
                                 {% if user.is_authenticated %}
                                 <div class="menu_side_area">
-                                    <form action="{% url 'logout' %}" method="post" class="logout-form">
+                                    <form  id="logout-form" action="{% url 'logout' %}" method="post" class="logout-form">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn-main btn-line"><span>Logout</span></button>
+                                        <button type="submit" class="btn-main btn-line bg-danger"><span>Logout</span></button>
                                     </form>
                                     <span id="menu-btn"></span>
                                 </div>                                
                                 {% else %}
                                 <div class="menu_side_area">
-                                    <a href="{% url 'signup' %}" class="btn-main btn-line" style="background-color: red;"><span>Signup</span></a>
+                                    <a href="{% url 'signup' %}" class="btn-main btn-line"><span>Signup</span></a>
                                     <span id="menu-btn"></span>
                                 </div>
                                 {% endif %}
