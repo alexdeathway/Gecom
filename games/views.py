@@ -27,6 +27,11 @@ class GamesListView(ListView):
     paginate_by=15
     queryset=GamesModel.objects.all()
 
+    def get_context_data(self,**kwargs):
+        context=super(GamesListView,self).get_context_data(**kwargs)
+        context["categories"]=CategoryModel.objects.all()
+        return context
+
 
 class GamesDetailView(DetailView):
       template_name="games/games_detail.html"

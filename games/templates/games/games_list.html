@@ -21,18 +21,24 @@
               <div class="col-lg-6">
                   <ul id="filters" class="float-lg-end float-sm-start wow fadeInUp" data-wow-delay="0s">
                       <li><a href="#" data-filter="*" class="selected">All Games</a></li>
-                      <li><a href="#" data-filter=".popular">popular</a></li>
+                      
+                      {% for category in categories %}
+                      <li><a href="#" data-filter=".{{category.name}}">{{category.name}}</a></li>
+                      {% endfor %}
+                      {% comment "this is for category allocation" %} 
                       <li><a href="#" data-filter=".fps">fps</a></li>
                       <li><a href="#" data-filter=".survival">survival</a></li>
                       <li><a href="#" data-filter=".sandbox">sandbox</a></li>
-                  </ul>
+                      {% endcomment %} 
+                    
+                    </ul>
               </div>
           </div>
 
           <div id="gallery" class="row g-4">
             
             {% for game in games %}
-              <div class="col-lg-4 col-md-6 item sandbox survival">
+              <div class="col-lg-4 col-md-6 item {{ game.category.name }} survival">
                   <div class="de-item">
                       <div class="d-overlay">
                           <div class="d-label">
