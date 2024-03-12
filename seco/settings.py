@@ -198,5 +198,31 @@ if DEBUG:
     #Error will be raised if postgres is not available.
     #otherwise in development we want to use sqlite or postgres if available.
     if not(is_available.postgres_connection()):
-        DATABASES['default'] = DATABASES['sqlite'] 
+        DATABASES['default'] = DATABASES['sqlite']
+
+#[v-1.7.4] - Added support for cloud storage(static and media files)  
+USE_CLOUD_STORAGE=os.getenv('USE_CLOUD_STORAGE', False) == 'True'     
+if USE_CLOUD_STORAGE:
+
+    AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_ENDPOINT_URL = os.getenv('AWS_S3_ENDPOINT_URL')
+    AWS_S3_ACCESS_KEY_ID = os.getenv('AWS_S3_ACCESS_KEY_ID')
+    AWS_S3_SECRET_ACCESS_KEY = os.getenv('AWS_S3_SECRET_ACCESS_KEY')
+    AWS_S3_SIGNATURE_VERSION = os.getenv('AWS_S3_SIGNATURE_VERSION')
+    AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN')
+
+
+    STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        },
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        },
+    }
+
+    #admin panel media files upload support
+    MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/"
+    
+    
 #DEBUG_PROPAGATE_EXCEPTIONS=True
