@@ -8,6 +8,7 @@ User=get_user_model()
 class GamesModel(models.Model):
     name=models.CharField(max_length=30)
     cover=models.ImageField(default="default_cover.jpg", upload_to="games_cover")
+    box_art=models.ImageField(default="default_box_art.jpg", upload_to="games_box_art")
     category=models.ForeignKey('CategoryModel',null=True,blank=True,on_delete=models.SET_NULL,related_name="GameModel_CategoryModel")
     price=models.PositiveIntegerField ()
     description=models.CharField(max_length=500)

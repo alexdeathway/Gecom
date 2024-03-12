@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% load tailwind_filters %}
-
-{% block body %}
-<div class="min-h-screen flex justify-center p-20 bg-gray-900 text-white px-4 sm:px-6 lg:px-8">
+{% load crispy_forms_tags %}
+{% block title %}Create games{% endblock title %}
+{% block content %}
+<div class="d-flex justify-content-center vh-100 p-5 bg-dark text-white">
     <form method="POST" enctype="multipart/form-data" >
 
 {% csrf_token %}
@@ -10,4 +10,4 @@
 <button type="submit" value="Submit">Submit</button>
 </form>
 </div>
-{% endblock body %}
+{% endblock content %}
