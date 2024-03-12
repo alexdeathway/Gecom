@@ -20,3 +20,7 @@ whitenoise==6.6.0
 #python packages for templateV1
 crispy-tailwind==0.5.0
 pytailwindcss==0.1.2
+
+#cloud storage
+django-storages==1.14.2
+boto3==1.34.57
