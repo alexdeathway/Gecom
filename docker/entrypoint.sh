@@ -30,7 +30,14 @@ until postgres_ready; do
 done
 >&2 echo "PostgreSQL is available"
 
-python3 manage.py collectstatic --noinput
+
+
+if [ "$RUN_COLLECTSTATIC" = "True" ]; then
+    echo "Running collectstatic"
+    python3 manage.py collectstatic --noinput
+else
+    echo "Skipping collectstatic"
+fi
 python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py loaddata db.json
