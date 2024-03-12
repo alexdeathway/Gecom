@@ -1,14 +1,51 @@
-{% extends 'base.html' %}
-{% load tailwind_filters %}
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
 
-{% block body %}
-<div class="min-h-screen flex items-center justify-center bg-gray-50 py-8 px-4 sm:px-6 lg:px-8" style="background-color: #808080;">
-
-
-<form method="POST" enctype="multipart/form-data">
-{% csrf_token %}
-{{form|crispy}}
- <input type="submit" value="Submit">
-</form>
-</div>
-{% endblock body %}
+<!-- content begin -->
+<div class="no-bottom no-top" id="content">
+    <div id="top"></div>
+    
+    <section class="v-center jarallax">
+        <div class="de-gradient-edge-top"></div>
+        <div class="de-gradient-edge-bottom"></div>
+        <img src="{% static 'images/background/2.webp' %}" class="jarallax-img" alt="">
+        <div class="container z-1000">
+            <div class="row align-items-center">
+                <div class="col-lg-4 offset-lg-4">
+                    <div class="padding40 rounded-10 shadow-soft bg-dark-1">
+                        <div class="text-center">
+                            <h4>Sign in to your account</h4>
+                        </div>
+                        <div class="spacer-10"></div>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{form|crispy}}
+                            <div class="field-set">
+                                <input type="checkbox" checked id="html" name="fav_language" value="HTML">
+                                <label for="html"><span class="op-5">Remember me</span></label><br>
+                            </div>
+                            <div class="spacer-20"></div>
+                            <div id="submit">
+                                <input type="submit" id="send_message" value="Sign In" class="btn-main btn-fullwidth rounded-3" />
+                            </div>
+                        </form>
+                        <div class="title-line">Or&nbsp;login&nbsp;up&nbsp;with</div>
+                        <div class="row g-2">
+                            <div class="col-lg-6">
+                                <a class="btn-sc btn-fullwidth mb10" href="{% url "misc:development-status" %}"><img src="{% static 'images/svg/google_icon.svg' %}" alt="">Google</a>
+                            </div>
+                            <div class="col-lg-6">
+                                <a class="btn-sc btn-fullwidth mb10" href="{% url "misc:development-status" %}"><img src="{% static 'images/svg/facebook_icon.svg' %}" alt="">Facebook</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>       
+<!-- content close -->
+        
+{% endblock content %}
