@@ -38,7 +38,7 @@
           <div id="gallery" class="row g-4">
             
             {% for game in games %}
-              <div class="col-lg-4 col-md-6 item {{ game.category.name }} survival">
+              <div class="col-lg-4 col-md-6 item {{ game.category.name }}">
                   <div class="de-item">
                       <div class="d-overlay">
                           <div class="d-label">
@@ -50,7 +50,7 @@
                               <a class="btn-main btn-fullwidth" href="{% url 'games:gamedetail' game.pk %}"><span>Order Now</span></a>
                           </div>
                       </div>
-                      <img src="{{game.cover.url}}" class="img-fluid" alt="">
+                      <img src="{{game.box_art.url}}" class="img-fluid" alt="">
                   </div>
               </div>
             {% endfor %}
