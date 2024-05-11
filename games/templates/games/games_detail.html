@@ -34,8 +34,34 @@
             </section>
             <!-- section close -->
 
+            <section id="subheader" class="jarallax pb20">
+              <div class="de-gradient-edge-bottom"></div>
+              {% comment %} <img src="images/background/subheader-game.webp" class="jarallax-img" alt=""> {% endcomment %}
+              <div class="container z-1000">
+                  <div class="row">
+                      <div class="col-lg-12 mb-3 text-center">
+                          {% comment %} <div class="subtitle wow fadeInUp mb-3">Most Complete</div> {% endcomment %}
+                          <h2 class="wow fadeInUp mb-0" data-wow-delay=".2s">Buy This Game</h2>
+                          <hr class="mt20">
+                          <a class="btn-main mb10" href="{% url "checkout:usercart_add" id=game.pk type='game' %}"><span>add to cart</span></a>
+                          {% comment %} <ul id="filters" class="wow fadeInUp" data-wow-delay="0s">
+                              <li><a href="{% url "checkout:usercart_add" id=game.pk type='game' %}" data-filter="*" class="selected">Add to cart</a></li>
+                              <li><a href="#" data-filter=".popular">popular</a></li>
+                              <li><a href="#" data-filter=".fps">fps</a></li>
+                              <li><a href="#" data-filter=".survival">survival</a></li>
+                              <li><a href="#" data-filter=".sandbox">sandbox</a></li>
+                          </ul> {% endcomment %}
+                      </div>  
+                  </div>
+              </div>
+            </section>
+
+
             <!--preconfigured server price table-->
             <section class="no-top">
+              <div class="col-lg-12 mb-3 text-center">
+                <h2 class="wow fadeInUp mb-0" data-wow-delay=".2s">Rent A Preconfigured Server</h2>
+              </div>
               <div class="container">
                   <div class="row">
 
@@ -317,6 +343,9 @@
                       </div>
                   </div>
           </section>
+
+          
+          
 
         <!-- content close -->
 

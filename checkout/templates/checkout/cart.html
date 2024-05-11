@@ -1,139 +1,137 @@
-{% extends 'base.html' %} {% load static %}
+{% extends "base.html" %}
 {% block title %}Cart{% endblock title %}
-{% block head %}
-<link href="{% static 'tailwindcss/style.css' %}" rel="stylesheet" type="text/css" >
-{% endblock head %}
+{% load static %}
 {% block content %}
-<!-- Shopping cart page -->
+<!-- content begin -->
 
-<div
-  class="bg-gray-800 min-h-screen py-6 flex flex-col justify-center sm:py-12"
->
-  <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-    <div
-      class="absolute inset-0 bg-gradient-to-r from-gray-700 to-light-blue-900 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"
-    ></div>
-    <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-      <div class="max-w-md mx-auto">
-        <div class="flex items-center space-x-7">
-          {% comment %} <img
-            class="w-20"
-            src="https://tailwindui.com/img/logos/workflow-mark-cyan-600-to-blue-600.svg"
-            alt="Workflow"
-          /> {% endcomment %}
-          <h1 class="text-gray-600 font-semibold text-2xl">Shopping Cart</h1>
-        </div>
-        <div class="divide-y divide-gray-200">
-          <!--Games -->
-          
-          {% for item in games %}
-          <div class="py-8 flex items-center justify-between">
-            <div class="flex items-center">
-              <img
-                class="w-20"
-                src="{{item.game.cover.url}}"
-                alt="Product image"
-              />
-              <div class="ml-4">
-                <h2 class="text-gray-800 font-semibold text-lg">
-                  {{item.game.name}}
-                </h2>
+<!-- content close -->
+<div class="no-bottom no-top" id="content">
+  <div id="top"></div>
+  
+  
+  <section class="jarallax">
+      <img src={% static "images/background/galactic-oddsey.webp" %} class="jarallax-img" alt="">
+      <div class="de-gradient-edge-top"></div>
+      <div class="de-gradient-edge-bottom"></div>
+      <div class="container z-1000">
+          <div class="row align-items-center">
+              <div class="col-lg-12">
+                  <div class="subtitle wow fadeInUp mb-3">Cart</div>
               </div>
-            </div>
-            <div class="flex flex-col items-end">
-              <p class="text-gray-800 font-semibold text-md">${{item.game.price}}</p>
-              <form action="{% url 'checkout:usercart' %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="_method" value="DELETE">
-                <input type="hidden" name="id" value="{{item.id}}">
-                <input type="hidden" name="type" value="game">
-                <button class="rounded-full  w-10 h-10 bg-red-500 p-0 border-0 inline-flex items-center justify-center text-red-100 ml-4 hover:text-white hover:font-bold ">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                    <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
-                  </svg>                  
-                </button>
-              </form>
-            </div>
-          </div>
-          {% endfor %}
-           <!--Components -->
-          {% for item in components %}
-          <div class="py-8 flex items-center justify-between">
-            <div class="flex items-center">
-              <img
-                class="w-20"
-                src="{{item.component.cover.url}}"
-                alt="Product image"
-              />
-              <div class="ml-4">
-                <h2 class="text-gray-800 font-semibold text-lg">
-                  {{item.component.name}}
-                </h2>
+              <div class="col-lg-6">
+                  <h2 class="wow fadeInUp" data-wow-delay=".2s">Payment</h2>
+                  <div class="spacer-20"></div>
               </div>
-            </div>
-            <div class="flex flex-col items-end">
-              <p class="text-gray-800 font-semibold text-md">${{item.component.price}}</p>
-              <form action="{% url 'checkout:usercart' %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="_method" value="DELETE">
-                <input type="hidden" name="id" value="{{item.id}}">
-                <input type="hidden" name="type" value="component">
-                <button class="rounded-full  w-10 h-10 bg-red-500 p-0 border-0 inline-flex items-center justify-center text-red-100 ml-4 hover:text-white hover:font-bold ">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                    <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
-                  </svg>                  
-                </button>
-              </form>
-            </div>
           </div>
-          {% endfor %}
-        
-        
-        </div>
-        <div class="flex justify-between mt-8">
-          <p class="text-gray-800 font-semibold text-md">Subtotal</p>
-          <p class="text-gray-800 font-semibold text-md">${{subtotal}}</p>
-        </div>
-        <div class="mt-8">
-          <form action="{% url 'checkout:promocode' %}" method="POST">
-            {% csrf_token %}
-            <label for="promo" class="font-semibold text-gray-700"
-              >Enter promo code</label
-            >
-            <div class="flex items-center mt-2">
-              <input
-                type="text"
-                id="promo"
-                name="promo"
-                class="form-input w-full rounded-md border-gray-300 shadow-sm px-4 py-2"
-                placeholder="Enter your code"
-              />
-              <button
-                type="submit"
-                class="text-white bg-red-500 hover:bg-red-600 ml-4 py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
-              >
-                Apply
-              </button>
-            </div>
-          </form>
-        </div>
-        <div class="mt-8">
-          <a
-            href="{% url 'checkout:nopurchase' %}"
-            class="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
-          >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="mr-4 w-6 h-6">
-            <path d="M4.5 3.75a3 3 0 00-3 3v.75h21v-.75a3 3 0 00-3-3h-15z" />
-            <path fill-rule="evenodd" d="M22.5 9.75h-21v7.5a3 3 0 003 3h15a3 3 0 003-3v-7.5zm-18 3.75a.75.75 0 01.75-.75h6a.75.75 0 010 1.5h-6a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3a.75.75 0 000-1.5h-3z" clip-rule="evenodd" />
-          </svg>
+
+
+
+
+          <div class="row">
           
-            <span>Checkout</span>
-          </a>
-        </div>
+              <div class="col-lg-4 mb-sm-30 wow fadeInRight" data-wow-delay=".4s">
+                  <div class="de-pricing-plan h-100 d-feature">
+                      <div class="d-badge">Top Seller</div>
+                      <div class="d-title">Total Amount</div>
+                      <div class="d-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                      <div class="spacer-20"></div>
+                      <div class="spacer-20"></div>
+                      <div class="d-price">
+                          <span class="d-cur">$</span>
+                          <span class="d-value">{{subtotal}}</span>
+                          <span class="d-period">/-</span>
+                      </div>
+                      <div class="d-sub-price">
+                          *tax not included
+                      </div>
+                      <div class="spacer-20"></div>
+                      <a class="btn-main btn-fullwidth" href="#"><span>Pay</span></a>
+                  </div>
+              </div>
+
+          </div>
+
+          <div class="spacer-double"></div>
+
+          
       </div>
+  </section>
+
+  <section class="no-top">
+    <div class="container">
+        <div id="gallery" class="row g-4">
+          {% for item in games  %}   
+            <div class="col-lg-4 col-md-6 item popular survival">
+                <div class="de-item s2">
+                    <div class="d-overlay">
+                        {% comment %} <div class="d-label">
+                            20% OFF
+                        </div> {% endcomment %}
+                        <div class="d-text">
+                            <h6>{{ item.game.name }}</h6>
+                            <div class="de-rating-ext">
+                        </div>
+                            <p class="d-price">Pricing <span class="price">${{item.game.price}}</span></p>
+                            <a class="btn-main btn-fullwidth" href="pricing-table-one.html"><span>remove from cart</span></a>
+                        </div>
+                    </div>
+                    <img src={{ item.game.cover.url }} class="img-fluid" alt="">
+                </div>
+            </div>
+          {% endfor %} 
+        </div>
+
     </div>
-  </div>
+  </section>  
+  
+
+  <section class="no-top">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="subtitle wow fadeInUp mb-3">Payment Methods</div>
+                <h2 class="wow fadeInUp" data-wow-delay=".2s">We accept</h2>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-4">
+                    <div class="col-sm-2 col-4">
+                        <div class="p-2 rounded-10" data-bgcolor="rgba(255, 255, 255, .05)">
+                            <img src="{% static 'images/payments/visa.webp' %}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-4">
+                        <div class="p-2 rounded-10" data-bgcolor="rgba(255, 255, 255, .05)">
+                            <img src="{% static 'images/payments/mastercard.webp' %}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-4">
+                        <div class="p-2 rounded-10" data-bgcolor="rgba(255, 255, 255, .05)">
+                            <img src="{% static 'images/payments/paypal.webp' %}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-4">
+                        <div class="p-2 rounded-10" data-bgcolor="rgba(255, 255, 255, .05)">
+                            <img src="{% static 'images/payments/skrill.webp' %}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-4">
+                        <div class="p-2 rounded-10" data-bgcolor="rgba(255, 255, 255, .05)">
+                            <img src="{% static 'images/payments/jcb.webp' %}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-4">
+                        <div class="p-2 rounded-10" data-bgcolor="rgba(255, 255, 255, .05)">
+                            <img src="{% static 'images/payments/american-express.webp' %}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  
+  
 </div>
-
-
+<!-- content close -->
 {% endblock content %}
