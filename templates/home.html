@@ -16,7 +16,14 @@
                       
                       {% for game in latest_releases %} 
                         <div class="swiper-slide">
-                            <div class="swiper-inner" data-bgimage="url({{ game.cover.url }})">
+                        {% comment %}  
+                        Problem: Game Cover Image is not displayed properly in the background of the small screen slider.
+                        RoadBloak: Avoiding javascript or making backend call to get the image url depending on the screen size.
+                        Solution: Use the box_art image for the small screen slider and cover image for the large screen slider
+                                  with different divs(div on and div off ) creating pseudo responsiveness .               
+                        {% endcomment %}
+                            <!-- div on large screen slider--> 
+                            <div class="swiper-inner d-none d-sm-block" data-bgimage="url({{ game.cover.url }})">
                                 <div class="sw-caption">
                                     <div class="container">
                                         <div class="row gx-5 align-items-center">
@@ -43,7 +50,37 @@
                                     </div>
                                 </div>
                                 <div class="sw-overlay"></div>
-                            </div>                            
+                            </div>
+                            <!--div off small screen sllider-->
+                            <div class="swiper-inner d-block d-sm-none" data-bgimage="url({{ game.box_art.url }})">
+                                <div class="sw-caption">
+                                    <div class="container">
+                                        <div class="row gx-5 align-items-center">
+                                            <div class="col-lg-8 mb-sm-30">
+                                                <div class="subtitle blink mb-4">Game Now Available</div>
+                                                <h1 class="slider-title text-uppercase mb-1">{{ game.name }}</h1>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                {% comment %} <p class="slider-text">{{ game.description }}</p> {% endcomment %}
+                                                <div class="sw-price wow fadeInUp">
+                                                    <div class="d-starting">
+                                                        Starting at
+                                                    </div>
+                                                    <div class="d-price">
+                                                        <span class="d-cur">$</span>
+                                                        <span class="d-val">{{ game.price }}</span>
+                                                        {% comment %} <span class="d-period">/monthly</span> {% endcomment %}
+                                                    </div>
+                                                </div>
+                                                <div class="spacer-10"></div>
+                                                <a class="btn-main mb10" href="{% url 'games:gamedetail' game.pk %}"><span>Order Your Game Server Now</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sw-overlay"></div>
+                            </div>
+                            
                         </div>
                       {% endfor %}   
                       

@@ -5,6 +5,11 @@ from components.models import ComponentsModel
 
 User=get_user_model()
 
+class CartServerItemModel(models.Model):
+     pass
+
+class CartServerComponentItemModel(models.Model):
+    pass
 
 
 class CartGameItemModel(models.Model):
