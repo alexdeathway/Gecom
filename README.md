@@ -3,7 +3,9 @@
 <div align="center">
 <img width="300" src="./docs/assets/project_id_name_logo.png"  alt="logo"/>
 
-[![Unit Tests](https://github.com/alexdeathway/gecom/actions/workflows/test.yaml/badge.svg)](https://github.com/alexdeathway/gecom/actions/workflows/test.yaml) [![Build](https://github.com/alexdeathway/gecom/actions/workflows/deploy.yaml/badge.svg)](https://github.com/alexdeathway/gecom/actions/workflows/deploy.yaml)
+[![Unit Tests](https://github.com/alexdeathway/gecom/actions/workflows/test.yaml/badge.svg)](https://github.com/alexdeathway/gecom/actions/workflows/test.yaml) [![Build](https://github.com/alexdeathway/gecom/actions/workflows/deploy.yaml/badge.svg)](https://github.com/alexdeathway/gecom/actions/workflows/deploy.yaml)  [![issues](https://img.shields.io/github/issues/alexdeathway/gecom)](https://github.com/alexdeathway/gecom/issues)
+
+
 
 </div>
 
