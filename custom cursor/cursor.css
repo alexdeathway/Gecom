@@ -1,0 +1,40 @@
+
+body {
+    height: 100vh;
+    width: 100%;
+    background: #121212;
+    cursor: none;
+  }
+ 
+  .link {
+    text-decoration: none;
+    color: #f7f7f7;
+  }
+  
+  .cursor {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  
+  .outer {
+    border: 1px solid #f7f7f770;
+  }
+  
+  .inner {
+    background: #f7f7f720;
+    transition: 250ms ease-out;
+  }
+  
+  .cursor.hover {
+    transform: translate(-50%, -50%) scale(4);
+    transition: transform 250ms ease-in-out;
+  }
+  
+  .inner.hover {
+    background: #7b6d92;
+    mix-blend-mode: difference;
+  }
