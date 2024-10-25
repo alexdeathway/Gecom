@@ -42,10 +42,10 @@ class OrganisationCreationForm(forms.ModelForm):
          "username",
          "email",
       ]
-   def clean_code_name(self):
+   def clean_username(self):
         username= self.cleaned_data['username']
         if not re.match(r'^[0-9a-zA-Z]*$',username) or username.lower() != username:
-                raise forms.ValidationError("Sorry , you can only have lower alphanumeric in username") 
+                raise forms.ValidationError("Sorry , username can contain only lower case alphabets and numbers") 
         return username     
 
 class OrganisationUpdateForm(forms.ModelForm):
@@ -65,10 +65,10 @@ class OrganisationUpdateForm(forms.ModelForm):
          "about",
 
       ]
-   def clean_code_name(self):
+   def clean_username(self):
         username= self.cleaned_data['username']
         if not re.match(r'^[0-9a-zA-Z]*$',username):
-                raise forms.ValidationError("Sorry , you can only have alphanumeric in username") 
+                raise forms.ValidationError("Sorry , username can contain only lower case alphabets and numbers") 
         return username   
 
 class GameUpdateForm(forms.ModelForm):
