@@ -44,7 +44,7 @@ class OrganisationCreationForm(forms.ModelForm):
       ]
    def clean_username(self):
         username= self.cleaned_data['username']
-        if not re.match(r'^[0-9a-zA-Z]*$',username) or username.lower() != username:
+        if not re.match(r'^[0-9a-z]*$',username) or username.lower() != username:
                 raise forms.ValidationError("Sorry , username can contain only lower case alphabets and numbers") 
         return username     
 
@@ -67,7 +67,7 @@ class OrganisationUpdateForm(forms.ModelForm):
       ]
    def clean_username(self):
         username= self.cleaned_data['username']
-        if not re.match(r'^[0-9a-zA-Z]*$',username):
+        if not re.match(r'^[0-9a-z]*$',username):
                 raise forms.ValidationError("Sorry , username can contain only lower case alphabets and numbers") 
         return username   
 
