@@ -4,10 +4,9 @@
 {% block content %}
 <div class="d-flex justify-content-center vh-100 p-5 bg-dark text-white">
     <form method="POST" enctype="multipart/form-data" >
-
-{% csrf_token %}
-{{ form|crispy }}
-<button type="submit" value="Submit">Submit</button>
-</form>
+        {% csrf_token %}
+        {% comment %} {{ form|crispy }} {% endcomment %}
+        <button type="submit" value="Submit">Submit</button>
+    </form>
 </div>
 {% endblock content %}

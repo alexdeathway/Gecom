@@ -76,7 +76,7 @@ class TestForms(TestCase):
         bad_data['csrfmiddlewaretoken'] = get_response.context['csrf_token']
         post_response = self.client.post(url, data=bad_data)
 
-        self.assertContains(post_response, 'Sorry , username can contain only lower case alphabets and numbers')
+        self.assertContains(post_response, 'Sorry , username can contain only lower case alphabets and numbers' in post_response.content.decode())
 
     
 

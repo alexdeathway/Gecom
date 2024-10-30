@@ -15,32 +15,32 @@ class TestGameUrls(SimpleTestCase):
     
     def test_games_list_url_is_resolved(self):
         url = reverse('games:games')
-        self.assertEquals(resolve(url).func.view_class, GamesListView)
+        self.assertEqual(resolve(url).func.view_class, GamesListView)
 
     def test_game_create_url_is_resolved(self):
         url = reverse('games:gamecreate')
-        self.assertEquals(resolve(url).func.view_class, GamesCreateView)
+        self.assertEqual(resolve(url).func.view_class, GamesCreateView)
 
     def test_organisation_create_url_is_resolved(self):
         url = reverse('games:organisationcreate')
-        self.assertEquals(resolve(url).func.view_class, OrganisationCreateView)
+        self.assertEqual(resolve(url).func.view_class, OrganisationCreateView)
 
     def test_game_detail_url_is_resolved(self):
         url = reverse('games:gamedetail', args=[1])
-        self.assertEquals(resolve(url).func.view_class, GamesDetailView)
+        self.assertEqual(resolve(url).func.view_class, GamesDetailView)
 
     def test_game_update_url_is_resolved(self):
         url = reverse('games:gameupdate', args=[1])
-        self.assertEquals(resolve(url).func.view_class, GameUpdateView)
+        self.assertEqual(resolve(url).func.view_class, GameUpdateView)
 
     def test_publisher_detail_url_is_resolved(self):
         url = reverse('games:publisherdetail', args=['someuser'])
-        self.assertEquals(resolve(url).func.view_class, PublisherDetailView)
+        self.assertEqual(resolve(url).func.view_class, PublisherDetailView)
 
     def test_organisation_update_url_is_resolved(self):
         url = reverse('games:organisationupdate', args=['someuser'])
-        self.assertEquals(resolve(url).func.view_class, OrganisationUpdateView)
+        self.assertEqual(resolve(url).func.view_class, OrganisationUpdateView)
 
     def test_category_detail_url_is_resolved(self):
         url = reverse('games:categorydetail', args=['somename'])
-        self.assertEquals(resolve(url).func.view_class, CategoryDetailView)
+        self.assertEqual(resolve(url).func.view_class, CategoryDetailView)

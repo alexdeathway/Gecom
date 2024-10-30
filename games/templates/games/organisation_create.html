@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load tailwind_filters %}
 {% load static %}
 {% block body %}
 <div class="min-h-screen flex items-center justify-end bg-gray-50 py-2 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-cover " 
@@ -8,7 +7,7 @@ style="background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     <form class="mr-40 py-8 px-8 rounded-xl bg-black " method="post">
 
         {% csrf_token %}
-        {{ form|crispy }}
+        {% comment %} {{ form|crispy }} {% endcomment %}
         <button class="inline-flex items-center bg-yellow-200 border-0 py-1 px-3 mb-1 text-yellow-700 focus:outline-none hover:text-yellow-900 rounded text-base mt-4 md:mt-0">
             Create
         </button>
