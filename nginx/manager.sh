@@ -17,7 +17,7 @@ else
   envsubst '${DOMAIN}' < /etc/nginx/nginx.prod.conf > /etc/nginx/conf.d/default.conf
 fi
 
-inotifywait -m -e close_write /etc/nginx/ |
+inotifywait -m -e close_write /etc/nginx/ /etc/letsencrypt/ |
 while read path action file; do
     echo "Changes in nginx configuration detected, reloading nginx!"
     nginx -s reload
