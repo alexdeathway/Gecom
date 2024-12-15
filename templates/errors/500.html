@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Error 500{% endblock title %}
+{% block content %}
+
+<div class="no-bottom no-top" id="content">
+
+  <div id="top"></div>
+
+  <section class="full-height no-top no-bottom jarallax" data-video-src="https://www.youtube.com/watch?v=YEPd9-M3kwk">    
+      <div class="de-gradient-edge-top"></div>
+      <div class="de-gradient-edge-bottom"></div>
+      <div class="overlay-bg t50 no-top no-bottom">
+          <div class="v-center">
+              <div class="container z-1000">
+                  <div class="row align-items-center">                        
+                      <div class="col-lg-10 offset-lg-1 text-center">
+                          {% comment %} <div class="subtitle blink mb-4">Error 404</div> {% endcomment %}
+                          <h1 class="mb-0 wow fadeInUp">500 Internal Server Error</h1>                                    
+                      </div>
+                      <div class="col-lg-6 offset-lg-3 text-center text-white">
+                          <p class="wow fadeInUp">Look like we messed up!</p>
+                          <a class="btn-main wow fadeInUp" href={% url "home" %}><span>Return Home!</span></a>
+
+                          <div class="spacer-single"></div>
+
+  
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+
+{% endblock content %}
