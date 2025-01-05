@@ -31,6 +31,11 @@ from django.contrib.auth.views import (
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
 
+
+### HTTPS errors handling
+handler404 = 'seco.views.error_404'
+handler500 = 'seco.views.error_500'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(),name="home"),

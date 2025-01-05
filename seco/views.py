@@ -20,5 +20,9 @@ class HomeView(ListView):
                 raise Http404("Homepage data missing,create superuser and dummy data in database!")
             return context
 
-#def index(request):
-#    return render(request,"index.html")
+
+def error_404(request,exception):
+    return render(request,"errors/404.html",status=404)
+
+def error_500(request):
+    return render(request,"errors/500.html",status=500)
