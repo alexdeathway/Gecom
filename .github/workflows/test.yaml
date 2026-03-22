@@ -21,7 +21,7 @@ jobs:
         run: mv template.env .env
 
       - name: Build and start Docker containers
-        run: docker compose -f docker-compose.yml up -d --build
+        run: docker compose -f docker-compose.yml up  --build
       
       - name: Wait for Django to start
         run: |
